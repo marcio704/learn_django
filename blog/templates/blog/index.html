@@ -63,21 +63,24 @@
                 	{% for post in post_list %}
 	                	<!-- Blog Posts -->
 		                <h2>
-		                    <a href="#">{{ post.name }}</a>
+		                    <a href="{% url 'blog:detail' post.id %}">{{ post.title }}</a>
 		                </h2>
 		                <p class="lead">
-		                    by 
-							{% for author in post.author_set.all %}
-								<li><a href="index.php">{{ author.name }}</a></li>
+		                    <small>This post was written by:</small>
+							{% for author in post.authors.all %}
+								{% if author.personal_page %}
+                                    <li><a href="{{ author.personal_page }}">{{ author.name }}</a></li>
+                                {% else %}
+                                    <li><span>{{ author.name }}</span></li>
+                                {% endif %}
 							{% endfor %}
-		                    
 		                </p>
-		                <p><span class="glyphicon glyphicon-time"></span> {{ post.date }}</p>
+		                <p><span class="glyphicon glyphicon-time"></span>{{ post.date }}</p>
 		                <hr>
 		                <img class="img-responsive" src="{{ post.thumbnail.url }}" alt="">
 		                <hr>
-		                <p>{{ post.text }}</p>
-		                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+		                <p>{{ post.resume }}</p>
+		                <a class="btn btn-primary" href="{% url 'blog:detail' post.id %}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
 		                <hr>
 	            	{% endfor %}

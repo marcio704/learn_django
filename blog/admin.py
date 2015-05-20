@@ -12,7 +12,7 @@ class CategoryAdmin(admin.ModelAdmin):
     fields = ['name']
 
 class AuthorAdmin(admin.ModelAdmin):
-	fields = ['name', 'email']
+	fields = ['name', 'email', 'personal_page']
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category, CategoryAdmin)

@@ -14,6 +14,7 @@ class Category(models.Model):
 class Author(models.Model):
 	name = models.CharField(max_length=200)
 	email = models.CharField(max_length=200)
+	personal_page = models.CharField(max_length=2000, blank=True, null=True)
 
 	def __str__(self):
 		return self.name
