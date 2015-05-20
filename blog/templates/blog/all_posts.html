@@ -17,9 +17,9 @@
         {% if post_list %}
             {% for post in post_list %}
                 <div class="col-md-4 portfolio-item">
-                    <center>
+                    <center >
                         <a href="{% url 'blog:detail' post.id %}">
-                            <img class="img-responsive" src="{{ post.thumbnail.url }}" alt="" style="width=50; height=50">
+                            <img class="img-responsive" src="{{ post.thumbnail.url }}" alt="" width="180" height="180">
                         </a>
                         <h3>
                             <a href="{% url 'blog:detail' post.id %}">{{ post.name }}</a>
