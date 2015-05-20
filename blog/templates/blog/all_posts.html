@@ -1,0 +1,65 @@
+{% extends "blog/master.html" %}
+
+<!-- Page Content -->
+{% block body %}
+        
+        <!-- Page Header -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Page Heading
+                    <small>Secondary Text</small>
+                </h1>
+            </div>
+        </div>
+
+        <!-- Projects Row -->
+        <div class="row">
+        {% if post_list %}
+            {% for post in post_list %}
+                <div class="col-md-4 portfolio-item">
+                    <center>
+                        <a href="{% url 'blog:detail' post.id %}">
+                            <img class="img-responsive" src="{{ post.thumbnail.url }}" alt="" style="width=50; height=50">
+                        </a>
+                        <h3>
+                            <a href="{% url 'blog:detail' post.id %}">{{ post.name }}</a>
+                        </h3>
+                        <strong><p style="text-aligment: justify;">{{ post.resume }}</p></strong>
+                    </center>
+                </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+        
+        <hr>
+
+        <!-- Pagination -->
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                    <li>
+                        <a href="#">&laquo;</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">1</a>
+                    </li>
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <a href="#">4</a>
+                    </li>
+                    <li>
+                        <a href="#">5</a>
+                    </li>
+                    <li>
+                        <a href="#">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+{% endblock %}
