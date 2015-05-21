@@ -50,8 +50,25 @@
 	<hr>
 
 	<!-- Posted Comments -->
-
-	<!-- Comment -->
+	{% if post.comment_set.all %}
+		{% for comment in post.comment_set.all %}
+			<div class="media">
+			    <a class="pull-left" href="#">
+			        <img class="media-object not-3d-img" src="{{ comment.author.photo.url }}" alt="" width="100" height="100">
+			    </a>
+			    <div class="media-body">
+			        <h4 class="media-heading"> {{ comment.title }}
+			            <small> {{ comment.date }} </small>
+			        </h4>
+			        {{ comment.text }}
+			    </div>
+			</div>
+		{% endfor %}
+	{% else %}
+		<h4 class="media-heading"> No comments were left here yet. Be the first to comment!</h4	>
+	{% endif %}
+	
+	<!-- Nested Comment  (TO BE IMPLEMENTED)
 	<div class="media">
 	    <a class="pull-left" href="#">
 	        <img class="media-object" src="http://placehold.it/64x64" alt="">
@@ -61,20 +78,7 @@
 	            <small>August 25, 2014 at 9:30 PM</small>
 	        </h4>
 	        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-	    </div>
-	</div>
 
-	<!-- Comment -->
-	<div class="media">
-	    <a class="pull-left" href="#">
-	        <img class="media-object" src="http://placehold.it/64x64" alt="">
-	    </a>
-	    <div class="media-body">
-	        <h4 class="media-heading">Start Bootstrap
-	            <small>August 25, 2014 at 9:30 PM</small>
-	        </h4>
-	        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-	        <!-- Nested Comment -->
 	        <div class="media">
 	            <a class="pull-left" href="#">
 	                <img class="media-object" src="http://placehold.it/64x64" alt="">
@@ -86,9 +90,8 @@
 	                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
 	            </div>
 	        </div>
-	        <!-- End Nested Comment -->
 	    </div>
-	</div>
+	</div> -->
 
 	<hr>
 

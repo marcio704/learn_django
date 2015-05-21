@@ -1,10 +1,13 @@
+#from django.template import RequestContext, loader
 from django.http import Http404
 from django.shortcuts import render
 from django.http import HttpResponse
-#from django.template import RequestContext, loader
+from django.views import generic
+
 from .models import Post
 from .models import Category
-from django.views import generic
+from .models import About
+
 import math
 
 
@@ -46,8 +49,8 @@ def contact(request):
     return render(request, 'blog/contact.html', context)
 
 def about(request):
-    post_list = Post.objects.all()
-    context = {'post_list': post_list}
+    about = About.objects.all()[0]
+    context = {'about': about}
 
     return render(request, 'blog/about.html', context)        
 

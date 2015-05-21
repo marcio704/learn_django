@@ -2,6 +2,9 @@ from django.contrib import admin
 from .models import Post
 from .models import Category
 from .models import Author
+from .models import User
+from .models import Comment
+from .models import About
 
 # Register your models here.
 
@@ -14,6 +17,18 @@ class CategoryAdmin(admin.ModelAdmin):
 class AuthorAdmin(admin.ModelAdmin):
 	fields = ['name', 'email', 'personal_page']
 
+class UserAdmin(admin.ModelAdmin):
+	fields = ['name', 'email', 'photo', 'creation_date', 'blocked', 'last_login']
+
+class CommentAdmin(admin.ModelAdmin):
+	fields = ['title', 'text', 'date', 'author', 'post']
+
+class AboutAdmin(admin.ModelAdmin):
+	fields = ['title', 'subtitle', 'text', 'last_change']
+
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Author, AuthorAdmin)
+admin.site.register(User, UserAdmin)
+admin.site.register(Comment, CommentAdmin)
+admin.site.register(About, AboutAdmin)

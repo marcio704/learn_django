@@ -5,7 +5,6 @@
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog-home.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'blog/css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/custom.css' %}" />
     <link rel="icon" type="image/ico" href="{% static 'blog/images/bulbasaur_icon.gif' %}" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,13 +12,23 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{% block title %}Welcome to LearnDjango.com{% endblock %}</title>
+    <!-- Custom CSS <link rel="stylesheet" type="text/css" href="{% static 'blog/css/clean-blog.min.css' %}" />-->
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/custom.css' %}" />
+    
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>   
+
+    <title>{% block title %}LearnDjango!{% endblock %}</title>
 </head>
 <body>
 	<!-- Header -->
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	{% block header %}
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
-            {% block header %}
+            
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -42,13 +51,14 @@
                     </li>
                 </ul>
             </div>
-            {% endblock %}    
+
         </div>
     </nav>
+    {% endblock %} 
 	
 	<!-- Body -->
-	<div class="container">
-		{% block body %} 
+	{% block body %}
+    <div class="container"> 
 		<p>
 	        <label>Please override the block "body" as following: <label>
 	    </p>    
@@ -57,21 +67,55 @@
 	        <p>Your HTML content here!</p>
 	        <p>{% endblock %'}'</p>
 	    </p>
-		{% endblock %}
+		
 	</div>
+    {% endblock %}
 
 	<hr>
     
     <!-- Footer -->
+    {% block footer %}
     <footer>
-        <div class="row">
-            <div class="col-lg-12">
-                <center>{% block footer %}Copyright &copy; LearnDjango 2015{% endblock %}</center>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <center><p class="copyright text-muted">Copyright &copy; LearnDjango 2015</p></center>
+                </div>
             </div>
         </div>
     </footer>
+    {% endblock %}
     
     <script type="text/javascript" src="{% static 'blog/js/jquery-2.1.4.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+    
+    <!-- Custom Theme JavaScript -->
+    <script type="text/javascript" src="{% static 'blog/js/clean-blog.min.js' %}"></script>
 </body>
 </html>
