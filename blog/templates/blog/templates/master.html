@@ -5,6 +5,8 @@
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog-home.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'blog/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/custom.css' %}" />
+    <link rel="icon" type="image/ico" href="{% static 'blog/images/bulbasaur_icon.gif' %}" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,13 +32,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a href="{% url 'blog:about' %}">About</a>
                     </li>
                     <li>
                         <a href="{% url 'blog:posts' %}">All Posts</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="{% url 'blog:contact' %}">Contact</a>
                     </li>
                 </ul>
             </div>

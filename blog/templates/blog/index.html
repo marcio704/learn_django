@@ -1,4 +1,4 @@
-{% extends "blog/blog_template.html" %}
+{% extends "blog/templates/blog_template.html" %}
 
 <!-- Page Content -->
 {% block content %}
@@ -14,7 +14,7 @@
                 <a href="{% url 'blog:detail' post.id %}">{{ post.title }}</a>
             </h2>
             <p class="lead">
-                <small>This post was written by:</small>
+                <small><strong>This post was written by:</strong></small>
     			{% for author in post.authors.all %}
     				{% if author.personal_page %}
                         <li><a href="{{ author.personal_page }}">{{ author.name }}</a></li>
@@ -23,7 +23,7 @@
                     {% endif %}
     			{% endfor %}
             </p>
-            <p><span class="glyphicon glyphicon-time"></span>{{ post.date }}</p>
+            <p><span class="glyphicon glyphicon-time"></span> {{ post.date }} </p>
             <hr>
             <center><img class="img-responsive" src="{{ post.thumbnail.url }}" alt=""></center>
             <hr>

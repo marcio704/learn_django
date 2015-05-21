@@ -1,14 +1,14 @@
-{% extends "blog/blog_template.html" %}
+{% extends "blog/templates/blog_template.html" %}
 
 <!-- Blog Post -->
 {% block content %}
 
 	<!-- Title -->
-	<h1>{{ post.title }}</h1>
+	<h1 class="page-header">{{ post.title }}</h1>
 
 	<!-- Author -->
 	<p class="lead">
-		by
+		<strong>written by:</strong>
 		{% for author in post.authors.all %}
 			{% if author.personal_page %}
 	            <li><a href="{{ author.personal_page }}">{{ author.name }}</a></li>

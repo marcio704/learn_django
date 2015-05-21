@@ -19,7 +19,7 @@ class IndexView(generic.ListView):
         return Post.objects.all()[:5]
 """
 def index(request):
-    post_list = Post.objects.all()[:5]
+    post_list = Post.objects.all().order_by('-date')[:5]
     category_list_parts = divideListByTwo(Category.objects.all())
     context = {'post_list': post_list, 'category_list_1': category_list_parts["list_1"], 'category_list_2': category_list_parts["list_2"]}
     
@@ -31,13 +31,25 @@ def detail(request, post_id):
     category_list_parts = divideListByTwo(Category.objects.all())
     context = {'post': post, 'category_list_1': category_list_parts["list_1"], 'category_list_2': category_list_parts["list_2"]}
     
-    return render(request, 'blog/detail.html', context)
+    return render(request, 'blog/post/detail.html', context)
 
 def posts(request):
     post_list = Post.objects.all()
     context = {'post_list': post_list}
 
-    return render(request, 'blog/all_posts.html', context)
+    return render(request, 'blog/post/all_posts.html', context)
+
+def contact(request):
+    post_list = Post.objects.all()
+    context = {'post_list': post_list}
+
+    return render(request, 'blog/contact.html', context)
+
+def about(request):
+    post_list = Post.objects.all()
+    context = {'post_list': post_list}
+
+    return render(request, 'blog/about.html', context)        
 
 
 #Utils

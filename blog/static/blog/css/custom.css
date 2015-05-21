@@ -1,0 +1,56 @@
+/*Elements*/
+img {
+    box-shadow: 10px 10px 24px #797979;
+    border-radius:10px;
+}
+
+a {
+  color: #44B78B;
+  text-decoration: none;
+}
+
+a:hover {
+	color: #0C3C26;
+}
+
+.home-body {
+    background: white url("../images/bulbasaur2.gif") no-repeat right bottom;
+    z-index: 1;
+}
+
+
+/*Classes*/
+.strong-green {
+	color: #0C3C26;   
+}
+
+
+/*Bootstrap override*/
+.navbar-inverse {
+    background-color: #0C3C26;   
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color: #FDF6F6;
+}
+
+.navbar-inverse .navbar-brand {
+	color: #CAC4C4;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #44B78B;
+  border-color: #44B78B;
+}
+
+.btn-primary:hover {
+	background-color: #0C3C26;  
+ }
+
+.page-header {
+	color: #44B78B;
+}
+
+
+
