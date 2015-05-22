@@ -45,7 +45,6 @@ class User(models.Model):
 		return self.name
 
 class Comment(models.Model):
-	title = models.CharField(max_length=200)
 	text = models.CharField(max_length=8000)
 	date = models.DateTimeField('date published')
 	author = models.ForeignKey(User, blank=True, null=True)
@@ -54,7 +53,17 @@ class Comment(models.Model):
 	def __str__(self):
 		return "{0} wrote: {1}".format(self.author.name, self.title)
 
-class About(models.Model):
+class Contact(models.Model):
+	name = models.CharField(max_length=200)
+	email = models.CharField(max_length=200)
+	phone = models.CharField(max_length=25)
+	message = models.CharField(max_length=8000)
+	creation_date = models.DateTimeField('date creation')
+
+	def __str__(self):
+		return self.name
+
+class AboutPage(models.Model):
 	title = models.CharField(max_length=200)
 	subtitle = models.CharField(max_length=100)
 	text = models.CharField(max_length=8000)
@@ -63,3 +72,15 @@ class About(models.Model):
 
 	def __str__(self):
 		return self.title
+
+class ContactPage(models.Model):
+	title = models.CharField(max_length=200)
+	subtitle = models.CharField(max_length=100)
+	text = models.CharField(max_length=8000)
+	last_change = models.DateTimeField('date change')	
+
+	def __str__(self):
+		return self.title
+
+
+

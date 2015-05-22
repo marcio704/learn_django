@@ -1,26 +1,20 @@
 #from django.template import RequestContext, loader
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.views import generic
 
 from .models import Post
 from .models import Category
-from .models import About
+from .models import Contact
+from .models import AboutPage
+from .models import ContactPage
+
 
 import math
-
+from datetime import datetime
 
 # Create your views here.
-"""
-class IndexView(generic.ListView):
-    template_name = 'blog/index.html'
-    context_object_name = 'post_list'
 
-    def get_queryset(self):
-        # Return last 5 posts.
-        return Post.objects.all()[:5]
-"""
 def index(request):
     post_list = Post.objects.all().order_by('-date')[:5]
     category_list_parts = divideListByTwo(Category.objects.all())
@@ -43,17 +37,41 @@ def posts(request):
     return render(request, 'blog/post/all_posts.html', context)
 
 def contact(request):
-    post_list = Post.objects.all()
-    context = {'post_list': post_list}
+    contact_page = ContactPage.objects.all()[0]
+    context = {'contact_page': contact_page}
 
     return render(request, 'blog/contact.html', context)
 
 def about(request):
-    about = About.objects.all()[0]
+    about = AboutPage.objects.all()[0]
     context = {'about': about}
 
     return render(request, 'blog/about.html', context)        
 
+def send_contact(request):
+    if request.method == 'POST':
+        try:
+            contact = Contact(name=request.POST.get('name'), email=request.POST.get('email'), phone=request.POST.get('phone'), message=request.POST.get('message'), creation_date=datetime.now())
+            contact.save()
+            return HttpResponse(200)
+        except:
+            print ('Error on saving contact information')
+            return HttpResponse(500)    
+    else:
+        return HttpResponseRedirect('/contact')
+
+def send_comment(request, post_id):
+    print (request.POST.get('text'))
+    if request.method == 'POST':
+        try:
+            comment = Comment(text=request.POST.get('text'), date=datetime.now(), author=User.objects.all()[0], post=Post.objects.get(pk=post_id))
+            comment.save()
+            return HttpResponse(200)
+        except:
+            print ('Error on saving comment information')
+            return HttpResponse(500)    
+    else:
+        return HttpResponseRedirect('/')
 
 #Utils
 def divideListByTwo (whole_list):
@@ -63,3 +81,4 @@ def divideListByTwo (whole_list):
     list_2 = whole_list [len(whole_list) - half_size_floor:]
 
     return {"list_1": list_1, "list_2": list_2}
+
