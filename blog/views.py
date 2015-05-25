@@ -8,10 +8,14 @@ from .models import Category
 from .models import Contact
 from .models import AboutPage
 from .models import ContactPage
+from .models import User
+from .models import Comment
 
+from datetime import datetime
 
 import math
-from datetime import datetime
+import sys
+
 
 # Create your views here.
 
@@ -22,11 +26,12 @@ def index(request):
     
     return render(request, 'blog/index.html', context)
 
-
+#TODO: Replace hard-coded author by logged user
 def detail(request, post_id):
+    user = User.objects.get(pk=3)
     post = Post.objects.get(pk=post_id)
     category_list_parts = divideListByTwo(Category.objects.all())
-    context = {'post': post, 'category_list_1': category_list_parts["list_1"], 'category_list_2': category_list_parts["list_2"]}
+    context = {'post': post, 'user': user, 'category_list_1': category_list_parts["list_1"], 'category_list_2': category_list_parts["list_2"]}
     
     return render(request, 'blog/post/detail.html', context)
 
@@ -54,21 +59,27 @@ def send_contact(request):
             contact = Contact(name=request.POST.get('name'), email=request.POST.get('email'), phone=request.POST.get('phone'), message=request.POST.get('message'), creation_date=datetime.now())
             contact.save()
             return HttpResponse(200)
-        except:
+        except Exception as inst:
+            print (type(inst))
+            print (inst)
             print ('Error on saving contact information')
+            
             return HttpResponse(500)    
     else:
         return HttpResponseRedirect('/contact')
 
+#TODO: Replace hard-coded author by logged user
 def send_comment(request, post_id):
-    print (request.POST.get('text'))
     if request.method == 'POST':
         try:
-            comment = Comment(text=request.POST.get('text'), date=datetime.now(), author=User.objects.all()[0], post=Post.objects.get(pk=post_id))
+            comment = Comment(text=request.POST.get('text'), date=datetime.now(), author=User.objects.get(pk=3), post=Post.objects.get(pk=post_id))
             comment.save()
             return HttpResponse(200)
-        except:
+        except Exception as inst:
+            print (type(inst))
+            print (inst)
             print ('Error on saving comment information')
+            
             return HttpResponse(500)    
     else:
         return HttpResponseRedirect('/')

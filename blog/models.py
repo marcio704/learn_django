@@ -46,12 +46,12 @@ class User(models.Model):
 
 class Comment(models.Model):
 	text = models.CharField(max_length=8000)
-	date = models.DateTimeField('date published')
+	date = models.DateTimeField('date creation')
 	author = models.ForeignKey(User, blank=True, null=True)
 	post = models.ForeignKey(Post, blank=True, null=True)
 
 	def __str__(self):
-		return "{0} wrote: {1}".format(self.author.name, self.title)
+		return "{0} wrote: {1}".format(self.author.name, self.text)
 
 class Contact(models.Model):
 	name = models.CharField(max_length=200)

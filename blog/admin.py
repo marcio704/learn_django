@@ -22,7 +22,7 @@ class UserAdmin(admin.ModelAdmin):
 	fields = ['name', 'email', 'photo', 'creation_date', 'blocked', 'last_login']
 
 class CommentAdmin(admin.ModelAdmin):
-	fields = ['title', 'text', 'date', 'author', 'post']
+	fields = ['text', 'date', 'author', 'post']
 
 class AboutPageAdmin(admin.ModelAdmin):
 	fields = ['title', 'subtitle', 'text', 'last_change']

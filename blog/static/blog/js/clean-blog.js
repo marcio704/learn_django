@@ -52,53 +52,77 @@ $(function() {
 
 // Comment Form Script
 $(function() {
-  
-  $("#comment-text").jqBootstrapValidation({
-    preventSubmit: true,
-    submitError: function($form, event, errors) {
-        // additional error messages or events
-    },
-    submitSuccess: function($form, event) {
-        event.preventDefault(); // prevent default submit behaviour
-        // get values from FORM
-        var text = $("#comment-text").val();
-        alert(text);
-        $.ajax({
-            url: "send_comment/",
-            type: "POST",
-            data: {
-                text: text
-            },
-            cache: false,
-            success: function() {
-                // Success message
-                $('#success').html("<div class='alert alert-success'>");
-                $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                    .append("</button>");
-                $('#success > .alert-success')
-                    .append("<strong>Your message has been sent. </strong>");
-                $('#success > .alert-success')
-                    .append('</div>');
+  $("#comment-form-btn").click(function() {
+    var text = $("#comment-text").val();
+    if(! text.trim()) {
+      $('#comment-success').html("<div class='alert alert-danger'>");
+      $('#comment-success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+          .append("</button>");
+      $('#comment-success > .alert-danger').append("<strong>Please, insert a comment before sending!");
+      $('#comment-success > .alert-danger').append('</div>');
+      return;
+    }
 
-                //clear all fields
-                $('#comment-form').trigger("reset");
-            },
-            error: function() {
-                // Fail message
-                $('#success').html("<div class='alert alert-danger'>");
-                $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                    .append("</button>");
-                $('#success > .alert-danger').append("<strong>Sorry, it seems that my mail server is not responding. Please try again later!");
-                $('#success > .alert-danger').append('</div>');
-                //clear all fields
-                $('#comment-form').trigger("reset");
-            },
-        })
-    },
-    filter: function() {
-        return $(this).is(":visible");
-    },
-    });
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+
+    var yyyy = today.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+    var today = dd+'/'+mm+'/'+yyyy;
+
+    var photo = $('hidden-photo').text();
+    alert(photo);
+    $.ajax({
+        url: "send_comment/",
+        type: "POST",
+        data: {
+            text: text
+        },
+        cache: false,
+        success: function() {
+            // Success message
+            $('#comment-success').html("<div class='alert alert-success'>");
+            $('#comment-success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+              .append("</button>");
+            $('#comment-success > .alert-success')
+              .append("<strong>Your comment has been sent. </strong>");
+            $('#comment-success > .alert-success')
+              .append('</div>');
+
+            //clear comment field
+            $('#comment-text').val("");
+
+            $('#new-comment').html("<div class='media'>");
+              $('#new-comment > .media').html("<a class='pull-left' href='#'>");
+                $('#new-comment > .media > .pull-left').html("<img class='media-object not-3d-img' src='" + photo + "' alt='' width='100' height='100'>");
+              $('#new-comment > .media').append("</a>");
+              $('#new-comment > .media').append("<div class='media-body'>");
+                $('#new-comment > .media > .media-body').html("<h4 class='media-heading'>");
+                  $('#new-comment > .media > .media-body > .media-heading').html("<small> " + today + " </small>");
+                $('#new-comment > .media > .media-body').append(text);
+                $('#new-comment > .media > .media-body').append("</h4>");
+              $('#new-comment > .media').append("</div>");
+
+              $('#no-comments').html('');
+                
+        },
+        error: function() {
+            // Fail message
+            $('#comment-success').html("<div class='alert alert-danger'>");
+            $('#comment-success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                .append("</button>");
+            $('#comment-success > .alert-danger').append("<strong>Sorry, it seems that our server is not responding. Please try again later!");
+            $('#comment-success > .alert-danger').append('</div>');
+            //clear all fields
+            $('#comment-text').val("");
+        },
+    })
   });
 });
 
