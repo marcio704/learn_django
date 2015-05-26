@@ -49,6 +49,7 @@ class Comment(models.Model):
 	date = models.DateTimeField('date creation')
 	author = models.ForeignKey(User, blank=True, null=True)
 	post = models.ForeignKey(Post, blank=True, null=True)
+	answer_to = models.ForeignKey('self', blank=True, null=True)
 
 	def __str__(self):
 		return "{0} wrote: {1}".format(self.author.name, self.text)

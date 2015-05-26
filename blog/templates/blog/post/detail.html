@@ -38,20 +38,21 @@
 	<!-- Blog Comments -->
 
 	<!-- Comments Form -->
-	<div class="well">
+	<div class="well"  id="comment-tab" name="comment-tab">
 	    <h4>Leave a Comment:</h4>
-	    
-	    <div class="form-group">
-	        <textarea id="comment-text" name="comment-text" class="form-control" rows="3" rows="5" class="form-control" placeholder="Comment" required data-validation-required-message="Please enter a comment."></textarea>
-	    </div>
-	    <div id="comment-success"></div>
-    	<button id="comment-form-btn" name="comment-form-btn" class="btn btn-default">Send</button>
+	    <form action="send_comment/" method="post">
+		    <div class="form-group">
+		        <textarea id="comment-text" name="comment-text" class="form-control" rows="3" rows="5" class="form-control" placeholder="Comment" required data-validation-required-message="Please enter a comment."></textarea>
+		    </div>
+		    <div id="comment-success"></div>
+	    	<button id="comment-form-btn" name="comment-form-btn" class="btn btn-default">Send</button>
+    	</form>
 	</div>
 
 	<hr>
 	<!-- Posted Comments -->
-	{% show_comments post user %}
-	
+	{% show_comments post %}
+	<div id="new-comment"></div>
 	<hr>
 
 	<a class="btn btn-primary" href="{% url 'blog:index' %}">Return to home page <span class="glyphicon glyphicon-chevron-right"></span></a>

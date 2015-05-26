@@ -10,30 +10,39 @@ from .models import AboutPage
 from .models import ContactPage
 from .models import User
 from .models import Comment
+from .utils import utils
 
-from datetime import datetime
+from django.utils import timezone
 
-import math
+from django.shortcuts import render_to_response
+from django.template.context_processors import csrf
+
 import sys
-
 
 # Create your views here.
 
+#TODO: Implement category list as a tag lib.
 def index(request):
     post_list = Post.objects.all().order_by('-date')[:5]
-    category_list_parts = divideListByTwo(Category.objects.all())
+    category_list_parts = utils.divideListByTwo(Category.objects.all())
     context = {'post_list': post_list, 'category_list_1': category_list_parts["list_1"], 'category_list_2': category_list_parts["list_2"]}
     
     return render(request, 'blog/index.html', context)
 
 #TODO: Replace hard-coded author by logged user
+#TODO: Implement category list as a tag lib.
 def detail(request, post_id):
     user = User.objects.get(pk=3)
     post = Post.objects.get(pk=post_id)
-    category_list_parts = divideListByTwo(Category.objects.all())
+    category_list_parts = utils.divideListByTwo(Category.objects.all())
     context = {'post': post, 'user': user, 'category_list_1': category_list_parts["list_1"], 'category_list_2': category_list_parts["list_2"]}
+
+
+    context.update(csrf(request))
+
+    return render_to_response("blog/post/detail.html", context)
     
-    return render(request, 'blog/post/detail.html', context)
+    
 
 def posts(request):
     post_list = Post.objects.all()
@@ -56,7 +65,7 @@ def about(request):
 def send_contact(request):
     if request.method == 'POST':
         try:
-            contact = Contact(name=request.POST.get('name'), email=request.POST.get('email'), phone=request.POST.get('phone'), message=request.POST.get('message'), creation_date=datetime.now())
+            contact = Contact(name=request.POST.get('name'), email=request.POST.get('email'), phone=request.POST.get('phone'), message=request.POST.get('message'), creation_date=timezone.now())
             contact.save()
             return HttpResponse(200)
         except Exception as inst:
@@ -71,10 +80,10 @@ def send_contact(request):
 #TODO: Replace hard-coded author by logged user
 def send_comment(request, post_id):
     if request.method == 'POST':
-        try:
-            comment = Comment(text=request.POST.get('text'), date=datetime.now(), author=User.objects.get(pk=3), post=Post.objects.get(pk=post_id))
+        try: 
+            comment = Comment(text=request.POST.get('comment-text'), date=timezone.now(), author=User.objects.get(pk=3), post=Post.objects.get(pk=post_id))
             comment.save()
-            return HttpResponse(200)
+            return HttpResponseRedirect('/{0}/#comment-tab'.format(post_id))
         except Exception as inst:
             print (type(inst))
             print (inst)
@@ -84,12 +93,20 @@ def send_comment(request, post_id):
     else:
         return HttpResponseRedirect('/')
 
-#Utils
-def divideListByTwo (whole_list):
-    half_size_ceil = int(math.ceil(len(whole_list)/2))  
-    half_size_floor = int(math.floor(len(whole_list)/2))
-    list_1 = whole_list [:half_size_ceil]
-    list_2 = whole_list [len(whole_list) - half_size_floor:]
 
-    return {"list_1": list_1, "list_2": list_2}
+def send_answer_to_comment(request, post_id, comment_id):
+    if request.method == 'POST':
+        try:
+            answer_to = Comment.objects.get(pk=comment_id)
 
+            comment = Comment(text=request.POST.get('answer-text-{0}'.format(comment_id)), date=timezone.now(), author=User.objects.get(pk=3), post=Post.objects.get(pk=post_id), answer_to=answer_to)
+            comment.save()
+            return HttpResponseRedirect('/{0}/#comment-tab'.format(post_id))
+        except Exception as inst:
+            print (type(inst))
+            print (inst)
+            print ('Error on saving answer information')
+            
+            return HttpResponse(500)    
+    else:
+        return HttpResponseRedirect('/{0}/'.format(post_id))

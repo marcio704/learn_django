@@ -1,4 +1,6 @@
 
+//TODO: Use angular.js or organize js functions separated by files
+
 //Configure Ajax for Post requests using django's token protection
 $(function() {
   function getCookie(name) {
@@ -49,11 +51,12 @@ $(function() {
 });
 
 
-
+/*
 // Comment Form Script
 $(function() {
+
   $("#comment-form-btn").click(function() {
-    var text = $("#comment-text").val();
+    var text = $("#new-comment-text").val();
     if(! text.trim()) {
       $('#comment-success').html("<div class='alert alert-danger'>");
       $('#comment-success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
@@ -75,9 +78,8 @@ $(function() {
         mm='0'+mm
     } 
     var today = dd+'/'+mm+'/'+yyyy;
-
     var photo = $('hidden-photo').text();
-    alert(photo);
+    
     $.ajax({
         url: "send_comment/",
         type: "POST",
@@ -96,7 +98,7 @@ $(function() {
               .append('</div>');
 
             //clear comment field
-            $('#comment-text').val("");
+            $('#new-comment-text').val("");
 
             $('#new-comment').html("<div class='media'>");
               $('#new-comment > .media').html("<a class='pull-left' href='#'>");
@@ -125,7 +127,7 @@ $(function() {
     })
   });
 });
-
+*/
 
 // Contact Form Scripts
 $(function() {

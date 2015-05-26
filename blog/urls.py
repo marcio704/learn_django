@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^contact', views.contact, name='contact'),
     url(r'^send_contact', views.send_contact, name='send_contact'),
     url(r'^(?P<post_id>[0-9]+)/send_comment', views.send_comment, name='send_comment'),
+    url(r'^send_answer_to_comment/(?P<post_id>[0-9]+)/(?P<comment_id>[0-9]+)/', views.send_answer_to_comment, name='send_answer_to_comment'),
     url(r'^(?P<post_id>[0-9]+)/$', views.detail, name='detail'),
 ]
 
