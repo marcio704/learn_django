@@ -1,4 +1,5 @@
 {% extends "blog/templates/master.html" %}
+{% load i18n %}
 
 {% block body %}
 
@@ -14,7 +15,7 @@
                     {% endif %}
                     <div class="login-panel panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Login</h3>
+                            <h3 class="panel-title"> {% trans "Login" %} </h3>
                         </div>
                         <div class="panel-body" id="divFormLogin" style="height: 215px; overflow-y: hidden">
                             <form action="/auth/" method="post" >
@@ -29,14 +30,14 @@
                                     </div>
                                     <input id="login-next" name="login-next" class="form-control" type="text" style="display: none" value="{{ next }}">
                                     <!-- Change this to a button or input when using this as a form -->
-                                    <button type="submit" class="btn btn-lg btn-primary btn-block">Go, go, go!</button>
+                                    <button type="submit" class="btn btn-lg btn-primary btn-block"> {% trans "Go, go, go!" %} </button>
                                 </fieldset>
                                 <br />
                             </form>
                             <!--</form>-->
                         </div>
-                        <a href="" target="_blank" >Forgot your password?</a> <br />
-                        <a href="{% url 'blog:sign_in' %}" >Not signed yet?</a>
+                        <a href="" target="_blank"> {% trans "Forgot your password?" %} </a> <br />
+                        <a href="{% url 'blog:sign_in' %}"> {% trans "Not signed yet?" %} </a>
                     </div>
                 </div>
             </center>

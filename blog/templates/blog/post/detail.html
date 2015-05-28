@@ -9,7 +9,7 @@
 
 	<!-- Author -->
 	<p class="lead">
-		<strong>written by:</strong>
+		<strong> {% trans "written by:" %} </strong>
 		{% for author in post.authors.all %}
 			{% if author.personal_page %}
 	            <li><a href="{{ author.personal_page }}">{{ author.name }}</a></li>
@@ -21,7 +21,7 @@
 	<hr>
 
 	<!-- Date/Time -->
-	<p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.date }}</p>
+	<p><span class="glyphicon glyphicon-time"></span> {% trans "Posted on:" %}  {{ post.date }}</p>
 
 	<hr>
 
@@ -39,13 +39,13 @@
 
 	<!-- Comments Form -->
 	<div class="well"  id="comment-tab" name="comment-tab">
-	    <h4>Leave a Comment:</h4>
+	    <h4> {% trans "Leave a Comment:" %} </h4>
 	    <form action="send_comment/" method="post">
 		    <div class="form-group">
 		        <textarea id="comment-text" name="comment-text" class="form-control" rows="3" rows="5" class="form-control" placeholder="Comment" required data-validation-required-message="Please enter a comment."></textarea>
 		    </div>
 		    <div id="comment-success"></div>
-	    	<button id="comment-form-btn" name="comment-form-btn" class="btn btn-default">Send</button>
+	    	<button id="comment-form-btn" name="comment-form-btn" class="btn btn-default"> {% trans "Send:" %} </button>
     	</form>
 	</div>
 
@@ -55,7 +55,7 @@
 	<div id="new-comment"></div>
 	<hr>
 
-	<a class="btn btn-primary" href="{% url 'blog:index' %}">Return to home page <span class="glyphicon glyphicon-chevron-right"></span></a>
+	<a class="btn btn-primary" href="{% url 'blog:index' %}"> {% trans "Return to home page:" %} <span class="glyphicon glyphicon-chevron-right"></span></a>
 
 {% endblock %}
 

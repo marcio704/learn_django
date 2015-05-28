@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,19 +44,19 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="{% url 'blog:about' %}">About</a>
+                        <a href="{% url 'blog:about' %}"> {% trans "About" %} </a>
                     </li>
                     <li>
-                        <a href="{% url 'blog:all_posts' %}">All Posts</a>
+                        <a href="{% url 'blog:all_posts' %}"> {% trans "All Posts" %} </a>
                     </li>
                     <li>
-                        <a href="{% url 'blog:contact' %}">Contact</a>
+                        <a href="{% url 'blog:contact' %}"> {% trans "Contact" %} </a>
                     </li>
                     <li>
                         {% if user.is_anonymous %} 
-                            <a href="{% url 'blog:login' %}"> (Log in) </a>
+                            <a href="{% url 'blog:login' %}"> {% trans "(Log in)" %} </a>
                         {% else %}                                
-                            <a href="{% url 'blog:logout' %}"> {{ user }} (Log out) </a>
+                            <a href="{% url 'blog:logout' %}"> {{ user }} {% trans "(Log out)" %} </a>
                         {% endif %}                            
                     </li>
                 </ul>

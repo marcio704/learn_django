@@ -1,11 +1,12 @@
 {% extends "blog/templates/blog_template.html" %}
+{% load i18n %}
 
 <!-- Page Content -->
 {% block content %}
     
     <h1 class="page-header">
-        Welcome to LearnDjango.com!
-        <small>See our last posts</small>
+       {% trans "Welcome to" %} LearnDjango.com!
+        <small> {% trans "See our last posts" %} </small>
     </h1>
     {% if post_list %}
     	{% for post in post_list %}
@@ -14,7 +15,7 @@
                 <a href="{% url 'blog:detail' post.id %}">{{ post.title }}</a>
             </h2>
             <p class="lead">
-                <small><strong>This post was written by:</strong></small>
+                <small><strong> {% trans "This post was written by:" %} </strong></small>
     			{% for author in post.authors.all %}
     				{% if author.personal_page %}
                         <li><a href="{{ author.personal_page }}">{{ author.name }}</a></li>
@@ -28,21 +29,23 @@
             <center><img class="img-responsive" src="{{ post.thumbnail.url }}" alt=""></center>
             <hr>
             <p style="text-align: justify;"><strong>{{ post.resume }}</strong></p>
-            <a class="btn btn-primary" href="{% url 'blog:detail' post.id %}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+            <a class="btn btn-primary" href="{% url 'blog:detail' post.id %}"> {% trans "Read More" %}  
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
 
             <hr>
     	{% endfor %}
     {% else %}
-    	<p>No posts are available.</p>
+    	<p> {% trans "No posts available." %} </p>
     {% endif %}
 
     <!-- Pager -->
     <ul class="pager">
         <li class="previous">
-            <a href="#">&larr; Newer</a>
+            <a href="#">&larr; {% trans "Newer" %} </a>
         </li>
         <li class="next">
-            <a href="#">Older &rarr;</a>
+            <a href="#"> {% trans "Older" %}  &rarr;</a>
         </li>
     </ul>
 

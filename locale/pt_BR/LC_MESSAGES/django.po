@@ -1,0 +1,163 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-28 20:55+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: blog/templates/blog/contact.html:32
+msgid "Name"
+msgstr "Nome" 
+
+#: blog/templates/blog/contact.html:39
+msgid "Email Address"
+msgstr "Email"
+
+#: blog/templates/blog/contact.html:46
+msgid "Phone Number"
+msgstr "Telefone"
+
+#: blog/templates/blog/contact.html:53
+msgid "Message"
+msgstr "Mensagem"
+
+#: blog/templates/blog/contact.html:62
+msgid "Send"
+msgstr "Enviar"
+
+#: blog/templates/blog/index.html:7
+msgid "Welcome to"
+msgstr "Bem-vindo ao"
+
+#: blog/templates/blog/index.html:8
+msgid "See our last posts"
+msgstr "Veja os posts mais rescentes"
+
+#: blog/templates/blog/index.html:17
+msgid "This post was written by:"
+msgstr "Esse post foi escrito por:"
+
+#: blog/templates/blog/index.html:31
+msgid "Read More"
+msgstr "Leia Mais"
+
+#: blog/templates/blog/index.html:38
+msgid "No posts available."
+msgstr "Nenhum post disponível"
+
+#: blog/templates/blog/index.html:44
+msgid "Newer"
+msgstr "Novos"
+
+#: blog/templates/blog/index.html:47
+msgid "Older"
+msgstr "Antigos"
+
+#: blog/templates/blog/post/all_posts.html:10
+msgid "These are all posts we've written so far. Enjoy!"
+msgstr "Estes são todos os posts que escrevemos até agora. Divirta-se!"
+
+#: blog/templates/blog/post/all_posts.html:62
+msgid "No posts found yet :("
+msgstr "Nenhum post encontrado :("
+
+#: blog/templates/blog/post/detail.html:12
+msgid "written by:"
+msgstr "escrito por"
+
+#: blog/templates/blog/post/detail.html:24
+msgid "Posted on:"
+msgstr "Postado em:"
+
+#: blog/templates/blog/post/detail.html:42
+msgid "Leave a Comment:"
+msgstr "Deixe um comentário"
+
+#: blog/templates/blog/post/detail.html:48
+msgid "Send:"
+msgstr "Enviar"
+
+#: blog/templates/blog/post/detail.html:58
+msgid "Return to home page:"
+msgstr "Retornar à página principal:"
+
+#: blog/templates/blog/post/posts_by_category.html:10
+msgid "Posts about"
+msgstr "Posts sobre"
+
+#: blog/templates/blog/post/posts_by_category.html:62
+msgid "No posts found for this category :("
+msgstr "Nenhum post encontrado para esta categoria :("
+
+#: blog/templates/blog/registration/login.html:17
+msgid "Login"
+msgstr "Login"
+
+#: blog/templates/blog/registration/login.html:32
+msgid "Go, go, go!"
+msgstr "Aproveite!"
+
+#: blog/templates/blog/registration/login.html:38
+msgid "Forgot your password?"
+msgstr "Esqueceu sua senha?"
+
+#: blog/templates/blog/registration/login.html:39
+msgid "Not signed yet?"
+msgstr "Ainda não é cadastrado?"
+
+#: blog/templates/blog/templates/blog_template.html:27
+msgid "Blog Search"
+msgstr "Procurar"
+
+#: blog/templates/blog/templates/blog_template.html:40
+msgid "Blog Categories"
+msgstr "Categorias"
+
+#: blog/templates/blog/templates/blog_template.html:67
+msgid "Related Contents"
+msgstr "Conteúdos Relacionados"
+
+#: blog/templates/blog/templates/blog_template.html:70
+msgid "Python Official Website"
+msgstr "Site Oficial do Python"
+
+#: blog/templates/blog/templates/blog_template.html:71
+msgid "Django Official Website"
+msgstr "Site Oficial do Django"
+
+#: blog/templates/blog/templates/blog_template.html:72
+msgid "Django Brasil"
+msgstr "Django Brasil"
+
+#: blog/templates/blog/templates/master.html:47
+msgid "About"
+msgstr "Sobre"
+
+#: blog/templates/blog/templates/master.html:50
+msgid "All Posts"
+msgstr "Todos os posts"
+
+#: blog/templates/blog/templates/master.html:53
+msgid "Contact"
+msgstr "Contato"
+
+#: blog/templates/blog/templates/master.html:57
+msgid "(Log in)"
+msgstr "(Entrar)"
+
+#: blog/templates/blog/templates/master.html:59
+msgid "(Log out)"
+msgstr "(Sair)"

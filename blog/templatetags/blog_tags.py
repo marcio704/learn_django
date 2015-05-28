@@ -37,7 +37,7 @@ def show_comments(post):
 		    <div class="media-body">
 		        <h4 class="media-heading">
 		        	<label>{{ author }}</label> 
-		            <small> at {{ date }} </small>
+		            <small> {% trans "at" %}  {{ date }} </small>
 		        </h4>
 		        {{ text }}
 		        <hr>
