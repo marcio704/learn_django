@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.models import User
 
 fs = FileSystemStorage(location='/media/photos')
 
@@ -29,25 +30,20 @@ class Post(models.Model):
 	category = models.ForeignKey(Category, blank=False, null=False)
 	authors = models.ManyToManyField(Author, blank=False, null=False)
 
-
 	def __str__(self):
 		return "{0} - {1}".format(self.title, self.resume)
 
-class User(models.Model):
-	name = models.CharField(max_length=200)
-	email = models.CharField(max_length=200)
+class UserProfile(models.Model):
+	user = models.OneToOneField(User, primary_key=True)
 	photo = models.ImageField(upload_to='users', blank=True, null=True)
-	creation_date = models.DateTimeField('date creation')
-	blocked =  models.BooleanField(default=False)
-	last_login = models.DateTimeField('date login')
 
 	def __str__(self):
-		return self.name
+		return self.user.first_name
 
 class Comment(models.Model):
 	text = models.CharField(max_length=8000)
 	date = models.DateTimeField('date creation')
-	author = models.ForeignKey(User, blank=True, null=True)
+	author = models.ForeignKey(UserProfile, blank=True, null=True)
 	post = models.ForeignKey(Post, blank=True, null=True)
 	answer_to = models.ForeignKey('self', blank=True, null=True)
 

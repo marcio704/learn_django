@@ -1,23 +1,31 @@
 #from django.template import RequestContext, loader
 from django.http import Http404, HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.views import generic
+from django.contrib.auth.decorators import login_required
+from django.template.context_processors import csrf
+from django.contrib.auth import authenticate
+from django.contrib.auth import  login as login_auth
+from django.contrib.auth import logout as logout_auth
+from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
 
 from .models import Post
 from .models import Category
 from .models import Contact
 from .models import AboutPage
 from .models import ContactPage
-from .models import User
+
+from .models import UserProfile
 from .models import Comment
 from .utils import utils
 
 from django.utils import timezone
 
-from django.shortcuts import render_to_response
-from django.template.context_processors import csrf
+
 
 import sys
+import re
 
 # Create your views here.
 
@@ -29,26 +37,27 @@ def index(request):
     
     return render(request, 'blog/index.html', context)
 
-#TODO: Replace hard-coded author by logged user
 #TODO: Implement category list as a tag lib.
 def detail(request, post_id):
-    user = User.objects.get(pk=3)
     post = Post.objects.get(pk=post_id)
     category_list_parts = utils.divideListByTwo(Category.objects.all())
-    context = {'post': post, 'user': user, 'category_list_1': category_list_parts["list_1"], 'category_list_2': category_list_parts["list_2"]}
+    context = {'post': post, 'category_list_1': category_list_parts["list_1"], 'category_list_2': category_list_parts["list_2"]}
 
-
-    context.update(csrf(request))
-
-    return render_to_response("blog/post/detail.html", context)
+    return render(request, "blog/post/detail.html", context)
     
     
-
-def posts(request):
+def all_posts(request):
     post_list = Post.objects.all()
     context = {'post_list': post_list}
 
     return render(request, 'blog/post/all_posts.html', context)
+
+def posts_by_category(request, category_id):
+    post_list = Post.objects.filter(category=category_id).order_by('-date')
+    category = Category.objects.get(pk=category_id)
+    context = {'post_list': post_list, 'category': category}
+
+    return render(request, 'blog/post/posts_by_category.html', context)
 
 def contact(request):
     contact_page = ContactPage.objects.all()[0]
@@ -77,11 +86,53 @@ def send_contact(request):
     else:
         return HttpResponseRedirect('/contact')
 
-#TODO: Replace hard-coded author by logged user
-def send_comment(request, post_id):
+def login(request):
+    try:
+        next = request.GET.get('next')
+    except Exception as inst:
+        print (type(inst))
+        print ('On login process: {0}'.format(inst))        
+    
+    next = '/' if next is None else '/{0}/#comment-tab'.format(re.search(r'\d+', next).group(0)) 
+    return render(request, 'blog/registration/login.html', {'next': next})  
+
+def logout(request):
+    logout_auth(request)
+    return HttpResponseRedirect('/')
+
+def auth(request):
     if request.method == 'POST':
         try: 
-            comment = Comment(text=request.POST.get('comment-text'), date=timezone.now(), author=User.objects.get(pk=3), post=Post.objects.get(pk=post_id))
+            user = authenticate(username=request.POST.get('login-username'), password=request.POST.get('login-password'))
+            if user is not None:
+                login_auth(request, user)
+                return HttpResponseRedirect(request.POST.get('login-next'))  
+            else:
+                return render(request, 'blog/registration/login.html', {'validation': 'User/password not found!'})                    
+        except Exception as inst:
+            print (type(inst))
+            print ('Error on authenticating user: {0}'.format(inst))
+            
+            return render(request, 'blog/registration/login.html')    
+    else:
+        return HttpResponseRedirect('/')
+
+#TODO: build screen for sign in option (blog/registration/sign_in.html)
+def sign_in(request):
+    if request.method == 'POST':
+        user = User.objects.create_user(username='john', email='jlennon@beatles.com', password='glassonion')
+        user_profile = UserProfile.objects.create(user=user)
+        print('User successfully saved!')
+        return HttpResponseRedirect('/login')
+    else:
+        return render(request, 'blog/registration/sign_in.html')
+
+@login_required
+def send_comment(request, post_id):
+    if request.method == 'POST':
+        try:
+            user_profile = UserProfile.objects.get(user=request.user) 
+            comment = Comment(text=request.POST.get('comment-text'), date=timezone.now(), author=user_profile, post=Post.objects.get(pk=post_id))
             comment.save()
             return HttpResponseRedirect('/{0}/#comment-tab'.format(post_id))
         except Exception as inst:
@@ -91,15 +142,15 @@ def send_comment(request, post_id):
             
             return HttpResponse(500)    
     else:
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/{0}/'.format(post_id))
 
-
+@login_required
 def send_answer_to_comment(request, post_id, comment_id):
     if request.method == 'POST':
         try:
             answer_to = Comment.objects.get(pk=comment_id)
-
-            comment = Comment(text=request.POST.get('answer-text-{0}'.format(comment_id)), date=timezone.now(), author=User.objects.get(pk=3), post=Post.objects.get(pk=post_id), answer_to=answer_to)
+            user_profile = UserProfile.objects.get(user=request.user)
+            comment = Comment(text=request.POST.get('answer-text-{0}'.format(comment_id)), date=timezone.now(), author=user_profile, post=Post.objects.get(pk=post_id), answer_to=answer_to)
             comment.save()
             return HttpResponseRedirect('/{0}/#comment-tab'.format(post_id))
         except Exception as inst:

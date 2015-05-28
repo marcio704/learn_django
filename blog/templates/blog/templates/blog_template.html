@@ -2,6 +2,7 @@
 
 <!-- Page Content -->
 {% block body %}
+
 <div class="container">     
     <div class="row">
         <!-- Blog Content -->
@@ -42,7 +43,7 @@
                         <ul class="list-unstyled">
                             {% if category_list_1 %}
                                 {% for category in category_list_1 %}
-                                    <li><a href="#">{{ category.name }}</a>
+                                    <li><a href="{% url 'blog:posts_by_category' category.id %}">{{ category.name }}</a>
                                     </li>
                                 {% endfor %}
                             {% endif %}
@@ -52,7 +53,7 @@
                         <ul class="list-unstyled">
                             {% if category_list_2 %}
                                 {% for category in category_list_2 %}
-                                    <li><a href="#">{{ category.name }}</a>
+                                    <li><a href="{% url 'blog:posts_by_category' category.id %}">{{ category.name }}</a>
                                     </li>
                                 {% endfor %}
                             {% endif %}
@@ -63,8 +64,14 @@
 
             <!-- Side Widget Well -->
             <div class="well">
-                <h4><strong class="strong-green">Site Widget Well</strong></h4>
-                <p style="text-align: justify;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                <h4><strong class="strong-green">Related Contents</strong></h4>
+                <p style="text-align: justify;">
+                    <ul class="list-unstyled">
+                        <li> <a href="https://www.python.org/" target="_blank"> Python Official Website </a> </li>
+                        <li> <a href="https://www.djangoproject.com/" target="_blank"> Django Official Website </a> </li>
+                        <li> <a href="http://www.djangobrasil.org/" target="_blank"> Django Brasil </a> </li>
+                    </ul>
+                </p>
             </div>
         {% endblock %}
         </div>

@@ -11,17 +11,18 @@ def current_time(context, format_string):
     user = context['user']
     return user
 
+#TODO: Fix recursive close feature
 @register.simple_tag()
 def show_comments(post):
 
 	#Closure to find child comments recursively
 	def insert_children(html, comment_template, post, parent, margin_left):
-		children_comments = Comment.objects.filter(post=post, answer_to=parent.id)
+		children_comments = Comment.objects.filter(post=post, answer_to=parent.id).order_by('-date')
 		if children_comments:
 			for child in children_comments:
 				margin_left[child.id] = margin_left[parent.id] + 50
 				grand_children_number = Comment.objects.filter(post=post, answer_to=child.id).count()
-				child_context = Context({'post_id': post.id, 'url': child.author.photo.url, 'date': child.date, 'text': child.text, 'comment_id': child.id, 'parent_comment_id': parent.id, 'children_number': grand_children_number, 'margin_left': margin_left[child.id], 'display': 'none'})
+				child_context = Context({'post_id': post.id, 'url': child.author.photo.url, 'author': child.author.user.username, 'date': child.date, 'text': child.text, 'comment_id': child.id, 'parent_comment_id': parent.id, 'children_number': grand_children_number, 'margin_left': margin_left[child.id], 'display': 'none'})
 				html[0] += comment_template.render(child_context)
 
 				insert_children(html, comment_template, post, child, margin_left)
@@ -34,10 +35,12 @@ def show_comments(post):
 		        <label id="hidden-photo" style="display: none;"> {{ url }} </label>
 		    </a>
 		    <div class="media-body">
-		        <h4 class="media-heading"> 
-		            <small> {{ date }} </small>
+		        <h4 class="media-heading">
+		        	<label>{{ author }}</label> 
+		            <small> at {{ date }} </small>
 		        </h4>
 		        {{ text }}
+		        <hr>
 		    </div>
 		    <a id="link-respond-{{ comment_id }}"> Respond </a>
 		    {% if children_number > 0 %}
@@ -50,7 +53,6 @@ def show_comments(post):
 					    <h4>Leave a Comment:</h4>
 					    
 					    <form action="/send_answer_to_comment/{{ post_id }}/{{ comment_id }}/" method="post">
-						    {% csrf_token %}
 						    {{ form }}
 						    <div class="form-group">
 					        	<textarea id="answer-text-{{ comment_id }}" name="answer-text-{{ comment_id }}" class="form-control" rows="3" rows="5" class="form-control" placeholder="Comment" required data-validation-required-message="Please enter your answer."></textarea>
@@ -80,7 +82,7 @@ def show_comments(post):
 	margin_left = {}
 	html = [""]
 
-	parent_comments = Comment.objects.filter(post=post, answer_to=None)
+	parent_comments = Comment.objects.filter(post=post, answer_to=None).order_by('-date')
 	if(not parent_comments):
 		comment_template = Template("<h4 id='no-comments' class='media-heading'> No comments were left here yet. Be the first to comment!</h4>")
 		return comment_template.render(Context())
@@ -88,7 +90,7 @@ def show_comments(post):
 	for parent in parent_comments:
 		margin_left[parent.id] = 0
 		children_number = Comment.objects.filter(post=post, answer_to=parent.id).count()
-		context = Context({'post_id': post.id, 'url': parent.author.photo.url, 'date': parent.date, 'text': parent.text, 'comment_id': parent.id, 'parent_comment_id': 0, 'children_number':children_number, 'margin_left': margin_left[parent.id], 'display': 'block' })
+		context = Context({'post_id': post.id, 'url': parent.author.photo.url, 'author': parent.author.user.username,'date': parent.date, 'text': parent.text, 'comment_id': parent.id, 'parent_comment_id': 0, 'children_number':children_number, 'margin_left': margin_left[parent.id], 'display': 'block' })
 		html[0] += comment_template.render(context)
 		
 		insert_children(html, comment_template, post, parent, margin_left)

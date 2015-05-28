@@ -46,10 +46,17 @@
                         <a href="{% url 'blog:about' %}">About</a>
                     </li>
                     <li>
-                        <a href="{% url 'blog:posts' %}">All Posts</a>
+                        <a href="{% url 'blog:all_posts' %}">All Posts</a>
                     </li>
                     <li>
                         <a href="{% url 'blog:contact' %}">Contact</a>
+                    </li>
+                    <li>
+                        {% if user.is_anonymous %} 
+                            <a href="{% url 'blog:login' %}"> (Log in) </a>
+                        {% else %}                                
+                            <a href="{% url 'blog:logout' %}"> {{ user }} (Log out) </a>
+                        {% endif %}                            
                     </li>
                 </ul>
             </div>
@@ -70,7 +77,8 @@
 	        <p>{% endblock %'}'</p>
 	    </p>
 		
-	</div>
+    </div>
+
     {% endblock %}
 
 	<hr>

@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Learn Django!
-                <small>These are all posts we've written so far. Enjoy!</small>
+                <small>Posts from <strong>{{ category.name }}!</strong></small>
             </h1>
         </div>
     </div>
@@ -28,12 +28,12 @@
                 </center>
             </div>
         {% endfor %}
-        <hr>
-    
+    	<hr>
+
         <!-- TODO: Pagination -->
         <div class="row text-center">
             <div class="col-lg-12">
-                <ul class="pagination"> 
+                <ul class="pagination">
                     <li>
                         <a href="#">&laquo;</a>
                     </li>
@@ -57,9 +57,9 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div>    
     {% else %}
-        No posts found for yet :(
+    	No posts found for this category :(
     {% endif %}
     </div>
 </div>
