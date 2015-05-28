@@ -60,24 +60,6 @@ class Contact(models.Model):
 	def __str__(self):
 		return self.name
 
-class AboutPage(models.Model):
-	title = models.CharField(max_length=200)
-	subtitle = models.CharField(max_length=100)
-	text = models.CharField(max_length=8000)
-	last_change = models.DateTimeField('date change')
-
-
-	def __str__(self):
-		return self.title
-
-class ContactPage(models.Model):
-	title = models.CharField(max_length=200)
-	subtitle = models.CharField(max_length=100)
-	text = models.CharField(max_length=8000)
-	last_change = models.DateTimeField('date change')	
-
-	def __str__(self):
-		return self.title
 
 
 

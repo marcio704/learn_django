@@ -4,8 +4,7 @@ from .models import Category
 from .models import Author
 from .models import UserProfile
 from .models import Comment
-from .models import AboutPage
-from .models import ContactPage
+
 
 # Register your models here.
 
@@ -24,18 +23,10 @@ class UserProfileAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
 	fields = ['text', 'date', 'author', 'post', 'answer_to']
 
-class AboutPageAdmin(admin.ModelAdmin):
-	fields = ['title', 'subtitle', 'text', 'last_change']
-
-class ContactPageAdmin(admin.ModelAdmin):
-	fields = ['title', 'subtitle', 'text', 'last_change']
-
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Comment, CommentAdmin)
-admin.site.register(AboutPage, AboutPageAdmin)
-admin.site.register(ContactPage, ContactPageAdmin)
 

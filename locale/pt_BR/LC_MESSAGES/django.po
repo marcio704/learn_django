@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-28 20:55+0000\n"
+"POT-Creation-Date: 2015-05-28 21:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,19 +18,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: blog/templates/blog/contact.html:32
-msgid "Name"
-msgstr "Nome" 
+#: blog/templates/blog/about.html:12
+msgid "Learn Django, step by step!"
+msgstr "Aprenda Django, passo a passo!"
 
-#: blog/templates/blog/contact.html:39
+#: blog/templates/blog/about.html:14
+msgid "Passion for web, python and simplicity"
+msgstr "Paixão por web, python e simplicidade"
+
+#: blog/templates/blog/about.html:25
+msgid "This is us!"
+msgstr "É nóis, parça!"
+
+#: blog/templates/blog/contact.html:12
+msgid "Get in touch :)"
+msgstr "Entre em contato :)"
+
+#: blog/templates/blog/contact.html:14
+msgid "It's fast and easy, just like Django!"
+msgstr "É ŕápido e fácil, assim como o Django!"
+
+#: blog/templates/blog/contact.html:26
+msgid "Fill the informations below, we'll answer as fast as we can:"
+msgstr "Preecnha as informações abaixo, responderemos o quanto antes: "
+
+#: blog/templates/blog/contact.html:32 blog/templates/blog/contact.html:33
+msgid "Name"
+msgstr "Nome"
+
+#: blog/templates/blog/contact.html:39 blog/templates/blog/contact.html:40
 msgid "Email Address"
 msgstr "Email"
 
-#: blog/templates/blog/contact.html:46
+#: blog/templates/blog/contact.html:46 blog/templates/blog/contact.html:47
 msgid "Phone Number"
 msgstr "Telefone"
 
-#: blog/templates/blog/contact.html:53
+#: blog/templates/blog/contact.html:53 blog/templates/blog/contact.html:54
 msgid "Message"
 msgstr "Mensagem"
 
@@ -38,107 +62,107 @@ msgstr "Mensagem"
 msgid "Send"
 msgstr "Enviar"
 
-#: blog/templates/blog/index.html:7
+#: blog/templates/blog/index.html:8
 msgid "Welcome to"
 msgstr "Bem-vindo ao"
 
-#: blog/templates/blog/index.html:8
+#: blog/templates/blog/index.html:9
 msgid "See our last posts"
 msgstr "Veja os posts mais rescentes"
 
-#: blog/templates/blog/index.html:17
+#: blog/templates/blog/index.html:18
 msgid "This post was written by:"
 msgstr "Esse post foi escrito por:"
 
-#: blog/templates/blog/index.html:31
+#: blog/templates/blog/index.html:32
 msgid "Read More"
 msgstr "Leia Mais"
 
-#: blog/templates/blog/index.html:38
+#: blog/templates/blog/index.html:39
 msgid "No posts available."
 msgstr "Nenhum post disponível"
 
-#: blog/templates/blog/index.html:44
+#: blog/templates/blog/index.html:45
 msgid "Newer"
 msgstr "Novos"
 
-#: blog/templates/blog/index.html:47
+#: blog/templates/blog/index.html:48
 msgid "Older"
 msgstr "Antigos"
 
-#: blog/templates/blog/post/all_posts.html:10
+#: blog/templates/blog/post/all_posts.html:11
 msgid "These are all posts we've written so far. Enjoy!"
 msgstr "Estes são todos os posts que escrevemos até agora. Divirta-se!"
 
-#: blog/templates/blog/post/all_posts.html:62
+#: blog/templates/blog/post/all_posts.html:63
 msgid "No posts found yet :("
 msgstr "Nenhum post encontrado :("
 
-#: blog/templates/blog/post/detail.html:12
+#: blog/templates/blog/post/detail.html:13
 msgid "written by:"
 msgstr "escrito por"
 
-#: blog/templates/blog/post/detail.html:24
+#: blog/templates/blog/post/detail.html:25
 msgid "Posted on:"
 msgstr "Postado em:"
 
-#: blog/templates/blog/post/detail.html:42
+#: blog/templates/blog/post/detail.html:43
 msgid "Leave a Comment:"
 msgstr "Deixe um comentário"
 
-#: blog/templates/blog/post/detail.html:48
+#: blog/templates/blog/post/detail.html:49
 msgid "Send:"
 msgstr "Enviar"
 
-#: blog/templates/blog/post/detail.html:58
-msgid "Return to home page:"
-msgstr "Retornar à página principal:"
+#: blog/templates/blog/post/detail.html:59
+msgid "Return to home page"
+msgstr "Retornar à página principal"
 
-#: blog/templates/blog/post/posts_by_category.html:10
+#: blog/templates/blog/post/posts_by_category.html:11
 msgid "Posts about"
 msgstr "Posts sobre"
 
-#: blog/templates/blog/post/posts_by_category.html:62
+#: blog/templates/blog/post/posts_by_category.html:63
 msgid "No posts found for this category :("
 msgstr "Nenhum post encontrado para esta categoria :("
 
-#: blog/templates/blog/registration/login.html:17
+#: blog/templates/blog/registration/login.html:18
 msgid "Login"
 msgstr "Login"
 
-#: blog/templates/blog/registration/login.html:32
+#: blog/templates/blog/registration/login.html:33
 msgid "Go, go, go!"
 msgstr "Aproveite!"
 
-#: blog/templates/blog/registration/login.html:38
+#: blog/templates/blog/registration/login.html:39
 msgid "Forgot your password?"
 msgstr "Esqueceu sua senha?"
 
-#: blog/templates/blog/registration/login.html:39
+#: blog/templates/blog/registration/login.html:40
 msgid "Not signed yet?"
 msgstr "Ainda não é cadastrado?"
 
-#: blog/templates/blog/templates/blog_template.html:27
+#: blog/templates/blog/templates/blog_template.html:28
 msgid "Blog Search"
 msgstr "Procurar"
 
-#: blog/templates/blog/templates/blog_template.html:40
+#: blog/templates/blog/templates/blog_template.html:41
 msgid "Blog Categories"
 msgstr "Categorias"
 
-#: blog/templates/blog/templates/blog_template.html:67
+#: blog/templates/blog/templates/blog_template.html:68
 msgid "Related Contents"
 msgstr "Conteúdos Relacionados"
 
-#: blog/templates/blog/templates/blog_template.html:70
+#: blog/templates/blog/templates/blog_template.html:71
 msgid "Python Official Website"
 msgstr "Site Oficial do Python"
 
-#: blog/templates/blog/templates/blog_template.html:71
+#: blog/templates/blog/templates/blog_template.html:72
 msgid "Django Official Website"
 msgstr "Site Oficial do Django"
 
-#: blog/templates/blog/templates/blog_template.html:72
+#: blog/templates/blog/templates/blog_template.html:73
 msgid "Django Brasil"
 msgstr "Django Brasil"
 
@@ -161,3 +185,6 @@ msgstr "(Entrar)"
 #: blog/templates/blog/templates/master.html:59
 msgid "(Log out)"
 msgstr "(Sair)"
+
+#~ msgid "at"
+#~ msgstr "em"

@@ -29,6 +29,7 @@ def show_comments(post):
 
 	#HTML content to be appended for each comment		
 	comment_html = """
+		{% load i18n %}
 		<div class="media parent-div-{{ parent_comment_id }}" style="margin-left: {{ margin_left }}px; display: {{ display }};">
 		    <a class="pull-left" href="#">
 		        <img class="media-object not-3d-img" src="{{ url }}" alt="" width="100" height="100">

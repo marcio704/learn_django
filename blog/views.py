@@ -13,8 +13,6 @@ from django.contrib.auth.models import User
 from .models import Post
 from .models import Category
 from .models import Contact
-from .models import AboutPage
-from .models import ContactPage
 
 from .models import UserProfile
 from .models import Comment
@@ -60,16 +58,10 @@ def posts_by_category(request, category_id):
     return render(request, 'blog/post/posts_by_category.html', context)
 
 def contact(request):
-    contact_page = ContactPage.objects.all()[0]
-    context = {'contact_page': contact_page}
-
-    return render(request, 'blog/contact.html', context)
+    return render(request, 'blog/contact.html')
 
 def about(request):
-    about = AboutPage.objects.all()[0]
-    context = {'about': about}
-
-    return render(request, 'blog/about.html', context)        
+    return render(request, 'blog/about.html')        
 
 def send_contact(request):
     if request.method == 'POST':

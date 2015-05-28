@@ -1,5 +1,6 @@
 {% extends "blog/templates/blog_template.html" %}
 {% load blog_tags %}
+{% load i18n %}
 
 <!-- Blog Post -->
 {% block content %}
@@ -55,7 +56,7 @@
 	<div id="new-comment"></div>
 	<hr>
 
-	<a class="btn btn-primary" href="{% url 'blog:index' %}"> {% trans "Return to home page:" %} <span class="glyphicon glyphicon-chevron-right"></span></a>
+	<a class="btn btn-primary" href="{% url 'blog:index' %}"> {% trans "Return to home page" %} <span class="glyphicon glyphicon-chevron-right"></span></a>
 
 {% endblock %}
 
