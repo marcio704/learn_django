@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-28 21:30+0000\n"
+"POT-Creation-Date: 2015-05-28 21:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,6 +125,10 @@ msgstr "Posts sobre"
 #: blog/templates/blog/post/posts_by_category.html:63
 msgid "No posts found for this category :("
 msgstr "Nenhum post encontrado para esta categoria :("
+
+#: blog/templates/blog/registration/login.html:13
+msgid "User/password not found!"
+msgstr "Usuário/senha não encontrados!"
 
 #: blog/templates/blog/registration/login.html:18
 msgid "Login"

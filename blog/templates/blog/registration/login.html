@@ -7,10 +7,10 @@
         <div class="row">
             <center>
                 <div class="col-md-4 col-md-offset-4">
-                    {% if validation %}
+                    {% if invalidation %}
                         <div class="alert alert-danger alert-dismissable">
                             <button id="closeAlertBtn" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <strong id="frmErrorsName"> {{ validation }}</strong>
+                            <strong id="frmErrorsName"> {% trans "User/password not found!" %} </strong>
                         </div>
                     {% endif %}
                     <div class="login-panel panel panel-default">

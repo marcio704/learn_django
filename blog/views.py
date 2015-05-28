@@ -100,7 +100,7 @@ def auth(request):
                 login_auth(request, user)
                 return HttpResponseRedirect(request.POST.get('login-next'))  
             else:
-                return render(request, 'blog/registration/login.html', {'validation': 'User/password not found!'})                    
+                return render(request, 'blog/registration/login.html', {'invalidation': 'User/password not found!'})                    
         except Exception as inst:
             print (type(inst))
             print ('Error on authenticating user: {0}'.format(inst))
