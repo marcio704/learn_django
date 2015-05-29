@@ -28,7 +28,7 @@ msgstr "Paixão por web, python e simplicidade"
 
 #: blog/templates/blog/about.html:25
 msgid "This is us!"
-msgstr "É nóis, parça!"
+msgstr """<p>Este blog foi inteiramente desenvolvido em Django para que possa servir de ferramenta de inspiração e de aprendizado àqueles que desejam aprender mais sobre Python e Django.</p> <p>A ideia deste site é mostrar e ensinar, passo a passo, como construir uma aplicação web em Django que utilize os principais conceitos e paradigmas enfrentados por qualquer desenvolvedor web. Durante o processo de escrita dos posts, serão abordados assuntos comuns mas essenciais para quem deseja desenvolver uma aplicação web de maneira rápida e simples utilizando o Django Framework.</p> <p> Por isso, post a post, mostrarei como construi este blog que, apesar de simples, fez uso dos principais tópicos e recursos já nativos do Django e que qualquer aplicação web, independentemente de sua complexidade ou domínio, fará uso constante como, por exemplo:</p> <ul><li>Sistema de autenticação (login/ logout).</li> <li>Persistência em banco de dados utilizando o ORM (Mapeamento objeto-relacional) do Django.</li> <li>Como utilizar o sistema de admin do Django para manipular e editar seus registros (CRUD).</li> <li>Sistema de migrations do Django para rastrear mundanças em suas entidades e no seu Banco de Dados</li> <li>Construção e hierarquia de templates HTML.</li> <li>Construção de templates com HTML dinâmico (tags).</li> <li>Manipulação de arquivos estáticos (CSS, JS, arquivos de imagem)</li> <li>Envio e manipulação de formulários via POST e GET.</li> <li>Paginação (backend e frontend)</li>  <li>Ajax com Django</li> <li>Como mapear suas rotas (URLs) no Django</li> <li>Internacionalização  (Sistema Multilingue) </li> <li>Criação e execução de Testes Unitários</li> <ul>"""
 
 #: blog/templates/blog/contact.html:12
 msgid "Get in touch :)"
@@ -40,7 +40,7 @@ msgstr "É ŕápido e fácil, assim como o Django!"
 
 #: blog/templates/blog/contact.html:26
 msgid "Fill the informations below, we'll answer as fast as we can:"
-msgstr "Preecnha as informações abaixo, responderemos o quanto antes: "
+msgstr "Preencha as informações abaixo, responderemos o quanto antes: "
 
 #: blog/templates/blog/contact.html:32 blog/templates/blog/contact.html:33
 msgid "Name"
