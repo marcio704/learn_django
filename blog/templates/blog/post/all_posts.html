@@ -26,6 +26,7 @@
                         <a href="{% url 'blog:detail' post.id %}">{{ post.name }}</a>
                     </h3>
                     <strong><p style="text-aligment: justify;">{{ post.resume }}</p></strong>
+                    {% trans 'From:' %} {{ post.date }}
                 </center>
             </div>
         {% endfor %}
@@ -34,27 +35,17 @@
         <!-- TODO: Pagination -->
         <div class="row text-center">
             <div class="col-lg-12">
-                <ul class="pagination"> 
-                    <li>
-                        <a href="#">&laquo;</a>
+                <!-- Pager -->
+                <ul class="pager">
+                    <li class="previous">
+                        {% if post_list.has_previous %}
+                            <a href="?page={{ post_list.previous_page_number }}"> &larr; {% trans "Newer" %} </a>
+                        {% endif %}
                     </li>
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">&raquo;</a>
+                    <li class="next">
+                        {% if post_list.has_next %}
+                            <a href="?page={{ post_list.next_page_number }}"> {% trans "Older" %}  &rarr; </a>
+                        {% endif %}
                     </li>
                 </ul>
             </div>

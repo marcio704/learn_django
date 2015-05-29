@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-28 21:37+0000\n"
+"POT-Creation-Date: 2015-05-29 18:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,19 +82,27 @@ msgstr "Leia Mais"
 msgid "No posts available."
 msgstr "Nenhum post disponível"
 
-#: blog/templates/blog/index.html:45
+#: blog/templates/blog/index.html:46
+#: blog/templates/blog/post/all_posts.html:42
+#: blog/templates/blog/post/posts_by_category.html:41
 msgid "Newer"
-msgstr "Novos"
+msgstr "Mais Novos"
 
-#: blog/templates/blog/index.html:48
+#: blog/templates/blog/index.html:51
+#: blog/templates/blog/post/all_posts.html:47
+#: blog/templates/blog/post/posts_by_category.html:46
 msgid "Older"
-msgstr "Antigos"
+msgstr "Mais Antigos"
 
 #: blog/templates/blog/post/all_posts.html:11
 msgid "These are all posts we've written so far. Enjoy!"
 msgstr "Estes são todos os posts que escrevemos até agora. Divirta-se!"
 
-#: blog/templates/blog/post/all_posts.html:63
+#: blog/templates/blog/post/all_posts.html:29
+msgid "From:"
+msgstr "De:"
+
+#: blog/templates/blog/post/all_posts.html:54
 msgid "No posts found yet :("
 msgstr "Nenhum post encontrado :("
 
@@ -122,7 +130,7 @@ msgstr "Retornar à página principal"
 msgid "Posts about"
 msgstr "Posts sobre"
 
-#: blog/templates/blog/post/posts_by_category.html:63
+#: blog/templates/blog/post/posts_by_category.html:53
 msgid "No posts found for this category :("
 msgstr "Nenhum post encontrado para esta categoria :("
 
@@ -146,27 +154,27 @@ msgstr "Esqueceu sua senha?"
 msgid "Not signed yet?"
 msgstr "Ainda não é cadastrado?"
 
-#: blog/templates/blog/templates/blog_template.html:28
+#: blog/templates/blog/templates/blog_template.html:40
 msgid "Blog Search"
 msgstr "Procurar"
 
-#: blog/templates/blog/templates/blog_template.html:41
+#: blog/templates/blog/templates/blog_template.html:48
 msgid "Blog Categories"
 msgstr "Categorias"
 
-#: blog/templates/blog/templates/blog_template.html:68
+#: blog/templates/blog/templates/blog_template.html:75
 msgid "Related Contents"
 msgstr "Conteúdos Relacionados"
 
-#: blog/templates/blog/templates/blog_template.html:71
+#: blog/templates/blog/templates/blog_template.html:78
 msgid "Python Official Website"
 msgstr "Site Oficial do Python"
 
-#: blog/templates/blog/templates/blog_template.html:72
+#: blog/templates/blog/templates/blog_template.html:79
 msgid "Django Official Website"
 msgstr "Site Oficial do Django"
 
-#: blog/templates/blog/templates/blog_template.html:73
+#: blog/templates/blog/templates/blog_template.html:80
 msgid "Django Brasil"
 msgstr "Django Brasil"
 

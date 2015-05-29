@@ -1,4 +1,5 @@
 #from django.template import RequestContext, loader
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, render_to_response
 from django.views import generic
@@ -29,9 +30,18 @@ import re
 
 #TODO: Implement category list as a tag lib.
 def index(request):
-    post_list = Post.objects.all().order_by('-date')[:5]
+    post_list = Post.objects.all().order_by('-date')
+    paginator = Paginator(post_list, 5)
+    try:
+        page = request.GET.get('page')
+        posts_by_page = paginator.page(page)
+    except PageNotAnInteger:
+        posts_by_page = paginator.page(1)
+    except EmptyPage:
+        posts_by_page = paginator.page(paginator.num_pages)
+
     category_list_parts = utils.divideListByTwo(Category.objects.all())
-    context = {'post_list': post_list, 'category_list_1': category_list_parts["list_1"], 'category_list_2': category_list_parts["list_2"]}
+    context = {'post_list': posts_by_page, 'category_list_1': category_list_parts["list_1"], 'category_list_2': category_list_parts["list_2"]}
     
     return render(request, 'blog/index.html', context)
 
@@ -45,15 +55,34 @@ def detail(request, post_id):
     
     
 def all_posts(request):
-    post_list = Post.objects.all()
-    context = {'post_list': post_list}
+    post_list = Post.objects.all().order_by('-date')
+    paginator = Paginator(post_list, 6)
 
+    try:
+        page = request.GET.get('page')
+        posts_by_page = paginator.page(page)
+    except PageNotAnInteger:
+        posts_by_page = paginator.page(1)
+    except EmptyPage:
+        posts_by_page = paginator.page(paginator.num_pages)
+
+    context = {'post_list': posts_by_page}
     return render(request, 'blog/post/all_posts.html', context)
 
 def posts_by_category(request, category_id):
     post_list = Post.objects.filter(category=category_id).order_by('-date')
+    paginator = Paginator(post_list, 3)
+
+    try:
+        page = request.GET.get('page')
+        posts_by_page = paginator.page(page)
+    except PageNotAnInteger:
+        posts_by_page = paginator.page(1)
+    except EmptyPage:
+        posts_by_page = paginator.page(paginator.num_pages)
+
     category = Category.objects.get(pk=category_id)
-    context = {'post_list': post_list, 'category': category}
+    context = {'post_list': posts_by_page, 'category': category}
 
     return render(request, 'blog/post/posts_by_category.html', context)
 
