@@ -1,11 +1,13 @@
-""" 
-	- Run "sudo pip install django-crontab" to install cron module.
-	- Run "python manage.py crontab add" in order to add these functions to cron scheduling
-"""
-
 from .models import Contact
 from django.utils import timezone
 from .utils import utils
+
+""" 
+	This cron feature uses django-crontab module, see specifications here: https://github.com/kraiz/django-crontabs
+
+	- Run "sudo pip install django-crontab" to install cron module.
+	- Run "python manage.py crontab add" in order to add these functions to cron scheduling
+"""
 
 def send_contact_email():
 	list_contact = Contact.objects.filter(is_email_sent=False)
