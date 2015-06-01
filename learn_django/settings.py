@@ -119,3 +119,23 @@ LOGIN_URL = '/login'
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
+
+
+
+""" 
+    For aditional secret settings such as E-mails, Passwords and Tokens, create an addtional file. 
+    For example, "secret_settings.py" in the root directory, this file should not be shared through a Version Control System like GIT or SVN.
+
+    File format should look like:
+        SERVER_EMAIL = 'server@email.com'
+        SERVER_EMAIL_PASS = 'password'
+        EMAIL_HOST_SMTP = 'smtp.gmail.com:587'
+        CLIENT_EMAIL = 'client@email.com'
+
+    For later use, do like:
+
+    from django.conf import settings
+    email = settings.SERVER_EMAIL
+"""
+
+from blog.secret_settings import *
