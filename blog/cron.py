@@ -1,6 +1,7 @@
 from .models import Contact
 from django.utils import timezone
 from .utils import utils
+from django.conf import settings
 
 """ 
 	This cron feature uses django-crontab module, see specifications here: https://github.com/kraiz/django-crontabs
@@ -11,7 +12,7 @@ from .utils import utils
 
 def send_contact_email():
 	list_contact = Contact.objects.filter(is_email_sent=False)
-	to_email = 'marcio704@yahoo.com.br'
+	to_email = settings.CLIENT_EMAIL
 	for contact in list_contact:
 	    try:
 	        msg = """

@@ -24,7 +24,7 @@ def send_email(to_address, msg):
 
 	body = MIMEText(msg.encode('utf-8'), 'plain', 'utf-8')
 	body['From'] = settings.SERVER_EMAIL
-	body['To'] = settings.CLIENT_EMAIL
+	body['To'] = to_address
 	body['Subject'] = Header('LearnDjango!', 'utf-8')
 
 	# The actual mail send
