@@ -37,7 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog'
+    'blog',
+    'django_crontab',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -50,6 +51,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 )
+
+CRONJOBS = [
+    ('*/1 * * * *', 'blog.cron.send_contact_email')
+]
 
 ROOT_URLCONF = 'learn_django.urls'
 

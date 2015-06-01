@@ -40,7 +40,7 @@ def index(request):
     except EmptyPage:
         posts_by_page = paginator.page(paginator.num_pages)
 
-    category_list_parts = utils.divideListByTwo(Category.objects.all())
+    category_list_parts = utils.divide_list_by_two(Category.objects.all())
     context = {'post_list': posts_by_page, 'category_list_1': category_list_parts["list_1"], 'category_list_2': category_list_parts["list_2"]}
     
     return render(request, 'blog/index.html', context)
@@ -48,7 +48,7 @@ def index(request):
 #TODO: Implement category list as a tag lib.
 def detail(request, post_id):
     post = Post.objects.get(pk=post_id)
-    category_list_parts = utils.divideListByTwo(Category.objects.all())
+    category_list_parts = utils.divide_list_by_two(Category.objects.all())
     context = {'post': post, 'category_list_1': category_list_parts["list_1"], 'category_list_2': category_list_parts["list_2"]}
 
     return render(request, "blog/post/detail.html", context)
