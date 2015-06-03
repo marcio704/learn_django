@@ -1,0 +1,41 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-03 16:03-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: blog/static/blog/js/clean-blog.js:164
+msgid "Sorry "
+msgstr "Desculpe "
+
+#: blog/static/blog/js/clean-blog.js:164
+msgid ", it seems that our server is not responding. Please try again later!"
+msgstr ""
+", parece que nosso servidor não está respondendo no momento. Por favor, "
+"tente mais tarde!"
+
+#: blog/static/blog/js/clean-blog.js:168
+msgid "This username is already in use, please choose another one"
+msgstr "Login já em uso, por favor, escolha outro"
+
+#: blog/static/blog/js/clean-blog.js:172
+msgid "This e-mail is already in use, please choose another one"
+msgstr "E-mail já em uso, por favor, digite outro"
+
+#: blog/static/blog/js/clean-blog.js:176
+msgid "Wrong password confirmation"
+msgstr "Confirmação de senha está diferente"

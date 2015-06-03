@@ -50,89 +50,9 @@ $(function() {
   });
 });
 
-
-/*
-// Comment Form Script
+// Contact Form Script
 $(function() {
-
-  $("#comment-form-btn").click(function() {
-    var text = $("#new-comment-text").val();
-    if(! text.trim()) {
-      $('#comment-success').html("<div class='alert alert-danger'>");
-      $('#comment-success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-          .append("</button>");
-      $('#comment-success > .alert-danger').append("<strong>Please, insert a comment before sending!");
-      $('#comment-success > .alert-danger').append('</div>');
-      return;
-    }
-
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0!
-
-    var yyyy = today.getFullYear();
-    if(dd<10){
-        dd='0'+dd
-    } 
-    if(mm<10){
-        mm='0'+mm
-    } 
-    var today = dd+'/'+mm+'/'+yyyy;
-    var photo = $('hidden-photo').text();
-    
-    $.ajax({
-        url: "send_comment/",
-        type: "POST",
-        data: {
-            text: text
-        },
-        cache: false,
-        success: function() {
-            // Success message
-            $('#comment-success').html("<div class='alert alert-success'>");
-            $('#comment-success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-              .append("</button>");
-            $('#comment-success > .alert-success')
-              .append("<strong>Your comment has been sent. </strong>");
-            $('#comment-success > .alert-success')
-              .append('</div>');
-
-            //clear comment field
-            $('#new-comment-text').val("");
-
-            $('#new-comment').html("<div class='media'>");
-              $('#new-comment > .media').html("<a class='pull-left' href='#'>");
-                $('#new-comment > .media > .pull-left').html("<img class='media-object not-3d-img' src='" + photo + "' alt='' width='100' height='100'>");
-              $('#new-comment > .media').append("</a>");
-              $('#new-comment > .media').append("<div class='media-body'>");
-                $('#new-comment > .media > .media-body').html("<h4 class='media-heading'>");
-                  $('#new-comment > .media > .media-body > .media-heading').html("<small> " + today + " </small>");
-                $('#new-comment > .media > .media-body').append(text);
-                $('#new-comment > .media > .media-body').append("</h4>");
-              $('#new-comment > .media').append("</div>");
-
-              $('#no-comments').html('');
-                
-        },
-        error: function() {
-            // Fail message
-            $('#comment-success').html("<div class='alert alert-danger'>");
-            $('#comment-success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
-                .append("</button>");
-            $('#comment-success > .alert-danger').append("<strong>Sorry, it seems that our server is not responding. Please try again later!");
-            $('#comment-success > .alert-danger').append('</div>');
-            //clear all fields
-            $('#comment-text').val("");
-        },
-    })
-  });
-});
-*/
-
-// Contact Form Scripts
-$(function() {
-
-    $("#contact-name, #contact-email, #contact-phone, #contact-message").jqBootstrapValidation({
+    $('form[name="contact-form"]').find('input,select,textarea').not('[type=submit]').jqBootstrapValidation({
         preventSubmit: true,
         submitError: function($form, event, errors) {
             // additional error messages or events
@@ -196,21 +116,87 @@ $(function() {
     });
 });
 
+// Sign-in Form Script
+$(function () {  
+  $('form[name="signin-form"]').find('input,select,textarea').not('[type=submit]').jqBootstrapValidation({
+    preventSubmit: true,
+    submitError: function($form, event, errors) {
+        // additional error messages or events
+    },
+    submitSuccess: function($form, event) {
+        // event.preventDefault(); // prevent default submit behaviour
+        // get values from FORM
+        var username = $("#signin-username").val();
+        var name = $("#signin-name").val();
+        var email = $("#signin-email").val();
+        var password = $("#signin-password").val();
+        var password2 = $("#signin-password2").val();
+        var firstName = name; 
+        if (firstName.indexOf(' ') >= 0) {
+            firstName = name.split(' ').slice(0, -1).join(' ');
+        }
+
+        $.ajax({
+            url: "sign_in",
+            type: "POST",
+            data: {
+              username: username,
+              name: name,
+              email: email,
+              password: password,
+              password2: password2
+            },
+            cache: false,
+            success: function() {
+                // Success message
+                $('#signin-success').html("<div class='alert alert-success'>");
+                $('#signin-success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                    .append("</button>");
+                $('#signin-success > .alert-success')
+                    .append("<strong>Your user has been successfully created. </strong>");
+                $('#signin-success > .alert-success')
+                    .append('</div>');
+
+                //clear all fields
+                $('#signin-form').trigger("reset");
+            },
+            error: function(request, status, error) {
+                errorMsg = gettext("Sorry ") + firstName + gettext(", it seems that our server is not responding. Please try again later!")
+                if (request.responseText) {
+                  switch(request.responseText) {
+                    case 'username':
+                      errorMsg = gettext('This username is already in use, please choose another one');
+                      $("#signin-username").val("").focus();
+                      break;
+                    case 'email':
+                      errorMsg = gettext('This e-mail is already in use, please choose another one');
+                      $("#signin-email").val("").focus();
+                      break;
+                    case 'password':
+                      errorMsg = gettext('Wrong password confirmation');
+                      $("#signin-password2").val("").focus();
+                      break;
+                  }
+                }
+                // Fail message
+                $('#signin-success').html("<div class='alert alert-danger'>");
+                $('#signin-success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                    .append("</button>");
+                $('#signin-success > .alert-danger').append("<strong>" + errorMsg);
+                $('#signin-success > .alert-danger').append('</div>');
+                //clear all fields
+                
+            },
+        });
+        event.preventDefault();
+      }
+  });
+});
 
 /*When clicking on Full hide fail/success boxes */
 $('#name').focus(function() {
     $('#success').html('');
 });
-
- // jqBootstrapValidation
- // * A plugin for automating validation on Twitter Bootstrap formatted forms.
- // *
- // * v1.3.6
- // *
- // * License: MIT <http://opensource.org/licenses/mit-license.php> - see LICENSE file
- // *
- // * http://ReactiveRaven.github.com/jqBootstrapValidation/
- 
 
 (function( $ ){
 

@@ -22,7 +22,7 @@ def show_comments(post):
 			for child in children_comments:
 				margin_left[child.id] = margin_left[parent.id] + 50
 				grand_children_number = Comment.objects.filter(post=post, answer_to=child.id).count()
-				child_context = Context({'post_id': post.id, 'url': child.author.photo.url, 'author': child.author.user.username, 'date': child.date, 'text': child.text, 'comment_id': child.id, 'parent_comment_id': parent.id, 'children_number': grand_children_number, 'margin_left': margin_left[child.id], 'display': 'none'})
+				child_context = Context({'post_id': post.id, 'url': child.author.photo.url if child.author.photo else '', 'author': child.author.user.username, 'date': child.date, 'text': child.text, 'comment_id': child.id, 'parent_comment_id': parent.id, 'children_number': grand_children_number, 'margin_left': margin_left[child.id], 'display': 'none'})
 				html[0] += comment_template.render(child_context)
 
 				insert_children(html, comment_template, post, child, margin_left)
@@ -91,7 +91,7 @@ def show_comments(post):
 	for parent in parent_comments:
 		margin_left[parent.id] = 0
 		children_number = Comment.objects.filter(post=post, answer_to=parent.id).count()
-		context = Context({'post_id': post.id, 'url': parent.author.photo.url, 'author': parent.author.user.username,'date': parent.date, 'text': parent.text, 'comment_id': parent.id, 'parent_comment_id': 0, 'children_number':children_number, 'margin_left': margin_left[parent.id], 'display': 'block' })
+		context = Context({'post_id': post.id, 'url': parent.author.photo.url if parent.author.photo else '', 'author': parent.author.user.username,'date': parent.date, 'text': parent.text, 'comment_id': parent.id, 'parent_comment_id': 0, 'children_number':children_number, 'margin_left': margin_left[parent.id], 'display': 'block' })
 		html[0] += comment_template.render(context)
 		
 		insert_children(html, comment_template, post, parent, margin_left)

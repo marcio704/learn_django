@@ -1,1 +1,64 @@
-oie
+{% extends "blog/templates/master.html" %}
+{% load i18n %}
+
+{% block body %}
+    <!-- Main Content -->
+    <script type="text/javascript">
+  		
+	</script>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p class="lead" style="text-align: justify;">
+                    {% trans "Fill the informations below:" %} 
+                </p>
+                <form name="signin-form" id="signin-form" novalidate>
+                    {% csrf_token %}
+                    <div class="row control-group">
+                    	<div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label> {% trans "Username" %} </label>
+                            <input type="text" class="form-control" placeholder="{% trans 'Username' %}" id="signin-username" name="signin-username" required data-validation-required-message="Please enter your username.">
+                            <p class="help-block text-danger"></p>
+                        </div>
+
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label> {% trans "Name" %} </label>
+                            <input type="text" class="form-control" placeholder="{% trans 'Name' %}" id="signin-name" name="signin-name" required data-validation-required-message="Please enter your name.">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label> {% trans "Email Address" %} </label>
+                            <input type="email" class="form-control" placeholder="{% trans 'Email Address' %}" id="signin-email" name="signin-email" required data-validation-required-message="Please enter your email address.">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>{% trans "Password" %} </label>
+                            <input type="password" rows="5" class="form-control" placeholder="{% trans 'Password' %}" id="signin-password" name="signin-password" required data-validation-required-message="Please enter a password."></input>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>{% trans "Confirm Password" %} </label>
+                            <input type="password" rows="5" class="form-control" placeholder="{% trans 'Confirm Password' %}" id="signin-password2" name="signin-password2" required data-validation-required-message="Please enter your password again."></input>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <br>
+                    <div id="signin-success"></div>
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            <button id="signin-btn" name="signin-btn" class="btn btn-default"> {% trans "Send" %} </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}  

@@ -100,8 +100,7 @@ def send_contact(request):
             return HttpResponse(200)
         except Exception as inst:
             print (type(inst))
-            print (inst)
-            print ('Error on saving contact information')
+            print ('Error on saving contact information: {0}'.format(inst))
             
             return HttpResponse(500)    
     else:
@@ -141,10 +140,33 @@ def auth(request):
 #TODO: build screen for sign in option (blog/registration/sign_in.html)
 def sign_in(request):
     if request.method == 'POST':
-        user = User.objects.create_user(username='john', email='jlennon@beatles.com', password='glassonion')
-        user_profile = UserProfile.objects.create(user=user)
-        print('User successfully saved!')
-        return HttpResponseRedirect('/login')
+        try:
+            user_by_username = User.objects.get(username=request.POST.get('username'))
+            if user_by_username is not None:
+                return HttpResponse("username", status=500)  
+        except Exception as inst:
+            print (type(inst))
+        
+        try:
+            user_by_email = User.objects.get(email=request.POST.get('email'))
+            if user_by_email is not None:
+                return HttpResponse("email", status=500)  
+        except Exception as inst:
+            print (type(inst)) 
+        
+        if not request.POST.get('password') == request.POST.get('password2'):
+            return HttpResponse("password", status=500)  
+
+        try:
+            user = User.objects.create_user(username=request.POST.get('username'), first_name=request.POST.get('name'), email=request.POST.get('email'), password=request.POST.get('password'))
+            #TODO - inserir upload foto
+            user_profile = UserProfile.objects.create(user=user)
+            return HttpResponseRedirect('/login')
+        except Exception as inst:
+            print (type(inst))
+            print ('Error on signing user: {0}'.format(inst))
+            
+            return HttpResponse("", status=500)  
     else:
         return render(request, 'blog/registration/sign_in.html')
 
@@ -158,8 +180,7 @@ def send_comment(request, post_id):
             return HttpResponseRedirect('/{0}/#comment-tab'.format(post_id))
         except Exception as inst:
             print (type(inst))
-            print (inst)
-            print ('Error on saving comment information')
+            print ('Error on saving comment information: {0}'.format(inst))
             
             return HttpResponse(500)    
     else:
@@ -176,8 +197,7 @@ def send_answer_to_comment(request, post_id, comment_id):
             return HttpResponseRedirect('/{0}/#comment-tab'.format(post_id))
         except Exception as inst:
             print (type(inst))
-            print (inst)
-            print ('Error on saving answer information')
+            print ('Error on saving answer information: {0}'.format(inst))
             
             return HttpResponse(500)    
     else:
