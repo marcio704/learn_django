@@ -22,7 +22,7 @@ def show_comments(post):
 			for child in children_comments:
 				margin_left[child.id] = margin_left[parent.id] + 50
 				grand_children_number = Comment.objects.filter(post=post, answer_to=child.id).count()
-				child_context = Context({'post_id': post.id, 'url': child.author.photo.url if child.author.photo else '', 'author': child.author.user.username, 'date': child.date, 'text': child.text, 'comment_id': child.id, 'parent_comment_id': parent.id, 'children_number': grand_children_number, 'margin_left': margin_left[child.id], 'display': 'none'})
+				child_context = Context({'post_id': post.id, 'photo_url': child.author.photo.url if child.author.photo else '', 'author': child.author.user.username, 'date': child.date, 'text': child.text, 'comment_id': child.id, 'parent_comment_id': parent.id, 'children_number': grand_children_number, 'margin_left': margin_left[child.id], 'display': 'none'})
 				html[0] += comment_template.render(child_context)
 
 				insert_children(html, comment_template, post, child, margin_left)
@@ -30,10 +30,14 @@ def show_comments(post):
 	#HTML content to be appended for each comment		
 	comment_html = """
 		{% load i18n %}
+		{% load staticfiles %}
 		<div class="media parent-div-{{ parent_comment_id }}" style="margin-left: {{ margin_left }}px; display: {{ display }};">
 		    <a class="pull-left" href="#">
-		        <img class="media-object not-3d-img" src="{{ url }}" alt="" width="100" height="100">
-		        <label id="hidden-photo" style="display: none;"> {{ url }} </label>
+		    	{% if photo_url %}
+			    	<img class="media-object not-3d-img" src="{{ photo_url }}" alt="" width="100" height="100">
+			    {% else %}
+			    	<img class="media-object not-3d-img" src="{% static 'blog/images/anonymous.jpg' %}" alt="" width="100" height="100">
+			    {% endif %}
 		    </a>
 		    <div class="media-body">
 		        <h4 class="media-heading">
@@ -84,14 +88,14 @@ def show_comments(post):
 	html = [""]
 
 	parent_comments = Comment.objects.filter(post=post, answer_to=None).order_by('-date')
-	if(not parent_comments):
+	if not parent_comments:
 		comment_template = Template("<h4 id='no-comments' class='media-heading'> No comments were left here yet. Be the first to comment!</h4>")
 		return comment_template.render(Context())
 
 	for parent in parent_comments:
 		margin_left[parent.id] = 0
 		children_number = Comment.objects.filter(post=post, answer_to=parent.id).count()
-		context = Context({'post_id': post.id, 'url': parent.author.photo.url if parent.author.photo else '', 'author': parent.author.user.username,'date': parent.date, 'text': parent.text, 'comment_id': parent.id, 'parent_comment_id': 0, 'children_number':children_number, 'margin_left': margin_left[parent.id], 'display': 'block' })
+		context = Context({'post_id': post.id, 'photo_url': parent.author.photo.url if parent.author.photo else '', 'author': parent.author.user.username,'date': parent.date, 'text': parent.text, 'comment_id': parent.id, 'parent_comment_id': 0, 'children_number':children_number, 'margin_left': margin_left[parent.id], 'display': 'block' })
 		html[0] += comment_template.render(context)
 		
 		insert_children(html, comment_template, post, parent, margin_left)

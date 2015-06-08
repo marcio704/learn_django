@@ -7,6 +7,7 @@ from django.conf import settings
 	This cron feature uses django-crontab module, see specifications here: https://github.com/kraiz/django-crontabs
 
 	- Run "sudo pip install django-crontab" to install cron module.
+	- Configure settings.py
 	- Run "python manage.py crontab add" in order to add these functions to cron scheduling
 """
 
