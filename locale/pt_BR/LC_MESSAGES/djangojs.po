@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-03 16:03-0300\n"
+"POT-Creation-Date: 2015-06-08 15:06-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,24 +18,53 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: blog/static/blog/js/clean-blog.js:164
+#: blog/static/blog/js/clean-blog.js:84
+#, fuzzy
+#| msgid "Email has been sent!"
+msgid "Your message has been sent"
+msgstr "E-mail enviado com sucesso"
+
+#: blog/static/blog/js/clean-blog.js:98 blog/static/blog/js/clean-blog.js:165
 msgid "Sorry "
 msgstr "Desculpe "
 
-#: blog/static/blog/js/clean-blog.js:164
+#: blog/static/blog/js/clean-blog.js:98 blog/static/blog/js/clean-blog.js:165
 msgid ", it seems that our server is not responding. Please try again later!"
 msgstr ""
 ", parece que nosso servidor não está respondendo no momento. Por favor, "
 "tente mais tarde!"
 
-#: blog/static/blog/js/clean-blog.js:168
+#: blog/static/blog/js/clean-blog.js:151
+msgid "Your user has been successfully created."
+msgstr "Usuário criado com sucesso."
+
+#: blog/static/blog/js/clean-blog.js:169
 msgid "This username is already in use, please choose another one"
 msgstr "Login já em uso, por favor, escolha outro"
 
-#: blog/static/blog/js/clean-blog.js:172
+#: blog/static/blog/js/clean-blog.js:173
 msgid "This e-mail is already in use, please choose another one"
 msgstr "E-mail já em uso, por favor, digite outro"
 
-#: blog/static/blog/js/clean-blog.js:176
+#: blog/static/blog/js/clean-blog.js:177
 msgid "Wrong password confirmation"
 msgstr "Confirmação de senha está diferente"
+
+#: blog/static/blog/js/clean-blog.js:217
+msgid "Email has been sent!"
+msgstr "E-mail enviado com sucesso"
+
+#: blog/static/blog/js/clean-blog.js:230
+msgid ""
+"Sorry, it seems that our server is not responding. Please try again later!"
+msgstr ""
+"Desculpe, parece que nosso servidor não está respondendo no momento. Por "
+"favor, tente mais tarde!"
+
+#: blog/static/blog/js/clean-blog.js:234
+msgid "Cannot find an user with this email address"
+msgstr "Não foi encontrado nenhum usuário cadastrado com este e-mail"
+
+#: blog/static/blog/js/clean-blog.js:238
+msgid "Invalid email"
+msgstr "E-mail inválido"

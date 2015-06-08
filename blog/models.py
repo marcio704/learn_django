@@ -53,7 +53,6 @@ class Comment(models.Model):
 class Contact(models.Model):
 	name = models.CharField(max_length=200)
 	email = models.CharField(max_length=200)
-	phone = models.CharField(max_length=25)
 	message = models.CharField(max_length=8000)
 	creation_date = models.DateTimeField('date creation')
 	is_email_sent = models.BooleanField(default=False)

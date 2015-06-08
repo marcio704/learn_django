@@ -62,7 +62,6 @@ $(function() {
             // get values from FORM
             var name = $("#contact-name").val();
             var email = $("#contact-email").val();
-            var phone = $("#contact-phone").val();
             var message = $("#contact-message").val();
             var firstName = name; // For Success/Failure Message
             // Check for white space in name for Success/Fail message
@@ -75,33 +74,32 @@ $(function() {
                 type: "POST",
                 data: {
                     name: name,
-                    phone: phone,
                     email: email,
                     message: message
                 },
                 cache: false,
                 success: function() {
+                    var msg = gettext("Your message has been sent");
                     // Success message
                     $('#success').html("<div class='alert alert-success'>");
                     $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
                         .append("</button>");
                     $('#success > .alert-success')
-                        .append("<strong>Your message has been sent. </strong>");
+                        .append("<strong> " + msg);
                     $('#success > .alert-success')
                         .append('</div>');
 
                     //clear all fields
-                    $('#contactForm').trigger("reset");
+                    $('#contact-form').trigger("reset");
                 },
                 error: function() {
+                    var errorMsg = gettext("Sorry ") + firstName + gettext(", it seems that our server is not responding. Please try again later!");
                     // Fail message
                     $('#success').html("<div class='alert alert-danger'>");
                     $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
                         .append("</button>");
-                    $('#success > .alert-danger').append("<strong>Sorry " + firstName + ", it seems that my mail server is not responding. Please try again later!");
+                    $('#success > .alert-danger').append("<strong>" + errorMsg);
                     $('#success > .alert-danger').append('</div>');
-                    //clear all fields
-                    $('#contactForm').trigger("reset");
                 },
             })
         },
@@ -148,12 +146,13 @@ $(function () {
             },
             cache: false,
             success: function() {
+                var msg = gettext("Your user has been successfully created.");
                 // Success message
                 $('#signin-success').html("<div class='alert alert-success'>");
                 $('#signin-success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
                     .append("</button>");
                 $('#signin-success > .alert-success')
-                    .append("<strong>Your user has been successfully created. </strong>");
+                    .append("<strong>" + msg);
                 $('#signin-success > .alert-success')
                     .append('</div>');
 
@@ -161,7 +160,7 @@ $(function () {
                 $('#signin-form').trigger("reset");
             },
             error: function(request, status, error) {
-                errorMsg = gettext("Sorry ") + firstName + gettext(", it seems that our server is not responding. Please try again later!")
+                var errorMsg = gettext("Sorry ") + firstName + gettext(", it seems that our server is not responding. Please try again later!");
                 if (request.responseText) {
                   switch(request.responseText) {
                     case 'username':
@@ -187,6 +186,70 @@ $(function () {
                 //clear all fields
                 
             },
+        });
+        event.preventDefault();
+      }
+  });
+});
+
+// Forgot my Password Form Script
+$(function () {  
+  $('form[name="forgot-password-form"]').find('input').not('[type=submit]').jqBootstrapValidation({
+    preventSubmit: true,
+    submitError: function($form, event, errors) {
+        // additional error messages or events
+    },
+    submitSuccess: function($form, event) {
+        // event.preventDefault(); // prevent default submit behaviour
+        // get values from FORM
+        var email = $("#forgot-password-email").val();
+        $('#loading-image').show();
+        $.ajax({
+            url: "forgot_password",
+            type: "POST",
+            data: {
+              email: email
+            },
+            cache: false,
+            success: function() {
+                // Success message
+                var msg = gettext("Email has been sent!");
+                $('#forgot-password-success').html("<div class='alert alert-success'>");
+                $('#forgot-password-success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                    .append("</button>");
+                $('#forgot-password-success > .alert-success')
+                    .append("<strong>" + msg);
+                $('#forgot-password-success > .alert-success')
+                    .append('</div>');
+
+                //clear all fields
+                $('#forgot-password-form').trigger("reset");
+            },
+            error: function(request, status, error) {
+                var errorMsg = gettext("Sorry, it seems that our server is not responding. Please try again later!");
+                if (request.responseText) {
+                  switch(request.responseText) {
+                    case 'user':
+                      errorMsg = gettext('Cannot find an user with this email address');
+                      $("#forgot-password-email").val("").focus();
+                      break;
+                    case 'email':
+                      errorMsg = gettext('Invalid email');
+                      $("#forgot-password-email").focus();
+                      break;
+                  }
+                }
+                // Fail message
+                $('#forgot-password-success').html("<div class='alert alert-danger'>");
+                $('#forgot-password-success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                    .append("</button>");
+                $('#forgot-password-success > .alert-danger').append("<strong>" + errorMsg);
+                $('#forgot-password-success > .alert-danger').append('</div>');
+                
+            },
+            complete: function(){
+              $('#loading-image').hide();
+            }
         });
         event.preventDefault();
       }

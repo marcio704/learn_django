@@ -21,11 +21,11 @@
                             <form action="/auth/" method="post" >
                                 <fieldset>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Login" id="login-username" name="login-username" required data-validation-required-message="Please enter your login.">
+                                        <input type="text" class="form-control" placeholder="Login" id="login-username" name="login-username" required data-validation-required-message="{% trans 'Please enter your login.' %}">
                                         <p class="help-block text-danger"></p>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Password" id="login-password" name="login-password" required data-validation-required-message="Please enter your password.">
+                                        <input type="password" class="form-control" placeholder="Password" id="login-password" name="login-password" required data-validation-required-message="{% trans 'Please enter your password.' %}">
                                         <p class="help-block text-danger"></p>
                                     </div>
                                     <input id="login-next" name="login-next" class="form-control" type="text" style="display: none" value="{{ next }}">
@@ -36,20 +36,12 @@
                             </form>
                             <!--</form>-->
                         </div>
-                        <a href="" target="_blank"> {% trans "Forgot your password?" %} </a> <br />
+                        <a href="{% url 'blog:forgot_password' %}"> {% trans "Forgot your password?" %} </a> <br />
                         <a href="{% url 'blog:sign_in' %}"> {% trans "Not signed yet?" %} </a>
                     </div>
                 </div>
             </center>
         </div>
     </div>
-
-    <script>
-        jQuery(document).ready(function() {
-            if (jQuery("#frmErrorsName").html() === "" && jQuery("#frmErrorsPwd").html() === "") {
-                jQuery("#closeAlertBtn").click();
-            }
-        });
-    </script>
 
 {% endblock %}

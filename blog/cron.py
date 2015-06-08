@@ -18,10 +18,9 @@ def send_contact_email():
 	        msg = """
 	            From: {0}
 	            Email: {1}
-	            Phone: {2}
-	            Date: {3}
-	            Message: {4}
-	        """.format(contact.name, contact.email, contact.phone, contact.creation_date, contact.message)
+	            Date: {2}
+	            Message: {3}
+	        """.format(contact.name, contact.email, contact.creation_date, contact.message)
 	        utils.send_email(to_email, msg)
 	        contact.is_email_sent = True
 	        contact.save()

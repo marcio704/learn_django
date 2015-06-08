@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-02 14:12+0000\n"
+"POT-Creation-Date: 2015-06-08 17:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,14 +67,15 @@ msgid "Fill the informations below, we'll answer as fast as we can:"
 msgstr "Preencha as informações abaixo, responderemos o quanto antes: "
 
 #: blog/templates/blog/contact.html:32 blog/templates/blog/contact.html:33
-#: blog/templates/blog/registration/sign_in.html:22
-#: blog/templates/blog/registration/sign_in.html:23
+#: blog/templates/blog/registration/sign_in.html:26
+#: blog/templates/blog/registration/sign_in.html:27
 msgid "Name"
 msgstr "Nome"
 
 #: blog/templates/blog/contact.html:39 blog/templates/blog/contact.html:40
-#: blog/templates/blog/registration/sign_in.html:29
-#: blog/templates/blog/registration/sign_in.html:30
+#: blog/templates/blog/registration/forgot_password.html:18
+#: blog/templates/blog/registration/sign_in.html:33
+#: blog/templates/blog/registration/sign_in.html:34
 msgid "Email Address"
 msgstr "Email"
 
@@ -87,7 +88,8 @@ msgid "Message"
 msgstr "Mensagem"
 
 #: blog/templates/blog/contact.html:62
-#: blog/templates/blog/registration/sign_in.html:52
+#: blog/templates/blog/registration/forgot_password.html:22
+#: blog/templates/blog/registration/sign_in.html:56
 msgid "Send"
 msgstr "Enviar"
 
@@ -97,7 +99,7 @@ msgstr "Bem-vindo ao"
 
 #: blog/templates/blog/index.html:9
 msgid "See our last posts"
-msgstr "Veja os posts mais rescentes"
+msgstr "Veja os posts mais recentes"
 
 #: blog/templates/blog/index.html:18
 msgid "This post was written by:"
@@ -163,6 +165,14 @@ msgstr "Posts sobre"
 msgid "No posts found for this category :("
 msgstr "Nenhum post encontrado para esta categoria :("
 
+#: blog/templates/blog/registration/forgot_password.html:12
+msgid "Forgot my password"
+msgstr "Esqueci minha senha"
+
+#: blog/templates/blog/registration/forgot_password.html:18
+msgid "Please enter your email address"
+msgstr "Por favor, digite seu e-mail"
+
 #: blog/templates/blog/registration/login.html:13
 msgid "User/password not found!"
 msgstr "Usuário/senha não encontrados!"
@@ -170,6 +180,16 @@ msgstr "Usuário/senha não encontrados!"
 #: blog/templates/blog/registration/login.html:18
 msgid "Login"
 msgstr "Login"
+
+#: blog/templates/blog/registration/login.html:24
+msgid "Please enter your login."
+msgstr "Por favor, digite seu login."
+
+#: blog/templates/blog/registration/login.html:28
+#, fuzzy
+#| msgid "Forgot your password?"
+msgid "Please enter your password."
+msgstr "Esqueceu sua senha?"
 
 #: blog/templates/blog/registration/login.html:33
 msgid "Go, go, go!"
@@ -183,24 +203,44 @@ msgstr "Esqueceu sua senha?"
 msgid "Not signed yet?"
 msgstr "Ainda não é cadastrado?"
 
-#: blog/templates/blog/registration/sign_in.html:10
+#: blog/templates/blog/registration/sign_in.html:14
 msgid "Fill the informations below:"
 msgstr "Preencha as informações abaixo: "
 
-#: blog/templates/blog/registration/sign_in.html:16
-#: blog/templates/blog/registration/sign_in.html:17
+#: blog/templates/blog/registration/sign_in.html:20
+#: blog/templates/blog/registration/sign_in.html:21
 msgid "Username"
 msgstr "Login"
 
-#: blog/templates/blog/registration/sign_in.html:36
-#: blog/templates/blog/registration/sign_in.html:37
-#: blog/templates/blog/registration/sign_in.html:44
+#: blog/templates/blog/registration/sign_in.html:21
+msgid "Please enter your username."
+msgstr "Por favor, digite seu login."
+
+#: blog/templates/blog/registration/sign_in.html:27
+msgid "Please enter your name."
+msgstr "Por favor, digite seu nome"
+
+#: blog/templates/blog/registration/sign_in.html:34
+msgid "Please enter your email address."
+msgstr "Por favor, digite seu e-mail"
+
+#: blog/templates/blog/registration/sign_in.html:40
+#: blog/templates/blog/registration/sign_in.html:41
 msgid "Password"
 msgstr "Senha"
 
-#: blog/templates/blog/registration/sign_in.html:43
+#: blog/templates/blog/registration/sign_in.html:41
+msgid "Please enter a password."
+msgstr "Por favor, digite sua senha."
+
+#: blog/templates/blog/registration/sign_in.html:47
+#: blog/templates/blog/registration/sign_in.html:48
 msgid "Confirm Password"
 msgstr "Confirme sua senha"
+
+#: blog/templates/blog/registration/sign_in.html:48
+msgid "Please enter your password again."
+msgstr "Por favor, digite novamente sua senha."
 
 #: blog/templates/blog/templates/blog_template.html:40
 msgid "Blog Search"

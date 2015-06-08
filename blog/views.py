@@ -8,6 +8,7 @@ from django.template.context_processors import csrf
 from django.contrib.auth import authenticate
 from django.contrib.auth import  login as login_auth
 from django.contrib.auth import logout as logout_auth
+from django.contrib.auth.hashers import  make_password 
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
 
@@ -25,6 +26,8 @@ from django.utils import timezone
 
 import sys
 import re
+import string
+import random
 
 # Create your views here.
 
@@ -95,7 +98,7 @@ def about(request):
 def send_contact(request):
     if request.method == 'POST':
         try:
-            contact = Contact(name=request.POST.get('name'), email=request.POST.get('email'), phone=request.POST.get('phone'), message=request.POST.get('message'), creation_date=timezone.now())
+            contact = Contact(name=request.POST.get('name'), email=request.POST.get('email'), message=request.POST.get('message'), creation_date=timezone.now())
             contact.save()
             return HttpResponse(200)
         except Exception as inst:
@@ -105,6 +108,41 @@ def send_contact(request):
             return HttpResponse(500)    
     else:
         return HttpResponseRedirect('/contact')
+
+def forgot_password(request):
+    if request.method == 'POST':
+        new_randomized_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
+        to_email = ''
+        try: 
+            to_email = request.POST.get('email')
+        except Exception as inst:
+            return HttpResponse('email', status=500)
+        try:
+            user = User.objects.get(email=to_email)
+        except Exception as inst:
+            return HttpResponse('user', status=500)  
+        if user is not None:
+            user.password = make_password(new_randomized_password, salt=None, hasher='default')
+            try:
+                user.save()
+            except Exception as inst:
+                return HttpResponse('forgot_password_error', status=500)  
+            try:
+                msg = """
+                    Hi, did you forget your LearnDjango password?
+
+                    We've created a new one for you. Your new randomized password is: {0}
+
+                    Login: {1}
+                """.format(new_randomized_password, user.username)
+                utils.send_email(to_email, msg)
+                return HttpResponse(200)    
+            except Exception as inst:
+                print ('Error on sending new password via email: {0}'.format(inst))
+        
+        return HttpResponse("forgot_password_error", status=500)  
+    else:
+        return render(request, 'blog/registration/forgot_password.html')    
 
 def login(request):
     try:
