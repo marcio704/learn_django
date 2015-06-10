@@ -1,14 +1,18 @@
 language: python
 python:
-  - "3.2"
-  - "3.3"
   - "3.4"
-sudo: required
+env:
+  - DJANGO=1.8
 install:
-  - "pip install ."
+  -	pip install -q Django==$DJANGO 
+  - pip install pep8 --use-mirrors
+  - pip install https://github.com/dcramer/pyflakes/tarball/master
+  - pip install -q -e . --use-mirrors
+before_script:
+  - "pep8 --exclude=migrations --ignore=E501,E225 src"
+  - pyflakes -x W src
 script:
-  - python blog/tests.py
-
+  - python setup.py test
 # command to install dependencies
 #install: "pip install -r requirements.txt"
 
