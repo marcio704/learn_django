@@ -3,9 +3,11 @@ python:
   - "3.2"
   - "3.3"
   - "3.4"
-  - "nightly"
-
 sudo: required
+install:
+  - pip install -q -e .
+script:
+  - python blog/tests.py
 
 # command to install dependencies
 #install: "pip install -r requirements.txt"
@@ -18,6 +20,6 @@ deploy:
   access_key_id: "AKIAISCPLKYOXYQHEAWA"
   secret_access_key: "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"
   bucket: "S3 Bucket"
-  key: latest/MyApp.zip
-  application: MyApp
+  key: latest/learn_django.zip
+  application: learn_django
   deployment_group: MyDeploymentGroup
