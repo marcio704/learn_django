@@ -23,6 +23,7 @@ from .models import TokenPassword
 from .utils import utils
 
 from django.utils import timezone
+from django.utils.translation import ugettext as _
 
 
 
@@ -130,14 +131,14 @@ def forgot_password(request):
                 token = TokenPassword(user=user, value=token_value)    
                 token.save()
             try:
-                msg = """
+                msg = _("""
                     Hi, did you forget your LearnDjango password?
 
                     Click the link below to rescue your password:
+                    """)
 
-                    http://localhost:9999/rescue_password?token={0}
-                """.format(token.value)
-                utils.send_email(to_email, msg)
+                link = "http://localhost:9999/rescue_password?token={0}".format(token.value)
+                utils.send_email(to_email, msg+link)
                 return HttpResponse(200)    
             except Exception as inst:
                 print ('Error on sending new password via email: {0}'.format(inst))

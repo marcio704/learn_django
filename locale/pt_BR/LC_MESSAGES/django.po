@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-11 14:08+0000\n"
+"POT-Creation-Date: 2015-06-11 14:03-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,6 +85,7 @@ msgstr "Mensagem"
 
 #: blog/templates/blog/contact.html:55
 #: blog/templates/blog/registration/forgot_password.html:23
+#: blog/templates/blog/registration/rescue_password.html:38
 #: blog/templates/blog/registration/sign_in.html:56
 msgid "Send"
 msgstr "Enviar"
@@ -203,22 +204,37 @@ msgstr "Ainda não é cadastrado?"
 msgid "This token does not exist or was already used."
 msgstr "Este token não existe ou já foi utilizado"
 
-#: blog/templates/blog/registration/rescue_password.html:9
-msgid "Hi"
-msgstr "Olá"
+#: blog/templates/blog/registration/rescue_password.html:15
+msgid "Rescue my password"
+msgstr "Esqueci minha senha"
 
-#: blog/templates/blog/registration/rescue_password.html:9
-msgid "this is your token: "
-msgstr "este é o seu token: "
-
-#: blog/templates/blog/registration/sign_in.html:14
-msgid "Fill the informations below:"
-msgstr "Preencha as informações abaixo: "
-
+#: blog/templates/blog/registration/rescue_password.html:21
 #: blog/templates/blog/registration/sign_in.html:20
 #: blog/templates/blog/registration/sign_in.html:21
 msgid "Username"
 msgstr "Login"
+
+#: blog/templates/blog/registration/rescue_password.html:25
+#: blog/templates/blog/registration/sign_in.html:40
+#: blog/templates/blog/registration/sign_in.html:41
+msgid "Password"
+msgstr "Senha"
+
+#: blog/templates/blog/registration/rescue_password.html:25
+msgid "Please enter your new password"
+msgstr "Por favor, digite sua nova senha"
+
+#: blog/templates/blog/registration/rescue_password.html:29
+msgid "Again"
+msgstr "Novamente"
+
+#: blog/templates/blog/registration/rescue_password.html:29
+msgid "Please enter your new password again"
+msgstr "Por favor, digite novamente sua senha."
+
+#: blog/templates/blog/registration/sign_in.html:14
+msgid "Fill the informations below:"
+msgstr "Preencha as informações abaixo: "
 
 #: blog/templates/blog/registration/sign_in.html:21
 msgid "Please enter your username."
@@ -231,11 +247,6 @@ msgstr "Por favor, digite seu nome"
 #: blog/templates/blog/registration/sign_in.html:34
 msgid "Please enter your email address."
 msgstr "Por favor, digite seu e-mail"
-
-#: blog/templates/blog/registration/sign_in.html:40
-#: blog/templates/blog/registration/sign_in.html:41
-msgid "Password"
-msgstr "Senha"
 
 #: blog/templates/blog/registration/sign_in.html:41
 msgid "Please enter a password."
@@ -293,6 +304,25 @@ msgstr "(Entrar)"
 #: blog/templates/blog/templates/master.html:59
 msgid "(Log out)"
 msgstr "(Sair)"
+
+#: blog/views.py:134
+msgid ""
+"\n"
+"                    Hi, did you forget your LearnDjango password?\n"
+"\n"
+"                    Click the link below to rescue your password:\n"
+"                    "
+msgstr ""
+"\n"
+"                    Olá, você esqueceu sua senha do LearDjango?\n"
+"\n"
+"                    Clique no link abaixo, para recuperá-la:\n"
+"                    "
+#~ msgid "Hi"
+#~ msgstr "Olá"
+
+#~ msgid "this is your token: "
+#~ msgstr "este é o seu token: "
 
 #~ msgid "Phone Number"
 #~ msgstr "Telefone"
