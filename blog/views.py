@@ -11,13 +11,15 @@ from django.contrib.auth import logout as logout_auth
 from django.contrib.auth.hashers import  make_password 
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Post
 from .models import Category
 from .models import Contact
-
 from .models import UserProfile
 from .models import Comment
+from .models import TokenPassword
+
 from .utils import utils
 
 from django.utils import timezone
@@ -111,7 +113,6 @@ def send_contact(request):
 
 def forgot_password(request):
     if request.method == 'POST':
-        new_randomized_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
         to_email = ''
         try: 
             to_email = request.POST.get('email')
@@ -122,19 +123,20 @@ def forgot_password(request):
         except Exception as inst:
             return HttpResponse('user', status=500)  
         if user is not None:
-            user.password = make_password(new_randomized_password, salt=None, hasher='default')
             try:
-                user.save()
-            except Exception as inst:
-                return HttpResponse('forgot_password_error', status=500)  
+                token = TokenPassword.objects.get(user=user, is_used=False)
+            except ObjectDoesNotExist as inst:
+                token_value = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
+                token = TokenPassword(user=user, value=token_value)    
+                token.save()
             try:
                 msg = """
                     Hi, did you forget your LearnDjango password?
 
-                    We've created a new one for you. Your new randomized password is: {0}
+                    Click the link below to rescue your password:
 
-                    Login: {1}
-                """.format(new_randomized_password, user.username)
+                    http://localhost:9999/rescue_password?token={0}
+                """.format(token.value)
                 utils.send_email(to_email, msg)
                 return HttpResponse(200)    
             except Exception as inst:
@@ -143,6 +145,35 @@ def forgot_password(request):
         return HttpResponse("forgot_password_error", status=500)  
     else:
         return render(request, 'blog/registration/forgot_password.html')    
+
+def rescue_password(request):
+    if request.method == 'POST':
+        try:
+            token = request.POST.get('token')
+            user_id = request.POST.get('user_id')
+            password_1 = request.POST.get('password_1')
+            password_2 = request.POST.get('password_2')
+        except:
+            return HttpResponse("missing_information", status=500)  
+        if password_1 != password_2:
+            return HttpResponse("wrong_password_confirmation", status=500)  
+
+        user = User.objects.get(pk=user_id)
+        user.password = make_password(password_1, salt=None, hasher='default')
+        user.save()
+
+        token_pass = TokenPassword.objects.get(value=token, is_used=False)
+        token_pass.is_used = True
+        token_pass.save()
+
+        return HttpResponse(200)  
+    else:
+        try:
+            token_pass = TokenPassword.objects.get(value=request.GET.get('token'), is_used=False)
+        except ObjectDoesNotExist as inst:
+            return render(request, 'blog/registration/rescue_password.html',  {'invalid_token': True})            
+        user = User.objects.get(pk=token_pass.user.id)
+        return render(request, 'blog/registration/rescue_password.html',  {'token': token_pass, 'token_user': user})            
 
 def login(request):
     try:

@@ -256,6 +256,72 @@ $(function () {
   });
 });
 
+// Rescue Password Form Script
+$(function () {  
+  $('form[name="rescue-password-form"]').find('input').not('[type=submit]').jqBootstrapValidation({
+    preventSubmit: true,
+    submitError: function($form, event, errors) {
+        // additional error messages or events
+    },
+    submitSuccess: function($form, event) {
+        // event.preventDefault(); // prevent default submit behaviour
+        // get values from FORM
+        var user_id = $("#rescue-password-user").val();
+        var token = $("#rescue-password-token").val();
+        var password_1 = $("#rescue-password-1").val();
+        var password_2 = $("#rescue-password-2").val();
+        
+        $.ajax({
+            url: "rescue_password",
+            type: "POST",
+            data: {
+              user_id: user_id,
+              token: token,
+              password_1: password_1,
+              password_2: password_2
+            },
+            cache: false,
+            success: function() {
+                // Success message
+                var msg = gettext("Your password has been successfully changed!");
+                $('#rescue-password-success').html("<div class='alert alert-success'>");
+                $('#rescue-password-success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                    .append("</button>");
+                $('#rescue-password-success > .alert-success')
+                    .append("<strong>" + msg);
+                $('#rescue-password-success > .alert-success')
+                    .append('</div>');
+
+                //clear all fields
+                $('#rescue-password-form').trigger("reset");
+            },
+            error: function(request, status, error) {
+                var errorMsg = gettext("Sorry, it seems that our server is not responding. Please try again later!");
+                if (request.responseText) {
+                  switch(request.responseText) {
+                    case 'missing_information':
+                      errorMsg = gettext('There are informations missing, you can not change your password');
+                      $('#rescue-password-form').trigger("reset");
+                      break;
+                    case 'wrong_password_confirmation':
+                      errorMsg = gettext('Password confirmation is wrong');
+                      $("#rescue-password-2").focus();
+                      break;
+                  }
+                }
+                // Fail message
+                $('#rescue-password-success').html("<div class='alert alert-danger'>");
+                $('#rescue-password-success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+                    .append("</button>");
+                $('#rescue-password-success > .alert-danger').append("<strong>" + errorMsg);
+                $('#rescue-password-success > .alert-danger').append('</div>');
+            }
+        });
+        event.preventDefault();
+      }
+  });
+});
+
 /*When clicking on Full hide fail/success boxes */
 $('#name').focus(function() {
     $('#success').html('');

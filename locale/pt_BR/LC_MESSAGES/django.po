@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-08 17:55+0000\n"
+"POT-Creation-Date: 2015-06-11 14:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,22 +73,18 @@ msgid "Name"
 msgstr "Nome"
 
 #: blog/templates/blog/contact.html:39 blog/templates/blog/contact.html:40
-#: blog/templates/blog/registration/forgot_password.html:18
+#: blog/templates/blog/registration/forgot_password.html:19
 #: blog/templates/blog/registration/sign_in.html:33
 #: blog/templates/blog/registration/sign_in.html:34
 msgid "Email Address"
 msgstr "Email"
 
 #: blog/templates/blog/contact.html:46 blog/templates/blog/contact.html:47
-msgid "Phone Number"
-msgstr "Telefone"
-
-#: blog/templates/blog/contact.html:53 blog/templates/blog/contact.html:54
 msgid "Message"
 msgstr "Mensagem"
 
-#: blog/templates/blog/contact.html:62
-#: blog/templates/blog/registration/forgot_password.html:22
+#: blog/templates/blog/contact.html:55
+#: blog/templates/blog/registration/forgot_password.html:23
 #: blog/templates/blog/registration/sign_in.html:56
 msgid "Send"
 msgstr "Enviar"
@@ -165,11 +161,11 @@ msgstr "Posts sobre"
 msgid "No posts found for this category :("
 msgstr "Nenhum post encontrado para esta categoria :("
 
-#: blog/templates/blog/registration/forgot_password.html:12
+#: blog/templates/blog/registration/forgot_password.html:13
 msgid "Forgot my password"
 msgstr "Esqueci minha senha"
 
-#: blog/templates/blog/registration/forgot_password.html:18
+#: blog/templates/blog/registration/forgot_password.html:19
 msgid "Please enter your email address"
 msgstr "Por favor, digite seu e-mail"
 
@@ -202,6 +198,18 @@ msgstr "Esqueceu sua senha?"
 #: blog/templates/blog/registration/login.html:40
 msgid "Not signed yet?"
 msgstr "Ainda não é cadastrado?"
+
+#: blog/templates/blog/registration/rescue_password.html:7
+msgid "This token does not exist or was already used."
+msgstr "Este token não existe ou já foi utilizado"
+
+#: blog/templates/blog/registration/rescue_password.html:9
+msgid "Hi"
+msgstr "Olá"
+
+#: blog/templates/blog/registration/rescue_password.html:9
+msgid "this is your token: "
+msgstr "este é o seu token: "
 
 #: blog/templates/blog/registration/sign_in.html:14
 msgid "Fill the informations below:"
@@ -285,6 +293,9 @@ msgstr "(Entrar)"
 #: blog/templates/blog/templates/master.html:59
 msgid "(Log out)"
 msgstr "(Sair)"
+
+#~ msgid "Phone Number"
+#~ msgstr "Telefone"
 
 #~ msgid "at"
 #~ msgstr "em"

@@ -60,6 +60,11 @@ class Contact(models.Model):
 	def __str__(self):
 		return self.name
 
+class TokenPassword(models.Model):
+	user = models.ForeignKey(User)
+	value = models.CharField(max_length=20)
+	is_used = models.BooleanField(default=False)
+	used_at = models.DateTimeField('date creation',blank=True, null=True)
 
 
 
