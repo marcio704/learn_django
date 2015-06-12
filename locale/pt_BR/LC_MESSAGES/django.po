@@ -19,8 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: blog/templates/blog/about.html:12
-msgid "Learn Django, step by step!"
-msgstr "Aprenda Django, passo a passo!"
+msgid "Easy Django, step by step!"
+msgstr "Easy Django, passo a passo!"
 
 #: blog/templates/blog/about.html:14
 msgid "Passion for web, python and simplicity"
@@ -308,7 +308,7 @@ msgstr "(Sair)"
 #: blog/views.py:134
 msgid ""
 "\n"
-"                    Hi, did you forget your LearnDjango password?\n"
+"                    Hi, did you forget your EasyDjango password?\n"
 "\n"
 "                    Click the link below to rescue your password:\n"
 "                    "

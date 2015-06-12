@@ -11,13 +11,3 @@ before_script:
 - psql -c 'ALTER USER django CREATEDB;' -U postgres
 script:
 - python manage.py test
-
-#deploy:
-#  provider: codedeploy
-#  access_key_id: AKIAISCPLKYOXYQHEAWA
-#  secret_access_key:
-#    secure: fSHuuPNLP0Gt/Ef7om261MRfxflhNx1v3aa2hZBhoLE1YHqktWphP6ysbcjze4ksbuLWJ9aHm6guB3S7Bh/aCuHjQO0VyDXGEqBmILpp0mbZU8YsRh/9ciouJmN6F1ACKJ0DRWT5d1jxodqDKxJWJuZDEPZ0z0IKxcrYFyhn3FVt6IozMhwTxugol+uI1jolMxnqY2EAmhEcsUXCTz7oNyRldrgp5/ZbU+KSKhtkqAg3z05H1BrdN9N6JuJ2DXca9aUUM2GlPzG+a+XlBaVyDj4JAPnr/rokiAaHCrxjT7q67jeyXjk7qYXdprI+dSWmmMbBgfQpiXcoTv9kR8PelejCkQSbVFwScPX9Xax/u/oFdYWG1mNn8nUzWBWe3kKsZwWj8J64jaOjNGdGIqO4vrF0Bmq0TDh+fEsqOv6TcWh2H53ED9qsL7g+Iv+2urj7fKGRH98kbJhkPmF6zVPJNmamNs2ODl66v0pcQyBYogZofUIAMOaTtftBZPqL9joFvQXl5JL9HD5MuyOym0RDvOx/89u9gD3ZOJBDaq2mIwk6858T400AOaeiTfffsYDeHR0NX16/wzeP6nJKbb60vZGEfE3Uox52BGwae8dUvWVR1i/R39EYVyGkPxWguIJDdNlwGXvaVJMwfjH5Nq38oAbfOavE10usX0C5DYMGhbA=
-#  bucket: learndjango
-#  key: latest/learn_django.zip
-#  application: learn_django
-#  deployment-group: 'learndjango-deploy-group'

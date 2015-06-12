@@ -132,7 +132,7 @@ def forgot_password(request):
                 token.save()
             try:
                 msg = _("""
-                    Hi, did you forget your LearnDjango password?
+                    Hi, did you forget your EasyDjango password?
 
                     Click the link below to rescue your password:
                     """)
