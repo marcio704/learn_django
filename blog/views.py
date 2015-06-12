@@ -210,23 +210,25 @@ def auth(request):
 #TODO: build screen for sign in option (blog/registration/sign_in.html)
 def sign_in(request):
     if request.method == 'POST':
+        user_by_username = None
         try:
             user_by_username = User.objects.get(username=request.POST.get('username'))
-            if user_by_username is not None:
-                return HttpResponse("username", status=500)  
-        except Exception as inst:
+        except ObjectDoesNotExist as inst:
             print (type(inst))
+        if user_by_username is not None:
+            return HttpResponse("username", status=500)  
         
+        user_by_email = None
         try:
-            user_by_email = User.objects.get(email=request.POST.get('email'))
-            if user_by_email is not None:
-                return HttpResponse("email", status=500)  
-        except Exception as inst:
+            user_by_email = User.objects.get(email=request.POST.get('email')) 
+        except ObjectDoesNotExist as inst:
             print (type(inst)) 
+        if user_by_email is not None:
+            return HttpResponse("email", status=500) 
         
         if not request.POST.get('password') == request.POST.get('password2'):
             return HttpResponse("password", status=500)  
-
+            
         try:
             user = User.objects.create_user(username=request.POST.get('username'), first_name=request.POST.get('name'), email=request.POST.get('email'), password=request.POST.get('password'))
             #TODO - inserir upload foto
