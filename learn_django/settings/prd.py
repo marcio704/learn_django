@@ -20,8 +20,6 @@ DATABASES = {
 MEDIA_ROOT = '/home/ubuntu/dev/learn_django/media'
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = '/home/ubuntu/dev/learn_django/static'
-
 LOCALE_PATHS = (
     '/home/ubuntu/dev/learn_django/locale',
 )
