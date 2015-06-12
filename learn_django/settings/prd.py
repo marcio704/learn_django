@@ -20,10 +20,11 @@ DATABASES = {
 MEDIA_ROOT = '/home/ubuntu/dev/learn_django/media'
 MEDIA_URL = '/media/'
 
+STATIC_ROOT = '/home/ubuntu/dev/learn_django/static'
+
 LOCALE_PATHS = (
     '/home/ubuntu/dev/learn_django/locale',
 )
-
 
 """ 
     For aditional secret settings such as E-mails, Passwords and Tokens, create an addtional file. 
