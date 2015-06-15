@@ -26,6 +26,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'blog',
     'django_crontab',
+    'ckeditor',
 )
 
 MIDDLEWARE_CLASSES = (

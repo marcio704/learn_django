@@ -18,6 +18,7 @@ DATABASES = {
 
 MEDIA_ROOT = '/home/marcio/dev/learn_django/media'
 MEDIA_URL = '/media/'
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 STATIC_ROOT = '/home/marcio/dev/learn_django/static'
 STATIC_URL = '/static/'

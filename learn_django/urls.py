@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
                  {'document_root': MEDIA_ROOT}),
-    url(r'^jsi8n/$', 'django.views.i18n.javascript_catalog', js_info_dict)
+    url(r'^jsi8n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
+    url(r'^ckeditor/', include('ckeditor.urls'))
 ]
