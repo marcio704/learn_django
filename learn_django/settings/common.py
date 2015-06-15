@@ -83,3 +83,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 LOGIN_URL = '/login'
+
+CKEDITOR_CONFIGS = {
+'default': {
+    'toolbar': [["Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker"],
+                ['NumberedList', 'BulletedList', "Indent", "Outdent", 'JustifyLeft', 'JustifyCenter',
+                 'JustifyRight', 'JustifyBlock'],
+                ["Image", "Table", "Link", "Unlink", "Anchor", "SectionLink", "Subscript", "Superscript"], ['Undo', 'Redo'], ["Source"],
+                ["Maximize"]],
+    'width': 900,
+}}
