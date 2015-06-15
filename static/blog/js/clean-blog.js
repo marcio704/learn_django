@@ -2,6 +2,7 @@
 //TODO: Use angular.js or organize js functions separated by files
 
 //Configure Ajax for Post requests using django's token protection
+
 $(function() {
   function getCookie(name) {
       var cookieValue = null;

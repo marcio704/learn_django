@@ -30,26 +30,26 @@
 	<center><img class="img-responsive" src="{{ post.thumbnail.url }}" alt=""></center>
 
 	<hr>
+	<div id="post-content">
+		<!-- Post Content -->
+		<p class="lead" style="text-align: justify;">{{ post.text |safe }}</p>
 
-	<!-- Post Content -->
-	<p class="lead" style="text-align: justify;">{{ post.text }}</p>
+		<hr>
 
-	<hr>
+		<!-- Blog Comments -->
 
-	<!-- Blog Comments -->
-
-	<!-- Comments Form -->
-	<div class="well"  id="comment-tab" name="comment-tab">
-	    <h4> {% trans "Leave a Comment:" %} </h4>
-	    <form action="send_comment/" method="post">
-		    <div class="form-group">
-		        <textarea id="comment-text" name="comment-text" class="form-control" rows="3" rows="5" class="form-control" placeholder="Comment" required data-validation-required-message="Please enter a comment."></textarea>
-		    </div>
-		    <div id="comment-success"></div>
-	    	<button id="comment-form-btn" name="comment-form-btn" class="btn btn-default"> {% trans "Send:" %} </button>
-    	</form>
+		<!-- Comments Form -->
+		<div class="well"  id="comment-tab" name="comment-tab">
+		    <h4> {% trans "Leave a Comment:" %} </h4>
+		    <form action="send_comment/" method="post">
+			    <div class="form-group">
+			        <textarea id="comment-text" name="comment-text" class="form-control" rows="3" rows="5" class="form-control" placeholder="Comment" required data-validation-required-message="Please enter a comment."></textarea>
+			    </div>
+			    <div id="comment-success"></div>
+		    	<button id="comment-form-btn" name="comment-form-btn" class="btn btn-default"> {% trans "Send:" %} </button>
+	    	</form>
+		</div>
 	</div>
-
 	<hr>
 	<!-- Posted Comments -->
 	{% show_comments post %}
@@ -57,8 +57,14 @@
 	<hr>
 
 	<a class="btn btn-primary" href="{% url 'blog:index' %}"> {% trans "Return to home page" %} <span class="glyphicon glyphicon-chevron-right"></span></a>
-
+	
+	<script type="text/javascript">
+		$(document).ready( function() {
+			$('#post-content').find('img').addClass('not-3d-img');
+		});	
+	</script>
 {% endblock %}
 
 <hr>
+
 
