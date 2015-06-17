@@ -12,6 +12,10 @@ from django.contrib.auth.hashers import  make_password
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils import timezone
+from django.utils.translation import ugettext as _
+from django.conf import settings
+from django.db import transaction
 
 from .models import Post
 from .models import Category
@@ -25,11 +29,6 @@ from .forms import UserProfileForm
 from .forms import UserForm
 
 from .utils import utils
-
-from django.utils import timezone
-from django.utils.translation import ugettext as _
-
-from django.conf import settings
 
 import sys
 import re
@@ -149,6 +148,7 @@ def forgot_password(request):
     else:
         return render(request, 'blog/registration/forgot_password.html')    
 
+@transaction.atomic
 def rescue_password(request):
     if request.method == 'POST':
         try:
@@ -218,8 +218,16 @@ def auth(request):
     else:
         return HttpResponseRedirect('/')
 
-#TODO: build screen for sign in option (blog/registration/sign_in.html)
+
 def sign_in(request):
+    try:
+        return _sign_in(request)
+    except Exception as inst:
+        print ('Error on creating user: {0}'.format(inst))
+        return render(request, 'blog/registration/sign_in.html', {'error': _('Sorry, an error occurred while creating  your user. Try again later.')})     
+
+@transaction.atomic
+def _sign_in(request):
     if request.method == 'POST':
         userProfileForm = UserProfileForm(request.POST, request.FILES or None)
         userForm = UserForm(request.POST or None)
@@ -244,25 +252,17 @@ def sign_in(request):
                 token_value = utils.generate_token()
                 token = TokenUserSignIn(user=user, value=token_value)    
                 token.save()
-            try:
-                msg = _("""Hi, just click the link below in order to confirm your EasyDjango account:
+            
+            msg = _("""Hi, just click the link below in order to confirm your EasyDjango account:
 
                     """)
-                link = "{0}/account_confirmation?token={1}".format(settings.SITE_URL, token.value)
-                utils.send_email(user.email, msg+link)
-            except Exception as inst:
-                print ('Error on sending new password via email: {0}'.format(inst))
+            link = "{0}/account_confirmation?token={1}".format(settings.SITE_URL, token.value)
+            utils.send_email(user.email, msg+link)    
 
             return render(request, 'blog/registration/sign_in.html', {'confirmation': _('Your account has been created, please go to your e-mail to confirm it.')})
         
         else:
             return render(request, 'blog/registration/sign_in.html', {'userProfileForm': userProfileForm, 'userForm':userForm})
-
-        if 'next' in request.POST:
-            next = request.POST['next']
-        else:
-            next = '/login'
-        return HttpResponseRedirect(next)
     else:
         userProfileForm = UserProfileForm()
         userForm = UserForm()

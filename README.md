@@ -7,6 +7,7 @@ This blog tool teaches you how to:
 * Database persistence using DJANGO's ORM framework (Object Relational Mapper).
 * Manipulate your objects using Django Admin (CRUD).
 * Database migrations: how to detect your database changes according to your model classes
+* Database transaction blocks
 * Build hierarquical HTML templates
 * Build dynamic HTML templates (tags).
 * Static files manipulation (CSS, JS, image files)
