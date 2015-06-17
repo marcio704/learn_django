@@ -20,6 +20,9 @@ from .models import UserProfile
 from .models import Comment
 from .models import TokenPassword
 
+from .forms import UserProfileForm
+from .forms import UserForm
+
 from .utils import utils
 
 from django.utils import timezone
@@ -210,37 +213,31 @@ def auth(request):
 #TODO: build screen for sign in option (blog/registration/sign_in.html)
 def sign_in(request):
     if request.method == 'POST':
-        user_by_username = None
-        try:
-            user_by_username = User.objects.get(username=request.POST.get('username'))
-        except ObjectDoesNotExist as inst:
-            print (type(inst))
-        if user_by_username is not None:
-            return HttpResponse("username", status=500)  
+        userProfileForm = UserProfileForm(request.POST, request.FILES or None)
+        userForm= UserForm(request.POST or None)
+        if userProfileForm.is_valid() and userForm.is_valid():
+            user = userForm.save(commit=False)
+            if not user.password == request.POST.get('password-confirmation'):
+                userForm._errors['password'] = _('Wrong password confirmation')
+                return render(request, 'blog/registration/sign_in.html', {'userProfileForm': userProfileForm, 'userForm':userForm})
+            user.password = make_password(user.password, salt=None, hasher='default')
+            user.save()
+
+            user_profile = userProfileForm.save(commit=False)
+            user_profile.user = user
+            user_profile.save()
+        else:
+            return render(request, 'blog/registration/sign_in.html', {'userProfileForm': userProfileForm, 'userForm':userForm})
         
-        user_by_email = None
-        try:
-            user_by_email = User.objects.get(email=request.POST.get('email')) 
-        except ObjectDoesNotExist as inst:
-            print (type(inst)) 
-        if user_by_email is not None:
-            return HttpResponse("email", status=500) 
-        
-        if not request.POST.get('password') == request.POST.get('password2'):
-            return HttpResponse("password", status=500)  
-            
-        try:
-            user = User.objects.create_user(username=request.POST.get('username'), first_name=request.POST.get('name'), email=request.POST.get('email'), password=request.POST.get('password'))
-            #TODO - inserir upload foto
-            user_profile = UserProfile.objects.create(user=user)
-            return HttpResponseRedirect('/login')
-        except Exception as inst:
-            print (type(inst))
-            print ('Error on signing user: {0}'.format(inst))
-            
-            return HttpResponse("", status=500)  
+        if 'next' in request.POST:
+            next = request.POST['next']
+        else:
+            next = '/login'
+        return HttpResponseRedirect(next)
     else:
-        return render(request, 'blog/registration/sign_in.html')
+        userProfileForm = UserProfileForm()
+        userForm = UserForm()
+    return render(request, 'blog/registration/sign_in.html', {'userProfileForm': userProfileForm, 'userForm':userForm})
 
 @login_required
 def send_comment(request, post_id):

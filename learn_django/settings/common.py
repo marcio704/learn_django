@@ -27,6 +27,7 @@ INSTALLED_APPS = (
     'blog',
     'django_crontab',
     'ckeditor',
+    'widget_tweaks',
 )
 
 MIDDLEWARE_CLASSES = (
