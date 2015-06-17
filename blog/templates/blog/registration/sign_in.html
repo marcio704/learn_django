@@ -10,94 +10,101 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <p class="lead" style="text-align: justify;">
-                    <center><h3>{% trans "Fill the informations below:" %}</h3></center>
-                </p>
-                <form name="signin-form" id="signin-form" method="post" validate enctype="multipart/form-data">
-                    
-                    <div class="row control-group">
-                    	<div class="form-group col-xs-12 floating-label-form-group controls">
-                            <p class="lead" style="text-align: justify;">
-                                {% trans "Username" %} 
-                            </p>
-                            {% render_field userForm.username type="text" class="form-control"  %}
-                            <p class="help-block text-danger"></p>
-                        </div>
-
-                        <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <p class="lead" style="text-align: justify;">
-                                {% trans "Name" %} 
-                            </p>
-                            {% render_field userForm.first_name type="text" class="form-control"  %}
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                    <div class="row control-group">
-                        <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <p class="lead" style="text-align: justify;">
-                                {% trans "Email Address" %} 
-                            </p>
-                            {% render_field userForm.email type="email" class="form-control"  %}
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                    <div class="row control-group">
-                        <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <p class="lead" style="text-align: justify;">
-                                {% trans "Password" %} 
-                            </p>
-                            {% render_field userForm.password type="password" rows="5" class="form-control"  %}
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                    <div class="row control-group">
-                        <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <p class="lead" style="text-align: justify;">
-                                {% trans "Confirm Password" %} 
-                            </p>
-                            <input type="password" class="form-control" id="password-confirmation" name="password-confirmation" required data-validation-required-message="{% trans 'Please enter your password.' %}">
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                    <div class="row control-group">
-                        <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <p class="lead" style="text-align: justify;">
-                                {% trans "Choose a picture" %} 
-                            </p>
-                            {{userProfileForm.photo}} 
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                    <br>
-                    <div id="signin-success"></div>
-                    <div class="row">
-                        <div class="form-group col-xs-12">
-                            <button type="submit" id="signin-btn" name="signin-btn" class="btn btn-default"> {% trans "Send" %} </button>
-                        </div>
-                    </div>
-                </form>
-                {% if userForm.errors %}
-                <!-- Error messaging -->
-                    <div id="user-profile-errors" class="alert alert-danger" role="alert">
-                        <div class="inner">
-                            <strong>
-                                <p>
-                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                    {% trans "There were some errors in the information you entered. Please correct the following:" %}
+            {% if confirmation %}
+                <div class="alert alert-success alert-dismissable">
+                    <button id="closeAlertBtn" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong id="frmSuccess"> {{ confirmation }} </strong>
+                </div>
+            {% else %}
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p class="lead" style="text-align: justify;">
+                        <center><h3>{% trans "Fill the informations below:" %}</h3></center>
+                    </p>
+                    <form name="signin-form" id="signin-form" method="post" validate enctype="multipart/form-data">
+                        
+                        <div class="row control-group">
+                        	<div class="form-group col-xs-12 floating-label-form-group controls">
+                                <p class="lead" style="text-align: justify;">
+                                    {% trans "Username" %} 
                                 </p>
-                            </strong>
-                            {{ userForm.non_field_errors }}
-                            <ul>
-                                {% for field in userForm %}
-                                    {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
-                                {% endfor %}
-                            </ul>
+                                {% render_field userForm.username type="text" class="form-control"  %}
+                                <p class="help-block text-danger"></p>
+                            </div>
+
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <p class="lead" style="text-align: justify;">
+                                    {% trans "Name" %} 
+                                </p>
+                                {% render_field userForm.first_name type="text" class="form-control"  %}
+                                <p class="help-block text-danger"></p>
+                            </div>
                         </div>
-                    </div>
-                <!-- /Error messaging -->
-                {% endif %}
-            </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <p class="lead" style="text-align: justify;">
+                                    {% trans "Email Address" %} 
+                                </p>
+                                {% render_field userForm.email type="email" class="form-control"  %}
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <p class="lead" style="text-align: justify;">
+                                    {% trans "Password" %} 
+                                </p>
+                                {% render_field userForm.password type="password" rows="5" class="form-control"  %}
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <p class="lead" style="text-align: justify;">
+                                    {% trans "Confirm Password" %} 
+                                </p>
+                                <input type="password" class="form-control" id="password-confirmation" name="password-confirmation" required data-validation-required-message="{% trans 'Please enter your password.' %}">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <p class="lead" style="text-align: justify;">
+                                    {% trans "Choose a picture" %} 
+                                </p>
+                                {{userProfileForm.photo}} 
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="signin-success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <button type="submit" id="signin-btn" name="signin-btn" class="btn btn-default"> {% trans "Send" %} </button>
+                            </div>
+                        </div>
+                    </form>
+                    {% if userForm.errors %}
+                    <!-- Error messaging -->
+                        <div id="user-profile-errors" class="alert alert-danger" role="alert">
+                            <div class="inner">
+                                <strong>
+                                    <p>
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        {% trans "There were some errors in the information you entered. Please correct the following:" %}
+                                    </p>
+                                </strong>
+                                {{ userForm.non_field_errors }}
+                                <ul>
+                                    {% for field in userForm %}
+                                        {% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    <!-- /Error messaging -->
+                    {% endif %}
+                </div>
+            {% endif %}    
         </div>
     </div>
 

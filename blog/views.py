@@ -19,6 +19,7 @@ from .models import Contact
 from .models import UserProfile
 from .models import Comment
 from .models import TokenPassword
+from .models import TokenUserSignIn
 
 from .forms import UserProfileForm
 from .forms import UserForm
@@ -28,12 +29,10 @@ from .utils import utils
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
-
+from django.conf import settings
 
 import sys
 import re
-import string
-import random
 
 # Create your views here.
 
@@ -130,7 +129,7 @@ def forgot_password(request):
             try:
                 token = TokenPassword.objects.get(user=user, is_used=False)
             except ObjectDoesNotExist as inst:
-                token_value = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
+                token_value = utils.generate_token()
                 token = TokenPassword(user=user, value=token_value)    
                 token.save()
             try:
@@ -140,7 +139,7 @@ def forgot_password(request):
                     Click the link below to rescue your password:
                     """)
 
-                link = "http://localhost:9999/rescue_password?token={0}".format(token.value)
+                link = "{0}/rescue_password?token={1}".format(settings.SITE_URL, token.value)
                 utils.send_email(to_email, msg+link)
                 return HttpResponse(200)    
             except Exception as inst:
@@ -168,6 +167,7 @@ def rescue_password(request):
 
         token_pass = TokenPassword.objects.get(value=token, is_used=False)
         token_pass.is_used = True
+        token_pass.used_at = timezone.now()
         token_pass.save()
 
         return HttpResponse(200)  
@@ -198,10 +198,18 @@ def auth(request):
         try: 
             user = authenticate(username=request.POST.get('login-username'), password=request.POST.get('login-password'))
             if user is not None:
+                try:
+                    token = TokenUserSignIn.objects.get(user=user)
+                except ObjectDoesNotExist as inst:
+                    return render(request, 'blog/registration/login.html', {'invalidation': _('Confirmation token not found for this user')})                    
+                
+                if not token.is_used:
+                    return render(request, 'blog/registration/login.html', {'invalidation': _('User not confirmed yet, get the confirmation link at your e-mail!')})                    
+                
                 login_auth(request, user)
                 return HttpResponseRedirect(request.POST.get('login-next'))  
             else:
-                return render(request, 'blog/registration/login.html', {'invalidation': 'User/password not found!'})                    
+                return render(request, 'blog/registration/login.html', {'invalidation': _('User/password not found!')})                    
         except Exception as inst:
             print (type(inst))
             print ('Error on authenticating user: {0}'.format(inst))
@@ -214,21 +222,42 @@ def auth(request):
 def sign_in(request):
     if request.method == 'POST':
         userProfileForm = UserProfileForm(request.POST, request.FILES or None)
-        userForm= UserForm(request.POST or None)
+        userForm = UserForm(request.POST or None)
+        
         if userProfileForm.is_valid() and userForm.is_valid():
             user = userForm.save(commit=False)
+            
             if not user.password == request.POST.get('password-confirmation'):
                 userForm._errors['password'] = _('Wrong password confirmation')
                 return render(request, 'blog/registration/sign_in.html', {'userProfileForm': userProfileForm, 'userForm':userForm})
+            
             user.password = make_password(user.password, salt=None, hasher='default')
             user.save()
 
             user_profile = userProfileForm.save(commit=False)
             user_profile.user = user
             user_profile.save()
+
+            try:
+                token = TokenUserSignIn.objects.get(user=user, is_used=False)
+            except ObjectDoesNotExist as inst:
+                token_value = utils.generate_token()
+                token = TokenUserSignIn(user=user, value=token_value)    
+                token.save()
+            try:
+                msg = _("""Hi, just click the link below in order to confirm your EasyDjango account:
+
+                    """)
+                link = "{0}/account_confirmation?token={1}".format(settings.SITE_URL, token.value)
+                utils.send_email(user.email, msg+link)
+            except Exception as inst:
+                print ('Error on sending new password via email: {0}'.format(inst))
+
+            return render(request, 'blog/registration/sign_in.html', {'confirmation': _('Your account has been created, please go to your e-mail to confirm it.')})
+        
         else:
             return render(request, 'blog/registration/sign_in.html', {'userProfileForm': userProfileForm, 'userForm':userForm})
-        
+
         if 'next' in request.POST:
             next = request.POST['next']
         else:
@@ -237,7 +266,22 @@ def sign_in(request):
     else:
         userProfileForm = UserProfileForm()
         userForm = UserForm()
-    return render(request, 'blog/registration/sign_in.html', {'userProfileForm': userProfileForm, 'userForm':userForm})
+        return render(request, 'blog/registration/sign_in.html', {'userProfileForm': userProfileForm, 'userForm':userForm})
+
+def account_confirmation(request):
+    if request.method == 'GET':
+        try:
+            token_pass = TokenUserSignIn.objects.get(value=request.GET.get('token'), is_used=False)
+        except ObjectDoesNotExist as inst:
+            return render(request, 'blog/registration/account_confirmation.html',  {'invalid_token': True})            
+        
+        user = User.objects.get(pk=token_pass.user.id)
+        token_pass.is_used = True
+        token_pass.used_at = timezone.now()
+        token_pass.save()
+        
+        return render(request, 'blog/registration/account_confirmation.html',  {'token': token_pass, 'token_user': user}) 
+
 
 @login_required
 def send_comment(request, post_id):

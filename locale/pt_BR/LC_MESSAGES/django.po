@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-16 22:36-0300\n"
+"POT-Creation-Date: 2015-06-17 11:24-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,6 +184,15 @@ msgstr "Posts sobre"
 msgid "No posts found for this category :("
 msgstr "Nenhum post encontrado para esta categoria :("
 
+#: blog/templates/blog/registration/account_confirmation.html:7
+#: blog/templates/blog/registration/rescue_password.html:7
+msgid "This token does not exist or was already used."
+msgstr "Este token não existe ou já foi utilizado"
+
+#: blog/templates/blog/registration/account_confirmation.html:9
+msgid "Your account has been successfully confirmed =)"
+msgstr "Sua conta foi confirmada com sucesso =)"
+
 #: blog/templates/blog/registration/forgot_password.html:13
 msgid "Forgot my password"
 msgstr "Esqueci minha senha"
@@ -191,10 +200,6 @@ msgstr "Esqueci minha senha"
 #: blog/templates/blog/registration/forgot_password.html:19
 msgid "Please enter your email address"
 msgstr "Por favor, digite seu e-mail"
-
-#: blog/templates/blog/registration/login.html:13
-msgid "User/password not found!"
-msgstr "Usuário/senha não encontrados!"
 
 #: blog/templates/blog/registration/login.html:18
 #: blog/templates/blog/registration/login.html:24
@@ -223,10 +228,6 @@ msgstr "Esqueceu sua senha?"
 #: blog/templates/blog/registration/login.html:40
 msgid "Not signed yet?"
 msgstr "Ainda não é cadastrado?"
-
-#: blog/templates/blog/registration/rescue_password.html:7
-msgid "This token does not exist or was already used."
-msgstr "Este token não existe ou já foi utilizado"
 
 #: blog/templates/blog/registration/rescue_password.html:15
 msgid "Rescue my password"
@@ -306,7 +307,7 @@ msgstr "(Entrar)"
 msgid "(Log out)"
 msgstr "(Sair)"
 
-#: blog/views.py:137
+#: blog/views.py:138
 msgid ""
 "\n"
 "                    Hi, did you forget your EasyDjango password?\n"
@@ -320,9 +321,42 @@ msgstr ""
 "                    Clique no link abaixo, para recuperá-la:\n"
 "                    "
 
-#: blog/views.py:221
+#: blog/views.py:206
+msgid "Confirmation token not found for this user"
+msgstr "Token de confirmação não encontrado para este usuário"
+
+#: blog/views.py:209
+msgid "User not confirmed yet, get the confirmation link at your e-mail!"
+msgstr "Este usuário ainda não foi confirmado, clique no link de confirmação no seu e-mail!"
+
+#: blog/views.py:214
+msgid "User/password not found!"
+msgstr "Usuário/senha não encontrados!"
+
+#: blog/views.py:231
 msgid "Wrong password confirmation"
 msgstr "Confimarção de senha incorreta"
+
+#: blog/views.py:247
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "                    Hi, did you forget your EasyDjango password?\n"
+#| "\n"
+#| "                    Click the link below to rescue your password:\n"
+#| "                    "
+msgid ""
+"\n"
+"                    Hi, just click the link below in order to confirm your "
+"EasyDjango account:\n"
+"\n"
+"                    "
+msgstr ""
+"\n"
+"                    Olá, você esqueceu sua senha do LearDjango?\n"
+"\n"
+"                    Clique no link abaixo, para recuperá-la:\n"
+"                    "
 
 #~ msgid "Please enter your username."
 #~ msgstr "Por favor, digite seu login."

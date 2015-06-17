@@ -1,0 +1,22 @@
+{% extends "blog/templates/master.html" %}
+{% load i18n %}
+
+<!-- Page Content -->
+{% block body %}
+	<div class="container">
+        <div class="row">
+			{% if invalid_token %}
+				<center><strong></strong></center>
+				<div class="alert alert-danger alert-dismissable">
+		                <button id="closeAlertBtn" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		        	    <strong id="frmSuccess"> {% trans 'This token does not exist or was already used.' %} </strong>
+		        </div>
+			{% else %}	
+				<div class="alert alert-success alert-dismissable">
+		                <button id="closeAlertBtn" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		        	    <strong id="frmSuccess"> {{ token_user.username }} {% trans 'Your account has been successfully confirmed =)' %} </strong>
+		        </div>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

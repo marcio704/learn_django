@@ -1,6 +1,7 @@
 from .common import *
 
 DEBUG=True
+SITE_URL = "http://localhost:8000"
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -28,8 +29,9 @@ LOCALE_PATHS = (
     '/home/marcio/dev/learn_django/locale',
 )
 
-#[email]
-SERVER_EMAIL = 'marcioacsantiago@gmail.com'
-SERVER_EMAIL_PASS = 'mgderune2k'
-EMAIL_HOST_SMTP = 'smtp.gmail.com:587'
-CLIENT_EMAIL = 'marcio704@yahoo.com.br'
+#[email] Tip: Amazon SES is a very nice tool for email sending
+SMTP_EMAIL_SENDER = 'your_sender@email.com'
+SMTP_SERVER_LOGIN = 'your_STMP_login'
+SMTP_SERVER_PASSWORD = 'your_STMP_password'
+SMTP_HOST = 'your_SMTP_address'
+CLIENT_EMAIL = 'your_receiver@email.com'

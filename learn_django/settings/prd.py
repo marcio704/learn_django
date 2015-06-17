@@ -2,6 +2,8 @@ from .common import *
 
 DEBUG=False
 ALLOWED_HOSTS = ['*']
+SITE_URL = "http://www.easydjango.com"
+
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases

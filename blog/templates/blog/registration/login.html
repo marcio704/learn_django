@@ -10,7 +10,7 @@
                     {% if invalidation %}
                         <div class="alert alert-danger alert-dismissable">
                             <button id="closeAlertBtn" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <strong id="frmErrorsName"> {% trans "User/password not found!" %} </strong>
+                            <strong id="frmErrorsName"> {{ invalidation }} </strong>
                         </div>
                     {% endif %}
                     <div class="login-panel panel panel-default">

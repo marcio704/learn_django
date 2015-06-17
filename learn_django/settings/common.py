@@ -94,3 +94,5 @@ CKEDITOR_CONFIGS = {
                 ["Maximize"]],
     'width': 900,
 }}
+
+TOKEN_SIZE = 20

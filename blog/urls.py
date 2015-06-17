@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^forgot_password', views.forgot_password, name='forgot_password'),
     url(r'^(?P<category_id>[0-9]+)/posts_by_category', views.posts_by_category, name='posts_by_category'),
     url(r'^rescue_password', views.rescue_password, name='rescue_password'),
+    url(r'^account_confirmation', views.account_confirmation, name='account_confirmation'),
 ]
 
 """

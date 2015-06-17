@@ -67,5 +67,9 @@ class TokenPassword(models.Model):
 	is_used = models.BooleanField(default=False)
 	used_at = models.DateTimeField('date creation',blank=True, null=True)
 
-
+class TokenUserSignIn(models.Model):
+	user = models.ForeignKey(User)
+	value = models.CharField(max_length=20)
+	is_used = models.BooleanField(default=False)
+	used_at = models.DateTimeField('date creation',blank=True, null=True)
 
