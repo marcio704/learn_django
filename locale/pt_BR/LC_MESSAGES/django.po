@@ -212,10 +212,8 @@ msgstr "Por favor, digite seu login."
 
 #: blog/templates/blog/registration/login.html:28
 #: blog/templates/blog/registration/sign_in.html:71
-#, fuzzy
-#| msgid "Forgot your password?"
 msgid "Please enter your password."
-msgstr "Esqueceu sua senha?"
+msgstr "Por favor, digite sua senha."
 
 #: blog/templates/blog/registration/login.html:33
 msgid "Go, go, go!"
@@ -344,29 +342,18 @@ msgid "Wrong password confirmation"
 msgstr "Confimarção de senha incorreta"
 
 #: blog/views.py:256
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "                    Hi, did you forget your EasyDjango password?\n"
-#| "\n"
-#| "                    Click the link below to rescue your password:\n"
-#| "                    "
 msgid ""
 "Hi, just click the link below in order to confirm your EasyDjango account:\n"
 "\n"
 "                    "
 msgstr ""
+"Olá, clique no link abaixo para confirmar sua conta no EasyDjago:\n"
 "\n"
-"                    Olá, você esqueceu sua senha do LearDjango?\n"
-"\n"
-"                    Clique no link abaixo, para recuperá-la:\n"
 "                    "
 
 #: blog/views.py:262
-#, fuzzy
-#| msgid "Your account has been successfully confirmed =)"
 msgid "Your account has been created, please go to your e-mail to confirm it."
-msgstr "Sua conta foi confirmada com sucesso =)"
+msgstr "Sua conta foi criada, por favor, faça a confirmação no seu email."
 
 #~ msgid "Please enter your username."
 #~ msgstr "Por favor, digite seu login."
