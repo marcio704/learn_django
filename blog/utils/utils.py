@@ -21,17 +21,14 @@ def divide_list_by_two (whole_list):
 
     return {"list_1": list_1, "list_2": list_2}
 
-
 def send_email(to_address, msg):
+  msg = MIMEText(msg)
+  msg['Subject'] = "EasyDjango!"
+  msg['From']    = settings.SMTP_EMAIL_SENDER
+  msg['To']      = to_address
 
-	body = MIMEText(msg.encode('utf-8'), 'plain', 'utf-8')
-	body['From'] = settings.SMTP_EMAIL_SENDER
-	body['To'] = to_address
-	body['Subject'] = Header('EasyDjango!', 'utf-8')
+  s = smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_HOST_PORT)
 
-	# The actual mail send
-	server = smtplib.SMTP(settings.SMTP_HOST)
-	server.starttls()
-	server.login(settings.SMTP_SERVER_LOGIN, settings.SMTP_SERVER_PASSWORD)
-	server.sendmail(settings.SMTP_EMAIL_SENDER, to_address, body.as_string())
-	server.quit()
+  s.login(settings.SMTP_SERVER_LOGIN, settings.SMTP_SERVER_PASSWORD)
+  s.sendmail(msg['From'], msg['To'], msg.as_string())
+  s.quit()
