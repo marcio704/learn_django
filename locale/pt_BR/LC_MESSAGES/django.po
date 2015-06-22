@@ -118,7 +118,7 @@ msgstr "Bem-vindo ao"
 
 #: blog/templates/blog/index.html:9
 msgid "See our last posts"
-msgstr "Veja os posts mais recentes"
+msgstr "Veja os posts mais recentes sobre Django em português"
 
 #: blog/templates/blog/index.html:18
 msgid "This post was written by:"
