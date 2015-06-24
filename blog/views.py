@@ -37,7 +37,7 @@ import re
 
 #TODO: Implement category list as a tag lib.
 def index(request):
-    post_list = Post.objects.all()
+    post_list = Post.objects.all().order_by('date')
     paginator = Paginator(post_list, 5)
     try:
         page = request.GET.get('page')
