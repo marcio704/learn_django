@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-17 19:13-0300\n"
+"POT-Creation-Date: 2015-06-25 16:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,35 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-#: blog/forms.py:11 blog/templates/blog/registration/rescue_password.html:28
-#: blog/templates/blog/registration/sign_in.html:34
-msgid "Username"
-msgstr "Login"
-
-#: blog/forms.py:12 blog/templates/blog/contact.html:32
-#: blog/templates/blog/contact.html:33
-#: blog/templates/blog/registration/sign_in.html:42
-msgid "Name"
-msgstr "Nome"
-
-#: blog/forms.py:13
-msgid "Email"
-msgstr "E-mail"
-
-#: blog/forms.py:14 blog/templates/blog/registration/login.html:28
-#: blog/templates/blog/registration/rescue_password.html:32
-#: blog/templates/blog/registration/sign_in.html:60
-msgid "Password"
-msgstr "Senha"
-
-#: blog/forms.py:27
-msgid "This username is already in use, please choose another one"
-msgstr "Este nome de usuário já está em uso. Por favor, escolha outro"
-
-#: blog/forms.py:36
-msgid "This e-mail is already in use, please choose another one"
-msgstr "Este e-mail de usuário já está em uso. Por favor, escolha outro"
 
 #: blog/templates/blog/about.html:12
 msgid "Easy Django, step by step!"
@@ -74,14 +45,15 @@ msgstr ""
 "utilizando o ORM (Mapeamento objeto-relacional) do Django.</li> <li>Como "
 "utilizar o sistema de admin do Django para manipular e editar seus registros "
 "(CRUD).</li> <li>Sistema de migrations do Django para rastrear mundanças em "
-"suas entidades e no seu Banco de Dados</li> <li> Como manipular transações em banco de dados </li><li>Construção e hierarquia de "
-"templates HTML.</li> <li>Construção de templates com HTML dinâmico (tags).</"
-"li> <li>Manipulação de arquivos estáticos (CSS, JS, arquivos de imagem)</li> "
-"<li>Envio e manipulação de formulários via POST e GET.</li> <li>Paginação "
-"(backend e frontend)</li>  <li>Ajax com Django</li> <li>Como mapear suas "
-"rotas (URLs) no Django</li> <li>Internacionalização  (Sistema Multilingue) </"
-"li> <li> Criação e agendamento de Jobs (cron scheduling) </li> <li> Envio de "
-"e-mail via SMTP </li> <li>Criação e execução de Testes Unitários</li> <ul>"
+"suas entidades e no seu Banco de Dados</li> <li> Como manipular transações "
+"em banco de dados </li><li>Construção e hierarquia de templates HTML.</li> "
+"<li>Construção de templates com HTML dinâmico (tags).</li> <li>Manipulação "
+"de arquivos estáticos (CSS, JS, arquivos de imagem)</li> <li>Envio e "
+"manipulação de formulários via POST e GET.</li> <li>Paginação (backend e "
+"frontend)</li>  <li>Ajax com Django</li> <li>Como mapear suas rotas (URLs) "
+"no Django</li> <li>Internacionalização  (Sistema Multilingue) </li> <li> "
+"Criação e agendamento de Jobs (cron scheduling) </li> <li> Envio de e-mail "
+"via SMTP </li> <li>Criação e execução de Testes Unitários</li> <ul>"
 
 #: blog/templates/blog/contact.html:12
 msgid "Get in touch :)"
@@ -94,6 +66,11 @@ msgstr "É rápido e fácil, assim como o Django!"
 #: blog/templates/blog/contact.html:26
 msgid "Fill the informations below, we'll answer as fast as we can:"
 msgstr "Preencha as informações abaixo, responderemos o quanto antes: "
+
+#: blog/templates/blog/contact.html:32 blog/templates/blog/contact.html:33
+#: blog/templates/blog/registration/sign_in.html:42
+msgid "Name"
+msgstr "Nome"
 
 #: blog/templates/blog/contact.html:39 blog/templates/blog/contact.html:40
 #: blog/templates/blog/registration/forgot_password.html:19
@@ -133,16 +110,12 @@ msgid "No posts available."
 msgstr "Nenhum post disponível"
 
 #: blog/templates/blog/index.html:46
-#: blog/templates/blog/post/all_posts.html:42
-#: blog/templates/blog/post/posts_by_category.html:41
-msgid "Newer"
-msgstr "Próximo"
+msgid "Newer posts"
+msgstr "Anterior"
 
 #: blog/templates/blog/index.html:51
-#: blog/templates/blog/post/all_posts.html:47
-#: blog/templates/blog/post/posts_by_category.html:46
-msgid "Older"
-msgstr "Anterior"
+msgid "Older posts"
+msgstr "Próximo"
 
 #: blog/templates/blog/post/all_posts.html:11
 msgid "These are all posts we've written so far. Enjoy!"
@@ -151,6 +124,16 @@ msgstr "Estes são todos os posts que escrevemos até agora. Divirta-se!"
 #: blog/templates/blog/post/all_posts.html:29
 msgid "From:"
 msgstr "De:"
+
+#: blog/templates/blog/post/all_posts.html:42
+#: blog/templates/blog/post/posts_by_category.html:41
+msgid "Newer"
+msgstr "Próximo"
+
+#: blog/templates/blog/post/all_posts.html:47
+#: blog/templates/blog/post/posts_by_category.html:46
+msgid "Older"
+msgstr "Anterior"
 
 #: blog/templates/blog/post/all_posts.html:54
 msgid "No posts found yet :("
@@ -211,6 +194,12 @@ msgid "Please enter your login."
 msgstr "Por favor, digite seu login."
 
 #: blog/templates/blog/registration/login.html:28
+#: blog/templates/blog/registration/rescue_password.html:32
+#: blog/templates/blog/registration/sign_in.html:60
+msgid "Password"
+msgstr "Senha"
+
+#: blog/templates/blog/registration/login.html:28
 #: blog/templates/blog/registration/sign_in.html:71
 msgid "Please enter your password."
 msgstr "Por favor, digite sua senha."
@@ -230,6 +219,11 @@ msgstr "Ainda não é cadastrado?"
 #: blog/templates/blog/registration/rescue_password.html:22
 msgid "Rescue my password"
 msgstr "Esqueci minha senha"
+
+#: blog/templates/blog/registration/rescue_password.html:28
+#: blog/templates/blog/registration/sign_in.html:34
+msgid "Username"
+msgstr "Login"
 
 #: blog/templates/blog/registration/rescue_password.html:32
 msgid "Please enter your new password"
@@ -285,75 +279,80 @@ msgstr "Site Oficial do Django"
 msgid "Django Brasil"
 msgstr "Django Brasil"
 
-#: blog/templates/blog/templates/master.html:47
+#: blog/templates/blog/templates/master.html:48
 msgid "About"
 msgstr "Sobre"
 
-#: blog/templates/blog/templates/master.html:50
+#: blog/templates/blog/templates/master.html:51
 msgid "All Posts"
 msgstr "Todos os posts"
 
-#: blog/templates/blog/templates/master.html:53
+#: blog/templates/blog/templates/master.html:54
 msgid "Contact"
 msgstr "Contato"
 
-#: blog/templates/blog/templates/master.html:57
+#: blog/templates/blog/templates/master.html:58
 msgid "(Log in)"
 msgstr "(Entrar)"
 
-#: blog/templates/blog/templates/master.html:59
+#: blog/templates/blog/templates/master.html:60
 msgid "(Log out)"
 msgstr "(Sair)"
 
-#: blog/views.py:135
-msgid ""
-"\n"
-"                    Hi, did you forget your EasyDjango password?\n"
-"\n"
-"                    Click the link below to rescue your password:\n"
-"                    "
-msgstr ""
-"\n"
-"                    Olá, você esqueceu sua senha do LearDjango?\n"
-"\n"
-"                    Clique no link abaixo, para recuperá-la:\n"
-"                    "
+#~ msgid "Email"
+#~ msgstr "E-mail"
 
-#: blog/views.py:204
-msgid "Confirmation token not found for this user"
-msgstr "Token de confirmação não encontrado para este usuário"
+#~ msgid "This username is already in use, please choose another one"
+#~ msgstr "Este nome de usuário já está em uso. Por favor, escolha outro"
 
-#: blog/views.py:207
-msgid "User not confirmed yet, get the confirmation link at your e-mail!"
-msgstr ""
-"Este usuário ainda não foi confirmado, clique no link de confirmação no seu "
-"e-mail!"
+#~ msgid "This e-mail is already in use, please choose another one"
+#~ msgstr "Este e-mail de usuário já está em uso. Por favor, escolha outro"
 
-#: blog/views.py:212
-msgid "User/password not found!"
-msgstr "Usuário/senha não encontrados!"
+#~ msgid ""
+#~ "\n"
+#~ "                    Hi, did you forget your EasyDjango password?\n"
+#~ "\n"
+#~ "                    Click the link below to rescue your password:\n"
+#~ "                    "
+#~ msgstr ""
+#~ "\n"
+#~ "                    Olá, você esqueceu sua senha do LearDjango?\n"
+#~ "\n"
+#~ "                    Clique no link abaixo, para recuperá-la:\n"
+#~ "                    "
 
-#: blog/views.py:227
-msgid "Sorry, an error occurred while creating  your user. Try again later."
-msgstr "Desculpe, ocorreu um erro ao criar seu usuário, tente novamente mais tarde."
+#~ msgid "Confirmation token not found for this user"
+#~ msgstr "Token de confirmação não encontrado para este usuário"
 
-#: blog/views.py:239
-msgid "Wrong password confirmation"
-msgstr "Confimarção de senha incorreta"
+#~ msgid "User not confirmed yet, get the confirmation link at your e-mail!"
+#~ msgstr ""
+#~ "Este usuário ainda não foi confirmado, clique no link de confirmação no "
+#~ "seu e-mail!"
 
-#: blog/views.py:256
-msgid ""
-"Hi, just click the link below in order to confirm your EasyDjango account:\n"
-"\n"
-"                    "
-msgstr ""
-"Olá, clique no link abaixo para confirmar sua conta no EasyDjago:\n"
-"\n"
-"                    "
+#~ msgid "User/password not found!"
+#~ msgstr "Usuário/senha não encontrados!"
 
-#: blog/views.py:262
-msgid "Your account has been created, please go to your e-mail to confirm it."
-msgstr "Sua conta foi criada, por favor, faça a confirmação no seu email."
+#~ msgid "Sorry, an error occurred while creating  your user. Try again later."
+#~ msgstr ""
+#~ "Desculpe, ocorreu um erro ao criar seu usuário, tente novamente mais "
+#~ "tarde."
+
+#~ msgid "Wrong password confirmation"
+#~ msgstr "Confimarção de senha incorreta"
+
+#~ msgid ""
+#~ "Hi, just click the link below in order to confirm your EasyDjango "
+#~ "account:\n"
+#~ "\n"
+#~ "                    "
+#~ msgstr ""
+#~ "Olá, clique no link abaixo para confirmar sua conta no EasyDjago:\n"
+#~ "\n"
+#~ "                    "
+
+#~ msgid ""
+#~ "Your account has been created, please go to your e-mail to confirm it."
+#~ msgstr "Sua conta foi criada, por favor, faça a confirmação no seu email."
 
 #~ msgid "Please enter your username."
 #~ msgstr "Por favor, digite seu login."

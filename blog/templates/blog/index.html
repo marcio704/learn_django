@@ -43,12 +43,12 @@
     <ul class="pager">
         <li class="previous">
             {% if post_list.has_previous %}
-                <a href="?page={{ post_list.previous_page_number }}"> &larr; {% trans "Newer" %} </a>
+                <a href="?page={{ post_list.previous_page_number }}"> &larr; {% trans "Newer posts" %} </a>
             {% endif %}
         </li>
         <li class="next">
             {% if post_list.has_next %}
-                <a href="?page={{ post_list.next_page_number }}"> {% trans "Older" %}  &rarr; </a>
+                <a href="?page={{ post_list.next_page_number }}"> {% trans "Older posts" %}  &rarr; </a>
             {% endif %}
         </li>
     </ul>
