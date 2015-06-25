@@ -12,7 +12,7 @@
     	{% for post in post_list %}
         	<!-- Blog Posts -->
             <h2>
-                <a href="{% url 'blog:detail' post.id %}">{{ post.title }}</a>
+                <a href="{% url 'blog:detail' post.url %}">{{ post.title }}</a>
             </h2>
             <p class="lead">
                 <small><strong> {% trans "This post was written by:" %} </strong></small>
@@ -29,7 +29,7 @@
             <center><img class="img-responsive" src="{{ post.thumbnail.url }}" alt=""></center>
             <hr>
             <p style="text-align: justify;"><strong>{{ post.resume }}</strong></p>
-            <a class="btn btn-primary" href="{% url 'blog:detail' post.id %}"> {% trans "Read More" %}  
+            <a class="btn btn-primary" href="{% url 'blog:detail' post.url %}"> {% trans "Read More" %}  
                 <span class="glyphicon glyphicon-chevron-right"></span>
             </a>
 

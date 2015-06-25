@@ -53,8 +53,8 @@ def index(request):
     return render(request, 'blog/index.html', context)
 
 #TODO: Implement category list as a tag lib.
-def detail(request, post_id):
-    post = Post.objects.get(pk=post_id)
+def detail(request, post_url):
+    post = Post.objects.get(url=post_url)
     category_list_parts = utils.divide_list_by_two(Category.objects.all())
     context = {'post': post, 'category_list_1': category_list_parts["list_1"], 'category_list_2': category_list_parts["list_2"]}
 
@@ -186,7 +186,7 @@ def login(request):
         print (type(inst))
         print ('On login process: {0}'.format(inst))        
     
-    next = '/' if next is None else '/{0}/#comment-tab'.format(re.search(r'\d+', next).group(0)) 
+    next = '/' if next is None else '/posts/{0}/#comment-tab'.format(next.split('/')[2]) 
     return render(request, 'blog/registration/login.html', {'next': next})  
 
 def logout(request):
@@ -284,34 +284,34 @@ def account_confirmation(request):
 
 
 @login_required
-def send_comment(request, post_id):
+def send_comment(request, post_url):
     if request.method == 'POST':
         try:
             user_profile = UserProfile.objects.get(user=request.user) 
-            comment = Comment(text=request.POST.get('comment-text'), date=timezone.now(), author=user_profile, post=Post.objects.get(pk=post_id))
+            comment = Comment(text=request.POST.get('comment-text'), date=timezone.now(), author=user_profile, post=Post.objects.get(url=post_url))
             comment.save()
-            return HttpResponseRedirect('/{0}/#comment-tab'.format(post_id))
+            return HttpResponseRedirect('/posts/{0}/#comment-tab'.format(post_url))
         except Exception as inst:
             print (type(inst))
             print ('Error on saving comment information: {0}'.format(inst))
             
             return HttpResponse(500)    
     else:
-        return HttpResponseRedirect('/{0}/'.format(post_id))
+        return HttpResponseRedirect('/posts/{0}/'.format(post_url))
 
 @login_required
-def send_answer_to_comment(request, post_id, comment_id):
+def send_answer_to_comment(request, post_url, comment_id):
     if request.method == 'POST':
         try:
             answer_to = Comment.objects.get(pk=comment_id)
             user_profile = UserProfile.objects.get(user=request.user)
-            comment = Comment(text=request.POST.get('answer-text-{0}'.format(comment_id)), date=timezone.now(), author=user_profile, post=Post.objects.get(pk=post_id), answer_to=answer_to)
+            comment = Comment(text=request.POST.get('answer-text-{0}'.format(comment_id)), date=timezone.now(), author=user_profile, post=Post.objects.get(url=post_url), answer_to=answer_to)
             comment.save()
-            return HttpResponseRedirect('/{0}/#comment-tab'.format(post_id))
+            return HttpResponseRedirect('/posts/{0}/#comment-tab'.format(post_url))
         except Exception as inst:
             print (type(inst))
             print ('Error on saving answer information: {0}'.format(inst))
             
             return HttpResponse(500)    
     else:
-        return HttpResponseRedirect('/{0}/'.format(post_id))
+        return HttpResponseRedirect('/posts/{0}/'.format(post_url))

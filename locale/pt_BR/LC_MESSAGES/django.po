@@ -136,13 +136,13 @@ msgstr "Nenhum post disponível"
 #: blog/templates/blog/post/all_posts.html:42
 #: blog/templates/blog/post/posts_by_category.html:41
 msgid "Newer"
-msgstr "Mais Novos"
+msgstr "Próximo"
 
 #: blog/templates/blog/index.html:51
 #: blog/templates/blog/post/all_posts.html:47
 #: blog/templates/blog/post/posts_by_category.html:46
 msgid "Older"
-msgstr "Mais Antigos"
+msgstr "Anterior"
 
 #: blog/templates/blog/post/all_posts.html:11
 msgid "These are all posts we've written so far. Enjoy!"

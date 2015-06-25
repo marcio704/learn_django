@@ -19,11 +19,11 @@
         {% for post in post_list %}
             <div class="col-md-4 portfolio-item">
                 <center >
-                    <a href="{% url 'blog:detail' post.id %}">
+                    <a href="{% url 'blog:detail' post.url %}">
                         <img class="img-responsive" src="{{ post.thumbnail.url }}" alt="" width="180" height="180">
                     </a>
                     <h3>
-                        <a href="{% url 'blog:detail' post.id %}">{{ post.name }}</a>
+                        <a href="{% url 'blog:detail' post.url %}">{{ post.name }}</a>
                     </h3>
                     <strong><p style="text-aligment: justify;">{{ post.resume }}</p></strong>
                     {% trans 'From:' %} {{ post.date }}

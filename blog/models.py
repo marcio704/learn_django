@@ -30,6 +30,7 @@ class Post(models.Model):
 	thumbnail = models.ImageField(upload_to='posts')
 	category = models.ForeignKey(Category, blank=False, null=False)
 	authors = models.ManyToManyField(Author, blank=False, null=False)
+	url = models.CharField(max_length=200, blank=True, null=True)
 
 	def __str__(self):
 		return "{0} - {1}".format(self.title, self.resume)

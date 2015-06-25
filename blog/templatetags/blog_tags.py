@@ -22,7 +22,7 @@ def show_comments(post):
 			for child in children_comments:
 				margin_left[child.id] = margin_left[parent.id] + 50
 				grand_children_number = Comment.objects.filter(post=post, answer_to=child.id).count()
-				child_context = Context({'post_id': post.id, 'photo_url': child.author.photo.url if child.author.photo else '', 'author': child.author.user.username, 'date': child.date, 'text': child.text, 'comment_id': child.id, 'parent_comment_id': parent.id, 'children_number': grand_children_number, 'margin_left': margin_left[child.id], 'display': 'none'})
+				child_context = Context({'post_url': post.url, 'photo_url': child.author.photo.url if child.author.photo else '', 'author': child.author.user.username, 'date': child.date, 'text': child.text, 'comment_id': child.id, 'parent_comment_id': parent.id, 'children_number': grand_children_number, 'margin_left': margin_left[child.id], 'display': 'none'})
 				html[0] += comment_template.render(child_context)
 
 				insert_children(html, comment_template, post, child, margin_left)
@@ -57,7 +57,7 @@ def show_comments(post):
 				    <div class="well">
 					    <h4>Leave a Comment:</h4>
 					    
-					    <form action="/send_answer_to_comment/{{ post_id }}/{{ comment_id }}/" method="post">
+					    <form action="/send_answer_to_comment/{{ post_url }}/{{ comment_id }}/" method="post">
 						    {{ form }}
 						    <div class="form-group">
 					        	<textarea id="answer-text-{{ comment_id }}" name="answer-text-{{ comment_id }}" class="form-control" rows="3" rows="5" class="form-control" placeholder="Comment" required data-validation-required-message="Please enter your answer."></textarea>
@@ -95,7 +95,7 @@ def show_comments(post):
 	for parent in parent_comments:
 		margin_left[parent.id] = 0
 		children_number = Comment.objects.filter(post=post, answer_to=parent.id).count()
-		context = Context({'post_id': post.id, 'photo_url': parent.author.photo.url if parent.author.photo else '', 'author': parent.author.user.username,'date': parent.date, 'text': parent.text, 'comment_id': parent.id, 'parent_comment_id': 0, 'children_number':children_number, 'margin_left': margin_left[parent.id], 'display': 'block' })
+		context = Context({'post_url': post.url, 'photo_url': parent.author.photo.url if parent.author.photo else '', 'author': parent.author.user.username,'date': parent.date, 'text': parent.text, 'comment_id': parent.id, 'parent_comment_id': 0, 'children_number':children_number, 'margin_left': margin_left[parent.id], 'display': 'block' })
 		html[0] += comment_template.render(context)
 		
 		insert_children(html, comment_template, post, parent, margin_left)
