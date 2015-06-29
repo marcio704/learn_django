@@ -29,9 +29,16 @@ LOCALE_PATHS = (
     '/home/marcio/dev/learn_django/locale',
 )
 
-#[email] Tip: Amazon SES is a very nice tool for email sending
-SMTP_EMAIL_SENDER = 'your_sender@email.com'
-SMTP_SERVER_LOGIN = 'your_STMP_login'
-SMTP_SERVER_PASSWORD = 'your_STMP_password'
-SMTP_HOST = 'your_SMTP_address'
-CLIENT_EMAIL = 'your_receiver@email.com'
+#[email] Tip: Amazon SES or MailGun are a very nice tools for email sending
+SMTP_EMAIL_SENDER = 'admin@easydjango.com'
+SMTP_SERVER_LOGIN = 'postmaster@easydjango.com'
+SMTP_SERVER_PASSWORD = 'b1fab8d9b2706d58fd23e547a6135cc7'
+SMTP_HOST = 'smtp.mailgun.org'
+SMTP_HOST_PORT = 587
+CLIENT_EMAIL = 'marcio704@yahoo.com.br'
+
+#Configs for RabbitMQ: Responsible for getting contact info (producer), queue and send email (consumer)
+RABBIT_MQ_HOST = 'YOUR_IP_OR_LOCALHOST'
+RABBIT_MQ_PORT = 'PORT_NUMBER'
+RABBIT_MQ_USER = 'USER'
+RABBIT_MQ_PASSWORD = 'PASSWORD'

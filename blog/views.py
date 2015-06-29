@@ -29,6 +29,7 @@ from .forms import UserProfileForm
 from .forms import UserForm
 
 from .utils import utils
+from .rabbit_mq_producer import RabbitMessageProducer
 
 import sys
 import re
@@ -99,17 +100,14 @@ def contact(request):
 def about(request):
     return render(request, 'blog/about.html')        
 
+@transaction.atomic
 def send_contact(request):
     if request.method == 'POST':
-        try:
-            contact = Contact(name=request.POST.get('name'), email=request.POST.get('email'), message=request.POST.get('message'), creation_date=timezone.now())
-            contact.save()
-            return HttpResponse(200)
-        except Exception as inst:
-            print (type(inst))
-            print ('Error on saving contact information: {0}'.format(inst))
-            
-            return HttpResponse(500)    
+        contact = Contact(name=request.POST.get('name'), email=request.POST.get('email'), 
+            message=request.POST.get('message'), creation_date=timezone.now())
+        contact.save()
+        RabbitMessageProducer().produce_email_message(settings.CLIENT_EMAIL, contact.get_contact_email_message())
+        return HttpResponse(200)
     else:
         return HttpResponseRedirect('/contact')
 
@@ -139,7 +137,7 @@ def forgot_password(request):
                     """)
 
                 link = "{0}/rescue_password?token={1}".format(settings.SITE_URL, token.value)
-                utils.send_email(to_email, msg+link)
+                RabbitMessageProducer().produce_email_message(to_email, msg+link)
                 return HttpResponse(200)    
             except Exception as inst:
                 print ('Error on sending new password via email: {0}'.format(inst))
@@ -257,7 +255,7 @@ def _sign_in(request):
 
                     """)
             link = "{0}/account_confirmation?token={1}".format(settings.SITE_URL, token.value)
-            utils.send_email(user.email, msg+link)    
+            RabbitMessageProducer().produce_email_message(user.email, msg+link)    
 
             return render(request, 'blog/registration/sign_in.html', {'confirmation': _('Your account has been created, please go to your e-mail to confirm it.')})
         

@@ -62,6 +62,14 @@ class Contact(models.Model):
 	def __str__(self):
 		return self.name
 
+	def get_contact_email_message(self):
+		return """
+			From: {0}
+			Email: {1}
+			Date: {2}
+			Message: {3}
+		""".format(self.name, self.email, self.creation_date, self.message)
+
 class TokenPassword(models.Model):
 	user = models.ForeignKey(User)
 	value = models.CharField(max_length=20)
