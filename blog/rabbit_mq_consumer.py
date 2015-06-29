@@ -42,7 +42,7 @@ class RabbitMessageConsumer(object):
 
         def callback(ch, method, properties, body):
             json_message = json.loads(body)
-            utils.send_email(json_message["to"], "FROM MQ: {0}".format(json_message["message"].encode('latin-1') ) )
+            utils.send_email(json_message["to"], json_message["message"].encode('latin-1'))
             ch.basic_ack(delivery_tag = method.delivery_tag)
 
         channel.basic_qos(prefetch_count=1)

@@ -323,7 +323,7 @@ msgstr ""
 "\n"
 "                    Esqueceu sua senha do LearDjango?\n"
 "\n"
-"                    Clique no link abaixo, para recuperá-la:\n"
+"                    Clique no link abaixo:\n"
 "                    "
 
 #: blog/views.py:202
