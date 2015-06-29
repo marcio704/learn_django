@@ -23,8 +23,8 @@ This blog tool teaches you how to:
 Also learn how to integrate Django with:
 * [Travis CI](https://travis-ci.org/) - Continuous Integration: Simulates application environment and runs all your unit tests after pushing to your github
 * [Amazon EC2](https://aws.amazon.com/ec2/) - Host your Django application at Amazon Cloud Service
-* [Amazon SES](https://aws.amazon.com/ses/) - Send e-mails via SES the Amazon Email Sending Service
-* [RabbitMQ](https://www.rabbitmq.com/) (ongoing, not finished yet)
+* [MailGun](https://mailgun.com/) - Send e-mails via MailGun Mail Service
+* [RabbitMQ](https://www.rabbitmq.com/) - Manage your email sending activities trought a Message Queuing, it's safer and easier.
 
 
 Additional tools:
