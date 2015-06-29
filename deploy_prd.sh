@@ -8,4 +8,4 @@ export DJANGO_SETTINGS_MODULE=learn_django.settings.prd
 python start_consumers.py &
 
 #Start server
-uwsgi --ini deploy.ini:prd
+uwsgi -d --ini deploy.ini:prd
