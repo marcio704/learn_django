@@ -5,7 +5,7 @@ killall -9 uwsgi
 export DJANGO_SETTINGS_MODULE=learn_django.settings.prd
 
 #Start threads for rabbitMQ consumers
-python start_consumers.py &
+nohup python start_consumers.py > /tmp/consumers.log 2>&1 &
 
 #Start server
-uwsgi -d --ini deploy.ini:prd
+nohup uwsgi --ini deploy.ini:prd > /dev/null 2>&1 &
