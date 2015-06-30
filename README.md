@@ -25,7 +25,7 @@ Also learn how to integrate Django with:
 * [Amazon EC2](https://aws.amazon.com/ec2/) - Host your Django application at Amazon Cloud Service
 * [MailGun](https://mailgun.com/) - Send e-mails via MailGun Mail Service
 * [RabbitMQ](https://www.rabbitmq.com/) - Manage your email sending activities trought a Message Queuing, it's safer and easier.
-* [ElasticSearch](https://www.elastic.co/products/elasticsearch) - NoSQL tool for optimized and indexed searches
+* [ElasticSearch](https://www.elastic.co/products/elasticsearch) - NoSQL tool for optimized and indexed searches (ongoing, not finished yet)
 
 Additional tools:
 * [PostgresSQL](http://www.postgresql.org/): Database solution
