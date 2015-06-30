@@ -20,7 +20,7 @@ This blog tool teaches you how to:
 * E-mail sending via SMTP
 * Creation and execution of unit tests
 
-Also learn how to integrate Django with:
+Also learn how to integrate your Python/Django application with:
 * [Travis CI](https://travis-ci.org/) - Continuous Integration: Simulates application environment and runs all your unit tests after pushing to your github
 * [Amazon EC2](https://aws.amazon.com/ec2/) - Host your Django application at Amazon Cloud Service
 * [MailGun](https://mailgun.com/) - Send e-mails via MailGun Mail Service
