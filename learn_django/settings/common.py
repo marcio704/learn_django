@@ -73,10 +73,6 @@ LANGUAGE_CODE = 'pt_BR'
 
 TIME_ZONE = 'UTC'
 
-DEFAULT_CHARSET = 'utf-8'
-
-DEFAULT_CONTENT_TYPE = 'text/html'
-
 USE_I18N = True
 
 USE_L10N = True
