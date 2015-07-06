@@ -12,7 +12,7 @@ fs = FileSystemStorage(location='/media/photos')
 class Category(models.Model):
 	name = models.CharField(max_length=100)
 
-	def __str__(self):
+	def __unicode__(self):
 		return self.name
 
 class Author(models.Model):
@@ -20,7 +20,7 @@ class Author(models.Model):
 	email = models.CharField(max_length=200)
 	personal_page = models.CharField(max_length=2000, blank=True, null=True)
 
-	def __str__(self):
+	def __unicode__(self):
 		return self.name
 
 class Post(models.Model):
@@ -33,15 +33,15 @@ class Post(models.Model):
 	authors = models.ManyToManyField(Author, blank=False, null=False)
 	url = models.CharField(max_length=200, blank=False, null=False)
 
-	def __str__(self):
-		return "{0} - {1}".format(self.title.encode('utf-8'), self.resume.encode('utf-8'))
+	def __unicode__(self):
+		return self.title
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, primary_key=True)
 	photo = models.ImageField(upload_to='users', blank=True, null=True)
 
-	def __str__(self):
-		return self.user.first_name.encode('utf-8')
+	def __unicode__(self):
+		return self.user.first_name
 
 class Comment(models.Model):
 	text = models.CharField(max_length=8000)
@@ -50,8 +50,8 @@ class Comment(models.Model):
 	post = models.ForeignKey(Post, blank=True, null=True)
 	answer_to = models.ForeignKey('self', blank=True, null=True)
 
-	def __str__(self):
-		return "{0} wrote: {1}".format(self.author.user.first_name.encode('utf-8'), self.text.encode('utf-8'))
+	def __unicode__(self):
+		return self.text
 
 class Contact(models.Model):
 	name = models.CharField(max_length=200)
@@ -60,8 +60,8 @@ class Contact(models.Model):
 	creation_date = models.DateTimeField('date creation')
 	is_email_sent = models.BooleanField(default=False)
 
-	def __str__(self):
-		return self.name.encode('utf-8')
+	def __unicode__(self):
+		return self.name
 
 	def get_contact_email_message(self):
 		return """
