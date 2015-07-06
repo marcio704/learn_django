@@ -2,6 +2,7 @@ from django.db import models
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
+import string
 
 fs = FileSystemStorage(location='/media/photos')
 
@@ -33,14 +34,14 @@ class Post(models.Model):
 	url = models.CharField(max_length=200, blank=False, null=False)
 
 	def __str__(self):
-		return "{0} - {1}".format(self.title, self.resume)
+		return "{0} - {1}".format(self.title.encode('utf-8'), self.resume.encode('utf-8'))
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, primary_key=True)
 	photo = models.ImageField(upload_to='users', blank=True, null=True)
 
 	def __str__(self):
-		return self.user.first_name
+		return self.user.first_name.encode('utf-8')
 
 class Comment(models.Model):
 	text = models.CharField(max_length=8000)
@@ -50,7 +51,7 @@ class Comment(models.Model):
 	answer_to = models.ForeignKey('self', blank=True, null=True)
 
 	def __str__(self):
-		return "{0} wrote: {1}".format(self.author.name, self.text)
+		return "{0} wrote: {1}".format(self.author.user.first_name.encode('utf-8'), self.text.encode('utf-8'))
 
 class Contact(models.Model):
 	name = models.CharField(max_length=200)
@@ -60,7 +61,7 @@ class Contact(models.Model):
 	is_email_sent = models.BooleanField(default=False)
 
 	def __str__(self):
-		return self.name
+		return self.name.encode('utf-8')
 
 	def get_contact_email_message(self):
 		return """
