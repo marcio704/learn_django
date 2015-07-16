@@ -9,6 +9,7 @@ django-celery==3.1.16
 django-ckeditor==4.4.8
 django-widget-tweaks==1.3
 elasticsearch==1.6.0
+enum34==1.0.4
 kombu==3.0.26
 pika==0.9.14
 psycopg2==2.6
