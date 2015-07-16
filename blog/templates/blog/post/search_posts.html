@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Easy Django!
-                <small> {% trans "Posts about" %} <strong>{{ category.name }}!</strong></small>
+                <small> {% trans "Posts found for your search" %} </small>
             </h1>
         </div>
     </div>
@@ -23,18 +23,20 @@
                         <img class="img-responsive" src="{{ post.thumbnail.url }}" alt="" width="180" height="180">
                     </a>
                     <h3>
-                        <a href="{% url 'blog:detail' post.url %}">{{ post.title }}</a>
+                        <a href="{% url 'blog:detail' post.url %}">{{ post.title |safe }}</a>
                     </h3>
-                    <strong><p style="text-aligment: justify;">{{ post.resume }}</p></strong>
+                    <strong><p style="text-aligment: justify;">{{ post.resume |safe }}</p></strong>
+                    {% trans 'From:' %} {{ post.date }}
+                    <p style="text-aligment: justify;">...{{ post.text |safe }}...</p>
                 </center>
             </div>
         {% endfor %}
-    	<hr>
-
+        <hr>
+    
         <!-- Pagination -->
         <div class="row text-center">
             <div class="col-lg-12">
-               <!-- Pager -->
+                <!-- Pager -->
                 <ul class="pager">
                     <li class="previous">
                         {% if post_list.has_previous %}
@@ -48,9 +50,9 @@
                     </li>
                 </ul>
             </div>
-        </div>    
+        </div>
     {% else %}
-        {% trans "No posts found for this category :(" %}
+        {% trans "No posts found yet :(" %}
     {% endif %}
     </div>
 </div>

@@ -1,4 +1,6 @@
 import os
+import djcelery
+from datetime import timedelta
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,9 +27,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-    'django_crontab',
     'ckeditor',
     'widget_tweaks',
+    'djcelery'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -40,10 +42,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 )
-
-CRONJOBS = [
-    ('*/1 * * * *', 'blog.cron.send_contact_email')
-]
 
 ROOT_URLCONF = 'learn_django.urls'
 
@@ -100,3 +98,17 @@ CKEDITOR_CONFIGS = {
 }}
 
 TOKEN_SIZE = 20
+
+#  Celery settings
+djcelery.setup_loader()
+
+CELERYBEAT_SCHEDULE = {
+    'add-every-30-seconds': {
+        'task': 'blog.tasks.ping_on_file',
+        'schedule': timedelta(seconds=30),
+        'args': (16, 32)
+    },
+}
+
+CELERY_TIMEZONE = 'UTC'
+CELERY_IMPORTS=("blog.tasks")

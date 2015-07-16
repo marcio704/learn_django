@@ -1,8 +1,13 @@
+import string
+import json
+
 from django.db import models
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 from ckeditor.fields import RichTextField
-import string
+from blog.elastic import ElasticSearchClient
+from blog.elastic import DocumentType
 
 fs = FileSystemStorage(location='/media/photos')
 
@@ -83,3 +88,16 @@ class TokenUserSignIn(models.Model):
 	is_used = models.BooleanField(default=False)
 	used_at = models.DateTimeField('date creation',blank=True, null=True)
 
+
+
+def import_post_document(sender, instance, **kwargs):
+	json_message = json.dumps({
+		'id': 	 	"""{0}""".format(instance.id), 
+		'title': 	"""{0}""".format(instance.title.decode('latin-1')),
+	 	'resume':  	"""{0}""".format(instance.resume.encode('utf-8').decode('latin-1')), 
+	 	'text':  	"""{0}""".format(instance.text.encode('utf-8').decode('latin-1'))
+	 	})
+	ElasticSearchClient().insert_document(instance.id, json_message, DocumentType.post)
+
+# register the signal in order to import Post object/document to ElasticSearch
+post_save.connect(import_post_document, sender=Post, dispatch_uid="search_import_elastic")

@@ -24,8 +24,9 @@ Also learn how to integrate your Python/Django application with:
 * [Travis CI](https://travis-ci.org/) - Continuous Integration: Simulates application environment and runs all your unit tests after pushing to your github
 * [Amazon EC2](https://aws.amazon.com/ec2/) - Host your Django application at Amazon Cloud Service
 * [MailGun](https://mailgun.com/) - Send e-mails via MailGun Mail Service
-* [RabbitMQ](https://www.rabbitmq.com/) - Manage your email sending activities trought a Message Queuing, it's safer and easier.
-* [ElasticSearch](https://www.elastic.co/products/elasticsearch) - NoSQL tool for optimized and indexed searches (ongoing, not finished yet)
+* [Celery](http://www.celeryproject.org/) - Distributed Task Queue and Jobs
+* [RabbitMQ](https://www.rabbitmq.com/) - Manage your email sending activities trought a Message Queuing, it's safer and easier
+* [ElasticSearch](https://www.elastic.co/products/elasticsearch) - NoSQL tool for optimized and indexed text searches
 
 Additional tools:
 * [PostgresSQL](http://www.postgresql.org/): Database solution

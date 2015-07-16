@@ -3,4 +3,4 @@
 dist/*
 django_speaker.egg-info/*
 media/*
-blog/secret_settings.py
+learn_django/settings/secret.py

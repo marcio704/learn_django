@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-29 16:59+0000\n"
+"POT-Creation-Date: 2015-07-16 19:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -146,20 +146,24 @@ msgid "These are all posts we've written so far. Enjoy!"
 msgstr "Estes são todos os posts que escrevemos até agora. Divirta-se!"
 
 #: blog/templates/blog/post/all_posts.html:29
+#: blog/templates/blog/post/search_posts.html:29
 msgid "From:"
 msgstr "De:"
 
 #: blog/templates/blog/post/all_posts.html:42
 #: blog/templates/blog/post/posts_by_category.html:41
+#: blog/templates/blog/post/search_posts.html:43
 msgid "Newer"
 msgstr "Próximo"
 
 #: blog/templates/blog/post/all_posts.html:47
 #: blog/templates/blog/post/posts_by_category.html:46
+#: blog/templates/blog/post/search_posts.html:48
 msgid "Older"
 msgstr "Anterior"
 
 #: blog/templates/blog/post/all_posts.html:54
+#: blog/templates/blog/post/search_posts.html:55
 msgid "No posts found yet :("
 msgstr "Nenhum post encontrado :("
 
@@ -190,6 +194,10 @@ msgstr "Posts sobre"
 #: blog/templates/blog/post/posts_by_category.html:53
 msgid "No posts found for this category :("
 msgstr "Nenhum post encontrado para esta categoria :("
+
+#: blog/templates/blog/post/search_posts.html:11
+msgid "Posts found for your search"
+msgstr "Posts encontrados para a sua busca"
 
 #: blog/templates/blog/registration/account_confirmation.html:12
 #: blog/templates/blog/registration/rescue_password.html:11
@@ -268,27 +276,43 @@ msgid ""
 "following:"
 msgstr "Há erros nas informações preenchidas. Por favor, corrija o seguinte: "
 
-#: blog/templates/blog/templates/blog_template.html:40
+#: blog/templates/blog/templates/blog_template.html:41
 msgid "Blog Search"
 msgstr "Procurar"
 
+#: blog/templates/blog/templates/blog_template.html:44
+msgid "Search here"
+msgstr "Procurar..."
+
+#: blog/templates/blog/templates/blog_template.html:44
+#, fuzzy
+#| msgid "Please enter your email address"
+msgid "Please enter your search term"
+msgstr "Por favor, digite seu e-mail"
+
 #: blog/templates/blog/templates/blog_template.html:48
+#, fuzzy
+#| msgid "Blog Search"
+msgid "Search"
+msgstr "Procurar"
+
+#: blog/templates/blog/templates/blog_template.html:55
 msgid "Blog Categories"
 msgstr "Categorias"
 
-#: blog/templates/blog/templates/blog_template.html:75
+#: blog/templates/blog/templates/blog_template.html:82
 msgid "Related Contents"
 msgstr "Conteúdos Relacionados"
 
-#: blog/templates/blog/templates/blog_template.html:78
+#: blog/templates/blog/templates/blog_template.html:85
 msgid "Python Official Website"
 msgstr "Site Oficial do Python"
 
-#: blog/templates/blog/templates/blog_template.html:79
+#: blog/templates/blog/templates/blog_template.html:86
 msgid "Django Official Website"
 msgstr "Site Oficial do Django"
 
-#: blog/templates/blog/templates/blog_template.html:80
+#: blog/templates/blog/templates/blog_template.html:87
 msgid "Django Brasil"
 msgstr "Django Brasil"
 
@@ -312,7 +336,7 @@ msgstr "(Entrar)"
 msgid "(Log out)"
 msgstr "(Sair)"
 
-#: blog/views.py:133
+#: blog/views.py:139
 msgid ""
 "\n"
 "                    Hi, did you forget your EasyDjango password?\n"
@@ -326,37 +350,45 @@ msgstr ""
 "                    Clique no link abaixo:\n"
 "                    "
 
-#: blog/views.py:202
-msgid "Confirmation token not found for this user"
-msgstr "Token de confirmação não encontrado para este usuário"
-
-#: blog/views.py:205
-msgid "User not confirmed yet, get the confirmation link at your e-mail!"
-msgstr "Este usuário ainda não foi confirmado, clique no link de confirmação no seu e-mail!"
-
-#: blog/views.py:210
+#: blog/views.py:206
 msgid "User/password not found!"
 msgstr "Usuário/senha não encontrados!"
 
-#: blog/views.py:225
-msgid "Sorry, an error occurred while creating  your user. Try again later."
-msgstr "Desculpe, ocorreu um erro ao criar seu usuário, tente novamente mais tarde."
+#: blog/views.py:210
+msgid "Confirmation token not found for this user"
+msgstr "Token de confirmação não encontrado para este usuário"
 
-#: blog/views.py:237
+#: blog/views.py:213
+msgid "User not confirmed yet, get the confirmation link at your e-mail!"
+msgstr ""
+"Este usuário ainda não foi confirmado, clique no link de confirmação no seu "
+"e-mail!"
+
+#: blog/views.py:232
+msgid "Sorry, an error occurred while creating  your user. Try again later."
+msgstr ""
+"Desculpe, ocorreu um erro ao criar seu usuário, tente novamente mais tarde."
+
+#: blog/views.py:246
 msgid "Wrong password confirmation"
 msgstr "Confimarção de senha incorreta"
 
-#: blog/views.py:254
+#: blog/views.py:263
+#, fuzzy
+#| msgid ""
+#| "Hi, just click the link below in order to confirm your EasyDjango "
+#| "account:\n"
+#| "\n"
+#| "                    "
 msgid ""
 "Hi, just click the link below in order to confirm your EasyDjango account:\n"
 "\n"
-"                    "
+"                "
 msgstr ""
 "Olá, clique no link abaixo para confirmar sua conta no EasyDjago:\n"
 "\n"
 "                    "
 
-#: blog/views.py:260
+#: blog/views.py:269
 msgid "Your account has been created, please go to your e-mail to confirm it."
 msgstr "Sua conta foi criada, por favor, faça a confirmação no seu email."
-

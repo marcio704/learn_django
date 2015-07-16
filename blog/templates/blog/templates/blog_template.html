@@ -37,10 +37,17 @@
         {% block sidebar %}
             <!-- Blog Search Well -->
             <div class="well">
-                <h4><strong class="strong-green"> {% trans "Blog Search" %} </strong></h4>
-                <div class="input-group">
-                    <gcse:search></gcse:search>
-                </div>
+                <form action="/find_post_by_content/" method="post" >
+                    <h4><strong class="strong-green"> {% trans "Blog Search" %} </strong></h4>
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="{% trans 'Search here' %}" id="term" name="term" required data-validation-required-message="{% trans 'Please enter your search term' %}">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <!-- Change this to a button or input when using this as a form -->
+                        <button type="submit" class="btn btn-lg btn-primary btn-block"> {% trans "Search" %} </button>
+                    </fieldset>
+                </form>
             </div>
 
             <!-- Blog Categories Well -->

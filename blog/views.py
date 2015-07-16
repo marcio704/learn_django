@@ -29,10 +29,11 @@ from .forms import UserProfileForm
 from .forms import UserForm
 
 from .utils import utils
-from .rabbit_mq_producer import RabbitMessageProducer
+from .elastic import ElasticSearchClient
 
 import sys
 import re
+import tasks
 
 # Create your views here.
 
@@ -94,6 +95,10 @@ def posts_by_category(request, category_id):
 
     return render(request, 'blog/post/posts_by_category.html', context)
 
+def find_post_by_content(request):
+    post_list = ElasticSearchClient().search_post_by_match(request.POST.get('term'))
+    return render(request, 'blog/post/search_posts.html', {'post_list': post_list})
+
 def contact(request):
     return render(request, 'blog/contact.html')
 
@@ -106,7 +111,7 @@ def send_contact(request):
         contact = Contact(name=request.POST.get('name'), email=request.POST.get('email'), 
             message=request.POST.get('message'), creation_date=timezone.now())
         contact.save()
-        RabbitMessageProducer().produce_email_message(settings.CLIENT_EMAIL, contact.get_contact_email_message())
+        tasks.send_email.delay(settings.CLIENT_EMAIL, contact.get_contact_email_message())
         return HttpResponse(200)
     else:
         return HttpResponseRedirect('/contact')
@@ -137,7 +142,7 @@ def forgot_password(request):
                     """)
 
                 link = "{0}/rescue_password?token={1}".format(settings.SITE_URL, token.value)
-                RabbitMessageProducer().produce_email_message(to_email, msg+link)
+                tasks.send_email.delay(to_email, msg+link)
                 return HttpResponse(200)    
             except Exception as inst:
                 print ('Error on sending new password via email: {0}'.format(inst))
@@ -195,19 +200,19 @@ def auth(request):
     if request.method == 'POST':
         try: 
             user = authenticate(username=request.POST.get('login-username'), password=request.POST.get('login-password'))
-            if user is not None:
-                try:
-                    token = TokenUserSignIn.objects.get(user=user)
-                except ObjectDoesNotExist as inst:
-                    return render(request, 'blog/registration/login.html', {'invalidation': _('Confirmation token not found for this user')})                    
-                
-                if not token.is_used:
-                    return render(request, 'blog/registration/login.html', {'invalidation': _('User not confirmed yet, get the confirmation link at your e-mail!')})                    
-                
-                login_auth(request, user)
-                return HttpResponseRedirect(request.POST.get('login-next'))  
-            else:
-                return render(request, 'blog/registration/login.html', {'invalidation': _('User/password not found!')})                    
+            if user is None:
+                return render(request, 'blog/registration/login.html', {'invalidation': _('User/password not found!')})
+            try:
+                token = TokenUserSignIn.objects.get(user=user)
+            except ObjectDoesNotExist as inst:
+                return render(request, 'blog/registration/login.html', {'invalidation': _('Confirmation token not found for this user')})                    
+            
+            if not token.is_used:
+                return render(request, 'blog/registration/login.html', {'invalidation': _('User not confirmed yet, get the confirmation link at your e-mail!')})                    
+            
+            login_auth(request, user)
+            return HttpResponseRedirect(request.POST.get('login-next'))  
+                                    
         except Exception as inst:
             print (type(inst))
             print ('Error on authenticating user: {0}'.format(inst))
@@ -230,37 +235,37 @@ def _sign_in(request):
         userProfileForm = UserProfileForm(request.POST, request.FILES or None)
         userForm = UserForm(request.POST or None)
         
-        if userProfileForm.is_valid() and userForm.is_valid():
-            user = userForm.save(commit=False)
-            
-            if not user.password == request.POST.get('password-confirmation'):
-                userForm._errors['password'] = _('Wrong password confirmation')
-                return render(request, 'blog/registration/sign_in.html', {'userProfileForm': userProfileForm, 'userForm':userForm})
-            
-            user.password = make_password(user.password, salt=None, hasher='default')
-            user.save()
-
-            user_profile = userProfileForm.save(commit=False)
-            user_profile.user = user
-            user_profile.save()
-
-            try:
-                token = TokenUserSignIn.objects.get(user=user, is_used=False)
-            except ObjectDoesNotExist as inst:
-                token_value = utils.generate_token()
-                token = TokenUserSignIn(user=user, value=token_value)    
-                token.save()
-            
-            msg = _("""Hi, just click the link below in order to confirm your EasyDjango account:
-
-                    """)
-            link = "{0}/account_confirmation?token={1}".format(settings.SITE_URL, token.value)
-            RabbitMessageProducer().produce_email_message(user.email, msg+link)    
-
-            return render(request, 'blog/registration/sign_in.html', {'confirmation': _('Your account has been created, please go to your e-mail to confirm it.')})
-        
-        else:
+        if not userProfileForm.is_valid() or not userForm.is_valid():
             return render(request, 'blog/registration/sign_in.html', {'userProfileForm': userProfileForm, 'userForm':userForm})
+        
+        user = userForm.save(commit=False)
+        
+        if not user.password == request.POST.get('password-confirmation'):
+            userForm._errors['password'] = _('Wrong password confirmation')
+            return render(request, 'blog/registration/sign_in.html', {'userProfileForm': userProfileForm, 'userForm':userForm})
+        
+        user.password = make_password(user.password, salt=None, hasher='default')
+        user.save()
+
+        user_profile = userProfileForm.save(commit=False)
+        user_profile.user = user
+        user_profile.save()
+
+        try:
+            token = TokenUserSignIn.objects.get(user=user, is_used=False)
+        except ObjectDoesNotExist as inst:
+            token_value = utils.generate_token()
+            token = TokenUserSignIn(user=user, value=token_value)    
+            token.save()
+        
+        msg = _("""Hi, just click the link below in order to confirm your EasyDjango account:
+
+                """)
+        link = "{0}/account_confirmation?token={1}".format(settings.SITE_URL, token.value)
+        tasks.send_email.delay(user.email, msg+link)    
+
+        return render(request, 'blog/registration/sign_in.html', {'confirmation': _('Your account has been created, please go to your e-mail to confirm it.')})
+            
     else:
         userProfileForm = UserProfileForm()
         userForm = UserForm()

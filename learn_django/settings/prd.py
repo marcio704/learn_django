@@ -32,7 +32,7 @@ LOCALE_PATHS = (
 
 """ 
     For aditional secret settings such as E-mails, Passwords and Tokens, create an addtional file. 
-    For example, create "secret_settings.py" inside app root directory, this file should not be shared through a Version Control System like GIT or SVN.
+    For example, create "secret.py" inside app root directory, this file should not be shared through a Version Control System like GIT or SVN.
 
     File format should look like:
         SERVER_EMAIL = 'server@email.com'
@@ -45,4 +45,4 @@ LOCALE_PATHS = (
     from django.conf import settings
     email = settings.SERVER_EMAIL
 """
-from blog.secret_settings import *
+from .secret import *
