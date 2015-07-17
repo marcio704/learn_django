@@ -20,6 +20,7 @@ class Category(models.Model):
 	def __unicode__(self):
 		return self.name
 
+
 class Author(models.Model):
 	name = models.CharField(max_length=200)
 	email = models.CharField(max_length=200)
@@ -27,6 +28,7 @@ class Author(models.Model):
 
 	def __unicode__(self):
 		return self.name
+
 
 class Post(models.Model):
 	title = models.CharField(max_length=200)
@@ -41,12 +43,14 @@ class Post(models.Model):
 	def __unicode__(self):
 		return self.title
 
+
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, primary_key=True)
 	photo = models.ImageField(upload_to='users', blank=True, null=True)
 
 	def __unicode__(self):
 		return self.user.first_name
+
 
 class Comment(models.Model):
 	text = models.CharField(max_length=8000)
@@ -57,6 +61,7 @@ class Comment(models.Model):
 
 	def __unicode__(self):
 		return self.text
+
 
 class Contact(models.Model):
 	name = models.CharField(max_length=200)
@@ -76,11 +81,13 @@ class Contact(models.Model):
 			Message: {3}
 		""".format(self.name, self.email, self.creation_date, self.message)
 
+
 class TokenPassword(models.Model):
 	user = models.ForeignKey(User)
 	value = models.CharField(max_length=20)
 	is_used = models.BooleanField(default=False)
 	used_at = models.DateTimeField('date creation',blank=True, null=True)
+
 
 class TokenUserSignIn(models.Model):
 	user = models.ForeignKey(User)

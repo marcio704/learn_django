@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-16 19:53+0000\n"
+"POT-Creation-Date: 2015-07-17 19:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,6 +46,30 @@ msgstr "Este nome de usuário já está em uso. Por favor, escolha outro"
 #: blog/forms.py:36
 msgid "This e-mail is already in use, please choose another one"
 msgstr "Este e-mail de usuário já está em uso. Por favor, escolha outro"
+
+#: blog/services.py:57
+msgid ""
+"\n"
+"\t\tHi, did you forget your EasyDjango password?\n"
+"\n"
+"\t\tClick the link below to rescue your password:\n"
+"\t\t"
+msgstr ""
+"\n"
+"                    Esqueceu sua senha do EasyDjango?\n"
+"\n"
+"                    Clique no link abaixo:\n"
+"                    "
+
+#: blog/services.py:141
+msgid ""
+"Hi, just click the link below in order to confirm your EasyDjango account:\n"
+"\n"
+"\t        "
+msgstr ""
+"Olá, clique no link abaixo para confirmar sua conta no EasyDjago:\n"
+"\n"
+"                    "
 
 #: blog/templates/blog/about.html:12
 msgid "Easy Django, step by step!"
@@ -285,14 +309,10 @@ msgid "Search here"
 msgstr "Procurar..."
 
 #: blog/templates/blog/templates/blog_template.html:44
-#, fuzzy
-#| msgid "Please enter your email address"
 msgid "Please enter your search term"
-msgstr "Por favor, digite seu e-mail"
+msgstr "Por favor, digite sua busca"
 
 #: blog/templates/blog/templates/blog_template.html:48
-#, fuzzy
-#| msgid "Blog Search"
 msgid "Search"
 msgstr "Procurar"
 
@@ -336,53 +356,26 @@ msgstr "(Entrar)"
 msgid "(Log out)"
 msgstr "(Sair)"
 
-#: blog/views.py:139
-msgid ""
-"\n"
-"                    Hi, did you forget your EasyDjango password?\n"
-"\n"
-"                    Click the link below to rescue your password:\n"
-"                    "
-msgstr ""
-"\n"
-"                    Esqueceu sua senha do EasyDjango?\n"
-"\n"
-"                    Clique no link abaixo:\n"
-"                    "
-
-#: blog/views.py:206
-msgid "User/password not found!"
-msgstr "Usuário/senha não encontrados!"
-
-#: blog/views.py:210
-msgid "Confirmation token not found for this user"
-msgstr "Token de confirmação não encontrado para este usuário"
-
-#: blog/views.py:213
-msgid "User not confirmed yet, get the confirmation link at your e-mail!"
-msgstr ""
-"Este usuário ainda não foi confirmado, clique no link de confirmação no seu "
-"e-mail!"
-
-#: blog/views.py:232
+#: blog/views.py:152
 msgid "Sorry, an error occurred while creating  your user. Try again later."
 msgstr ""
 "Desculpe, ocorreu um erro ao criar seu usuário, tente novamente mais tarde."
 
-#: blog/views.py:246
+#: blog/views.py:170
 msgid "Wrong password confirmation"
 msgstr "Confimarção de senha incorreta"
 
-#: blog/views.py:263
-msgid ""
-"Hi, just click the link below in order to confirm your EasyDjango account:\n"
-"\n"
-"                "
-msgstr ""
-"Olá, clique no link abaixo para confirmar sua conta no EasyDjago:\n"
-"\n"
-"                    "
-
-#: blog/views.py:269
+#: blog/views.py:181
 msgid "Your account has been created, please go to your e-mail to confirm it."
 msgstr "Sua conta foi criada, por favor, faça a confirmação no seu email."
+
+#~ msgid "User/password not found!"
+#~ msgstr "Usuário/senha não encontrados!"
+
+#~ msgid "Confirmation token not found for this user"
+#~ msgstr "Token de confirmação não encontrado para este usuário"
+
+#~ msgid "User not confirmed yet, get the confirmation link at your e-mail!"
+#~ msgstr ""
+#~ "Este usuário ainda não foi confirmado, clique no link de confirmação no "
+#~ "seu e-mail!"
