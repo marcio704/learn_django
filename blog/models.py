@@ -93,9 +93,9 @@ class TokenUserSignIn(models.Model):
 def import_post_document(sender, instance, **kwargs):
 	json_message = json.dumps({
 		'id': 	 	"""{0}""".format(instance.id), 
-		'title': 	"""{0}""".format(instance.title.decode('latin-1')),
-	 	'resume':  	"""{0}""".format(instance.resume.encode('utf-8').decode('latin-1')), 
-	 	'text':  	"""{0}""".format(instance.text.encode('utf-8').decode('latin-1'))
+		'title': 	"""{0}""".format(instance.title.encode('utf-8')),
+	 	'resume':  	"""{0}""".format(instance.resume.encode('utf-8')), 
+	 	'text':  	"""{0}""".format(instance.text.encode('utf-8'))
 	 	})
 	ElasticSearchClient().insert_document(instance.id, json_message, DocumentType.post)
 

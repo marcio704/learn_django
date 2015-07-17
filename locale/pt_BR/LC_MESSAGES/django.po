@@ -374,12 +374,6 @@ msgid "Wrong password confirmation"
 msgstr "Confimarção de senha incorreta"
 
 #: blog/views.py:263
-#, fuzzy
-#| msgid ""
-#| "Hi, just click the link below in order to confirm your EasyDjango "
-#| "account:\n"
-#| "\n"
-#| "                    "
 msgid ""
 "Hi, just click the link below in order to confirm your EasyDjango account:\n"
 "\n"
