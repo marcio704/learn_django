@@ -79,7 +79,7 @@ class Contact(models.Model):
 			Email: {1}
 			Date: {2}
 			Message: {3}
-		""".format(self.name, self.email, self.creation_date, self.message)
+		""".format(self.name.encode('utf-8'), self.email, self.creation_date, self.message.encode('utf-8'))
 
 
 class TokenPassword(models.Model):
