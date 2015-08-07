@@ -32,10 +32,10 @@ LOCALE_PATHS = (
 #[email] Tip: Amazon SES or MailGun are a very nice tools for email sending
 SMTP_EMAIL_SENDER = 'admin@email.com'
 SMTP_SERVER_LOGIN = 'postmaster@email.com'
-SMTP_SERVER_PASSWORD = 'asdasdasd1231231eqwda'
+SMTP_SERVER_PASSWORD = 'b1fab8d9b2706d58fd23e547a6135cc7'
 SMTP_HOST = 'smtp.mailgun.org'
 SMTP_HOST_PORT = 587
-CLIENT_EMAIL = 'marcio704@email.com.br'
+CLIENT_EMAIL = 'email@yahoo.com.br'
 
 #Configs for RabbitMQ: Responsible for getting contact info (producer), queue and send email (consumer)
 RABBIT_MQ_HOST = 'YOUR_IP_OR_LOCALHOST'
