@@ -185,7 +185,7 @@ def account_confirmation(request):
     if request.method == 'GET':
         try:
             context = services.expire_signin_token(request.GET.get('token'))
-        except ObjectDoesNotExist as inst:
+        except Exception as inst:
             return render(request, 'blog/registration/account_confirmation.html',  {'invalid_token': True})            
 
         return render(request, 'blog/registration/account_confirmation.html',  context) 
