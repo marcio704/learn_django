@@ -67,7 +67,7 @@ msgid ""
 "\n"
 "\t        "
 msgstr ""
-"Olá, clique no link abaixo para confirmar sua conta no EasyDjago:\n"
+"Ola, clique no link abaixo para confirmar sua conta no EasyDjago:\n"
 "\n"
 "                    "
 
