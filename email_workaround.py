@@ -20,15 +20,18 @@ def send_email(to_address, msg):
   	s.sendmail(msg['From'], msg['To'], msg.as_string())
   	s.quit()
 
-conn_string = "host='localhost' dbname='learn_django' user='postgres' password='	'"
-cnx = psycopg2.connect(conn_string)
-cursor = cnx.cursor()
-cursor2 = cnx.cursor()
+records = []
+try:
+	conn_string = "host='localhost' dbname='learn_django' user='postgres' password='postgres'"
+	cnx = psycopg2.connect(conn_string)
+	cursor = cnx.cursor()
+	cursor2 = cnx.cursor()
 
 
-cursor.execute("select au.id, au.email, tk.value from  auth_user au inner join blog_tokenusersignin tk on au.id = tk.user_id where tk.is_used = true; ")
-
-records = cursor.fetchall()
+	cursor.execute("select au.id, au.email, tk.value from  auth_user au inner join blog_tokenusersignin tk on au.id = tk.user_id where tk.is_used = true")
+	records = cursor.fetchall()
+except Exception as e:
+	print("Ocorreu um ERRO: {0}".format(e))
 
 for (id, email, value) in records:
 	print("{0} - {1} - {2}").format(id, email, value)
