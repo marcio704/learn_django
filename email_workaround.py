@@ -41,8 +41,8 @@ for (id, email, value) in records:
 	link = "{0}/account_confirmation?token={1}".format('http://www.easydjango.com', value)
 	try:
 		send_email(email, msg+link)	
-	except:
-		print("Error to send email: {0}".format(email))
+	except Exception as e:
+		print("Error to send email: {0} {1}".format(email, e))
 
 	cursor2.execute("UPDATE blog_tokenusersignin set is_used = true where user_id = {0}".format(id))
 	
