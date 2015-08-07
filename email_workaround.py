@@ -28,7 +28,7 @@ try:
 	cursor2 = cnx.cursor()
 
 
-	cursor.execute("select au.id, au.email, tk.value from  auth_user au inner join blog_tokenusersignin tk on au.id = tk.user_id where tk.is_used = true")
+	cursor.execute("select au.id, au.email, tk.value from  auth_user au inner join blog_tokenusersignin tk on au.id = tk.user_id where tk.is_used = false")
 	records = cursor.fetchall()
 except Exception as e:
 	print("Ocorreu um ERRO: {0}".format(e))
