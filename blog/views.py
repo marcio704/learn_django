@@ -213,20 +213,4 @@ def send_answer_to_comment(request, post_url, comment_id):
         print ('Error on saving answer information: {0}'.format(inst))
         return HttpResponse(500)    
         
-
-def send_email_workaround(request):
-    if request.method == 'POST':
-        return
-    users_list = UserProfile.objects.all()
-    for user_d in users_list:
-        try:
-            token = TokenUserSignIn.objects.get(user_id=user_d.user.id)
-            msg = _("""Ola, clique no link abaixo para confirmar sua conta no EasyDjago:
-
-                """)
-            link = "{0}/account_confirmation?token={1}".format(settings.SITE_URL, token.value)
-            tasks.send_email.delay(user_d.user.email, msg+link)
-        except Exception as e:
-            print(e)
-    return HttpResponse(200)    
-
+        
