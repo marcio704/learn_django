@@ -31,21 +31,24 @@ cnx = psycopg2.connect(conn_string)
 cursor = cnx.cursor()
 cursor2 = cnx.cursor()
 
-cursor.execute("select au.id, au.email, tk.value from  auth_user au inner join blog_tokenusersignin tk on au.id = tk.user_id where tk.is_used = false")
+cursor.execute("select au.id, au.email from auth_user au")
 records = cursor.fetchall()
 
 for (id, email, value) in records:
 	print("{0} - {1} - {2}").format(id, email, value)
-	msg = """Ola, clique no link abaixo para confirmar sua conta no EasyDjago:
+	msg = """O EasyDjango acabou de lançar um novo post:
 
+			"Construção de templates HTML dinâmicos (tags): Como utilizar template tags (ou TagLibs) no Django"
+
+			Confira o conteúdo completo em:
                 """
-	link = "{0}/account_confirmation?token={1}".format('http://www.easydjango.com', value)
+	link = "{0}/posts/template_tags".format('http://www.easydjango.com')
 	try:
 		send_email(email, msg+link)	
 	except Exception as e:
 		print("Error to send email: {0} {1}".format(email, e))
 
-	cursor2.execute("UPDATE blog_tokenusersignin set is_used = true where user_id = {0}".format(id))
+	#cursor2.execute("UPDATE blog_tokenusersignin set is_used = true where user_id = {0}".format(id))
 	
 
 cnx.commit()
