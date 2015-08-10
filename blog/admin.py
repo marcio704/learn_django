@@ -9,7 +9,7 @@ from .models import Comment
 # Register your models here.
 
 class PostAdmin(admin.ModelAdmin):
-    fields = ['date', 'title', 'text', 'resume', 'thumbnail', 'category', 'authors']
+    fields = ['date', 'title', 'text', 'resume', 'thumbnail', 'category', 'authors', 'url']
 
 class CategoryAdmin(admin.ModelAdmin):
     fields = ['name']
