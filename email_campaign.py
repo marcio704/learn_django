@@ -41,8 +41,8 @@ for (id, email, value) in records:
 			"Construção de templates HTML dinâmicos (tags): Como utilizar template tags (ou TagLibs) no Django"
 
 			Confira o conteúdo completo em:
-                """.enconde('utf-8')
-	link = "{0}/posts/template_tags".format('http://www.easydjango.com').enconde('utf-8')
+                """.encode('utf-8')
+	link = "{0}/posts/template_tags".format('http://www.easydjango.com').encode('utf-8')
 	try:
 		send_email(email, msg+link)	
 	except Exception as e:
