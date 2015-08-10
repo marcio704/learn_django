@@ -19,7 +19,6 @@ urlpatterns = [
     url(r'^rescue_password', views.rescue_password, name='rescue_password'),
     url(r'^account_confirmation', views.account_confirmation, name='account_confirmation'),
     url(r'^find_post_by_content', views.find_post_by_content, name='find_post_by_content'),
-    url(r'^send_email_workaround', views.send_email_workaround, name='send_email_workaround'),
 ]
 
 """
