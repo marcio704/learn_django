@@ -25,7 +25,11 @@ class ElasticSearchClient():
 		      		]
 		    	}
 		  	},
-		  	"highlight": { "fields" : { "text" : {}, "resume": {}, "title": {} } }
+		  	"highlight": { 
+		  		"pre_tags" :  ["<b> <i> <ins>"],
+        		"post_tags" : ["</ins> </i> </b> "], 
+        		"fields" : { "text" : {}, "resume": {}, "title": {} } 
+        	}
 		}
 
 		res = self.es.search(index=settings.ELASTIC_SEARCH_INDEX, doc_type=DocumentType.post.value, body=query)
