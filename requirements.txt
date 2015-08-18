@@ -16,3 +16,4 @@ psycopg2==2.6
 pytz==2015.4
 urllib3==1.10.4
 wsgiref==0.1.2
+uwsgi==2.0.11
