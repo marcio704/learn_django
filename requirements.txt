@@ -4,7 +4,7 @@ amqp==1.4.6
 anyjson==0.3.3
 argparse==1.2.1
 billiard==3.3.0.20
-celery==3.1.18
+celery==5.2.2
 django-celery==3.1.16
 django-ckeditor==4.4.8
 django-widget-tweaks==1.3
