@@ -1,5 +1,5 @@
 Django==1.8.2
-Pillow==2.8.2
+Pillow==9.0.0
 amqp==1.4.6
 anyjson==0.3.3
 argparse==1.2.1
